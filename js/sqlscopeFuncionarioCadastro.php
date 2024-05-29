@@ -50,6 +50,9 @@ function grava()
 
     $nome = $utils->formatarString($_POST['nome']);
     $cpf = $utils->formatarString($_POST['cpf']);
+    $rg = $utils->formatarString($_POST['rg']);
+    $genero = $utils->formatarString($_POST['genero']);
+    $estadoCivil = $utils->formatarString($_POST['estadoCivil']);
     $dataNascimento = $utils->formatarDataSql($_POST['dataNascimento']);
 
     $sql = " SELECT cpf FROM funcionarios WHERE cpf = $cpf ";
@@ -66,11 +69,22 @@ function grava()
         return;
     }
 
+    $sql = " SELECT rg FROM funcionarios WHERE rg = $rg ";
+    $result = $reposit->RunQuery($sql);
+
+    if($result[0]) {
+        echo 'failed#RG já cadastrado';
+        return;
+    }
+
     $sql = "dbo.funcionarioCadastro_Atualiza
         $codigo,
         $ativo,
         $nome,
         $cpf,
+        $rg,
+        $genero,
+        $estadoCivil,
         $dataNascimento";
 
     $reposit = new reposit();

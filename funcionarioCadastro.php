@@ -167,11 +167,11 @@ include("inc/nav.php");
                                                                 <label class="select">
                                                                     <select name="estadoCivil" id="estadoCivil" class="required">
                                                                         <option value="" disabled selected>Selecione um estado civil</option>
-                                                                        <option value="solteiro">Solteiro</option>
-                                                                        <option value="casado">Casado</option>
-                                                                        <option value="separado">Separado</option>
-                                                                        <option value="divorciado">Divorciado</option>
-                                                                        <option value="viúvo">Viúvo</option>
+                                                                        <option value="1">Solteiro</option>
+                                                                        <option value="2">Casado</option>
+                                                                        <option value="3">Separado</option>
+                                                                        <option value="4">Divorciado</option>
+                                                                        <option value="5">Viúvo</option>
                                                                     </select>
                                                                 </label>
                                                             </section>
@@ -473,7 +473,7 @@ include("inc/scripts.php");
         }
 
 
-        gravaFuncionario(codigo, ativo, nome, cpf, dataNascimento);
+        gravaFuncionario(codigo, ativo, nome, cpf, rg, genero, estadoCivil, dataNascimento);
     }
 
     function calcularIdade() {
