@@ -222,6 +222,34 @@ include("inc/nav.php");
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="panel-group smart-accordion-default" id="accordion">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseContato" class="" id="accordionContato">
+                                                        <i class="fa fa-lg fa-angle-down pull-right"></i>
+                                                        <i class="fa fa-lg fa-angle-up pull-right"></i>
+                                                        Contato
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseContato" class="panel-collapse collapse in">
+                                                <div class="panel-body no-padding">
+                                                    <fieldset>
+                                                        <div class="row"></div>
+                                                        <div class="row">
+                                                            <section class="col col-3">
+                                                                <label class="label">Código</label>
+                                                                <label class="input">
+                                                                    <input id="codigo" name="codigo" type="text" class="readonly" readonly>
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <footer>
                                         <button type="button" id="btnExcluir" class="btn btn-danger" aria-hidden="true" title="Excluir" style="display:<?php echo $esconderBtnExcluir ?>">
                                             <span class="fa fa-trash" ></span>
