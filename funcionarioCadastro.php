@@ -155,10 +155,10 @@ include("inc/nav.php");
                                                                         <option value="6">Homem transexual</option>
                                                                         <option value="7">Gênero não-binário</option>
                                                                         <option value="8">Gênero-fluido</option>
-                                                                        <option value="9">Agênero</option>
-                                                                        <option value="10">Bigênero</option>
-                                                                        <option value="11">Poligênero</option>
-                                                                        <option value="12">Gênero neutro</option>
+                                                                        <option value="9">Gênero neutro</option>
+                                                                        <option value="10">Agênero</option>
+                                                                        <option value="11">Bigênero</option>
+                                                                        <option value="12">Poligênero</option>
                                                                     </select>
                                                                 </label>
                                                             </section>
