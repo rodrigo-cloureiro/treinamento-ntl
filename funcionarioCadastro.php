@@ -163,6 +163,19 @@ include("inc/nav.php");
                                                                 </label>
                                                             </section>
                                                             <section class="col col-3">
+                                                                <label class="label">Estado Civil</label>
+                                                                <label class="select">
+                                                                    <select name="estadoCivil" id="estadoCivil" class="required">
+                                                                        <option value="" disabled selected>Selecione um estado civil</option>
+                                                                        <option value="solteiro">Solteiro</option>
+                                                                        <option value="casado">casado</option>
+                                                                        <option value="separado">Separado</option>
+                                                                        <option value="divorciado">Divorciado</option>
+                                                                        <option value="viúvo">Viúvo</option>
+                                                                    </select>
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-3">
                                                                 <label class="label">Data de Nascimento</label>
                                                                 <label class="input">
                                                                     <input id="dataNascimento" name="dataNascimento" autocomplete="on" data-mask="99/99/9999" data-mask-placeholder="dd/mm/aaaa" data-dateformat="dd/mm/yy" placeholder="dd/mm/aaaa" type="text" class="required datepicker" value="">
