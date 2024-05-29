@@ -137,6 +137,32 @@ include("inc/nav.php");
                                                                 </label>
                                                             </section>
                                                             <section class="col col-3">
+                                                                <label class="label">RG</label>
+                                                                <label class="input">
+                                                                    <input type="text" id="rg" name="rg" class="required" value="" placeholder="XX.XXX.XXX-X" data-mask="99.999.999-9" data-mask-placeholder="XX.XXX.XXX-X">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-3">
+                                                                <label class="label">Sexo</label>
+                                                                <label class="select">
+                                                                    <select name="sexo" id="sexo" class="required">
+                                                                        <option value="" disabled selected>Selecione um gênero</option>
+                                                                        <option value="1">Mulher cisgênero</option>
+                                                                        <option value="2">Mulher transgênero</option>
+                                                                        <option value="3">Mulher transexual</option>
+                                                                        <option value="4">Homem cisgênero</option>
+                                                                        <option value="5">Homem transgênero</option>
+                                                                        <option value="6">Homem transexual</option>
+                                                                        <option value="7">Gênero não-binário</option>
+                                                                        <option value="8">Gênero-fluido</option>
+                                                                        <option value="9">Agênero</option>
+                                                                        <option value="10">Bigênero</option>
+                                                                        <option value="11">Poligênero</option>
+                                                                        <option value="12">Gênero neutro</option>
+                                                                    </select>
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-3">
                                                                 <label class="label">Data de Nascimento</label>
                                                                 <label class="input">
                                                                     <input id="dataNascimento" name="dataNascimento" autocomplete="on" data-mask="99/99/9999" data-mask-placeholder="dd/mm/aaaa" data-dateformat="dd/mm/yy" placeholder="dd/mm/aaaa" type="text" class="required datepicker" value="">
