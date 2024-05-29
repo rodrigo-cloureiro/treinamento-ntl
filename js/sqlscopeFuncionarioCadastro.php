@@ -55,10 +55,10 @@ function grava()
     $sql = " SELECT cpf FROM funcionarios WHERE cpf = $cpf ";
     $result = $reposit->RunQuery($sql);
 
-    if(!$utils->validaCPF($cpf)) {
-        echo 'failed#CPF inválido';
-        return;
-    }
+    // if(!$utils->validaCPF($cpf)) {
+    //     echo 'failed#CPF inválido';
+    //     return;
+    // }
 
     // count($result)
     if($result[0]) {

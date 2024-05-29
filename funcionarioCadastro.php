@@ -65,7 +65,7 @@ include("inc/nav.php");
         <section id="widget-grid" class="">
             <div class="row">
                 <article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable centerBox">
-                    <div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false" style="">
+                    <div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
                         <header>
                             <span class="widget-icon"><i class="fa fa-cog"></i></span>
                             <h2>Usuário</h2>
@@ -168,7 +168,7 @@ include("inc/nav.php");
                                                                     <select name="estadoCivil" id="estadoCivil" class="required">
                                                                         <option value="" disabled selected>Selecione um estado civil</option>
                                                                         <option value="solteiro">Solteiro</option>
-                                                                        <option value="casado">casado</option>
+                                                                        <option value="casado">Casado</option>
                                                                         <option value="separado">Separado</option>
                                                                         <option value="divorciado">Divorciado</option>
                                                                         <option value="viúvo">Viúvo</option>
@@ -422,34 +422,56 @@ include("inc/scripts.php");
     }
 
     function gravar() {
-        var codigo = +($("#codigo").val());
-        var ativo = $("#ativo").val();
-        var nome = $("#nome").val();
-        var cpf = $("#cpf").val();
-        var dataNascimento = $("#dataNascimento").val();
+        let codigo = +($("#codigo").val());
+        let ativo = $("#ativo").val();
+        let nome = $("#nome").val();
+        let cpf = $("#cpf").val();
+        let dataNascimento = $("#dataNascimento").val();
+        let rg = $("#rg").val();
+        let genero = $("#sexo").val() || "";
+        let estadoCivil = $("#estadoCivil").val() || "";
         
         if(nome == "") {
-            smartAlert("Atenção", "O nome precisa ser preenchido", "error");
+            smartAlert("Atenção", "O nome precisa ser preenchido!", "error");
             $("#nome").focus();
             return;
         }
         
         if(cpf == "") {
-            smartAlert("Atenção", "O CPF precisa ser preenchido", "error");
+            smartAlert("Atenção", "O CPF precisa ser preenchido!", "error");
             $("#cpf").focus();
+            return;
+        }
+        
+        if(rg == "") {
+            smartAlert("Atenção", "O RG precisa ser preenchido!", "error");
+            $("#rg").focus();
+            return;
+        }
+
+        if(genero == "") {
+            smartAlert("Atenção", "O gênero precisa ser preenchido!", "error");
+            $("#sexo").focus();
+            return;
+        }
+
+        if(estadoCivil == "") {
+            smartAlert("Atenção", "O estado civil precisa ser preenchido!", "error");
+            $("#estadoCivil").focus();
             return;
         }
 
         if(dataNascimento == "") {
-            smartAlert("Atenção", "A data de nascimento precisa ser preenchido", "error");
+            smartAlert("Atenção", "A data de nascimento precisa ser preenchida!", "error");
             $("#dataNascimento").focus();
             return;
         } else {
             if(!dataValida(dataNascimento)) {
-                smartAlert("Atenção", "A data de nascimento não é válida", "error");
+                smartAlert("Atenção", "A data de nascimento não é válida!", "error");
                 return;
             }
         }
+
 
         gravaFuncionario(codigo, ativo, nome, cpf, dataNascimento);
     }
