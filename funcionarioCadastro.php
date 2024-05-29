@@ -235,7 +235,7 @@ include("inc/nav.php");
                                                     </a>
                                                 </h4>
                                             </div>
-                                            <div id="collapseContato" class="panel-collapse collapse in">
+                                            <div id="collapseContato" class="panel-collapse collapse">
                                                 <div class="panel-body no-padding">
                                                     <fieldset class="col col-6">
                                                         <div class="row"></div>
