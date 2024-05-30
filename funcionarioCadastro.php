@@ -169,11 +169,11 @@ include("inc/nav.php");
                                                                 <label class="select">
                                                                     <select name="estadoCivil" id="estadoCivil" class="required">
                                                                         <option value="" disabled selected>Selecione um estado civil</option>
-                                                                        <option value="1">Solteiro</option>
-                                                                        <option value="2">Casado</option>
-                                                                        <option value="3">Separado</option>
-                                                                        <option value="4">Divorciado</option>
-                                                                        <option value="5">Viúvo</option>
+                                                                        <option value="1">Solteiro(a)</option>
+                                                                        <option value="2">Casado(a)</option>
+                                                                        <option value="3">Separado(a)</option>
+                                                                        <option value="4">Divorciado(a)</option>
+                                                                        <option value="5">Viúvo(a)</option>
                                                                     </select>
                                                                 </label>
                                                             </section>
@@ -223,8 +223,6 @@ include("inc/nav.php");
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="panel-group smart-accordion-default" id="accordion">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h4 class="panel-title">
