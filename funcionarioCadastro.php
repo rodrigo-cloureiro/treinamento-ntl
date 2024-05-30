@@ -552,7 +552,7 @@ include("inc/scripts.php");
     }
 
     function voltar() {
-        $(location).attr('href', 'usuarioFiltro.php');
+        $(location).attr('href', 'funcionarioFiltro.php');
     }
 
     function excluir() {

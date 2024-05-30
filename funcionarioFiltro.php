@@ -214,6 +214,6 @@ include("inc/scripts.php");
     }
 
     function novo() {
-        $(location).attr('href', 'usuarioCadastro.php');
+        $(location).attr('href', 'funcionarioCadastro.php');
     }
 </script>
