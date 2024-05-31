@@ -258,10 +258,10 @@ include("inc/nav.php");
                                             <div id="collapseContato" class="panel-collapse collapse">
                                                 <div class="panel-body no-padding">
                                                     <fieldset class="col col-6">
-                                                        <input id="jsonTelefone" name="jsonTelefone" type="" value="[]">
+                                                        <input id="jsonTelefone" name="jsonTelefone" type="hidden" value="[]">
                                                         <div id="formTelefone" class="col-sm-12">
-                                                            <input type="" id="telefoneId" name="telefoneId">
-                                                            <input type="" id="sequencialTel" name="sequencialTel">
+                                                            <input type="hidden" id="telefoneId" name="telefoneId">
+                                                            <input type="hidden" id="sequencialTel" name="sequencialTel">
                                                             <div class="row">
                                                                 <section class="col col-4">
                                                                     <label class="label">Telefone</label>
@@ -325,7 +325,7 @@ include("inc/nav.php");
                                                             <section class="col col-6">
                                                                 <label class="label">Email</label>
                                                                 <label class="input">
-                                                                    <i class="icon-prepend fa fa-phone"></i>
+                                                                    <i class="icon-prepend fa fa-envelope"></i>
                                                                     <input id="email" maxlength="70" name="email" class="" type="text" value="">
                                                                 </label>
                                                             </section>
@@ -698,7 +698,6 @@ include("inc/scripts.php");
             skipEmpty: false,
             nodeCallback: processDataTel
         });
-        debugger
         if (item["sequencialTel"] === '') {
             if (jsonTelefoneArray.length === 0) {
                 item["sequencialTel"] = 1;
@@ -714,12 +713,15 @@ include("inc/scripts.php");
 
         var index = -1;
         $.each(jsonTelefoneArray, function(i, obj) {
-            debugger
             if (+$('#sequencialTel').val() === obj.sequencialTel) {
                 index = i;
                 return false;
             }
         });
+
+        if (!validaTelefone()) {
+            return false;
+        }
 
         if (index >= 0)
             jsonTelefoneArray.splice(index, 1, item);
@@ -732,19 +734,34 @@ include("inc/scripts.php");
     }
 
     function validaTelefone() {
-        var existe = false;
-        var achou = false;
-        var tel = $('#telefone').val();
-        var sequencial = +$('#sequencialTel').val();
-        var telefonePrincipalMarcado = 0;
+        let existe = false;
+        let achou = false;
+        let tel = $('#telefone').val();
+        let sequencial = +$('#sequencialTel').val();
+        let telefonePrincipalMarcado = $("#principal").is(":checked") ? 1 : 0; // se input principal estiver marcado 1, caso não 0
 
         for (i = jsonTelefoneArray.length - 1; i >= 0; i--) {
             if (telefonePrincipalMarcado === 1) {
-                if ((jsonTelefoneArray[i].telefonePrincipal === 1) && (jsonTelefoneArray[i].sequencialTel !== sequencial)) {
+                if ((jsonTelefoneArray[i].principal === true) && (jsonTelefoneArray[i].sequencialTel !== sequencial)) {
                     achou = true;
                     break;
                 }
             }
+
+            if (jsonTelefoneArray[i].telefone === tel) {
+                existe = true;
+                break;
+            }
+        }
+
+        if (tel == "") {
+            smartAlert("Erro", "Informe um telefone!", "error");
+            return false;
+        }
+
+        if (achou === true) {
+            smartAlert("Erro", "Já existe um telefone principal cadastrado.", "error");
+            return false;
         }
 
         if (existe === true) {
@@ -798,7 +815,6 @@ include("inc/scripts.php");
     }
 
     function excluirContato() {
-        debugger
         var arrSequencial = [];
         $('#tableTelefone input[type=checkbox]:checked').each(function() {
             arrSequencial.push(parseInt($(this).val()));
