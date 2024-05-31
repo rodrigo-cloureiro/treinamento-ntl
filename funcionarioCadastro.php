@@ -258,16 +258,16 @@ include("inc/nav.php");
                                             <div id="collapseContato" class="panel-collapse collapse">
                                                 <div class="panel-body no-padding">
                                                     <fieldset class="col col-6">
-                                                        <input id="jsonTelefone" name="jsonTelefone" type="hidden" value="[]">
+                                                        <input id="jsonTelefone" name="jsonTelefone" type="" value="[]">
                                                         <div id="formTelefone" class="col-sm-12">
-                                                            <input type="hidden" id="telefoneId" name="telefoneId">
-                                                            <input type="hidden" id="sequecialTel" name="sequencialTel">
+                                                            <input type="" id="telefoneId" name="telefoneId">
+                                                            <input type="" id="sequencialTel" name="sequencialTel">
                                                             <div class="row">
                                                                 <section class="col col-4">
                                                                     <label class="label">Telefone</label>
                                                                     <label class="input">
                                                                         <i class="icon-prepend fa fa-phone"></i>
-                                                                        <input id="telefone" maxlength="50" name="telefone" class="" type="text" value="" data-mask="(99) 99999-9999">
+                                                                        <input id="telefone" maxlength="50" name="telefone" class="" type="text" value="" data-mask="(99) 99999-9999" data-mask-placeholder="(XX) XXXXX-XXXX">
                                                                     </label>
                                                                 </section>
                                                                 <section class="col col-2">
@@ -725,7 +725,6 @@ include("inc/scripts.php");
         $("#jsonTelefone").val(JSON.stringify(jsonTelefoneArray));
         fillTableTelefone();
         clearFormTelefone();
-
     }
 
     function validaTelefone() {
@@ -822,10 +821,14 @@ include("inc/scripts.php");
         if (arr.length > 0) {
             var item = arr[0];
             $("#telefoneId").val(item.telefoneId);
+            $("#sequencialTel").val(item.sequencialTel);
+            $("#telefone").val(item.telefone);
         }
     }
 
     function clearFormTelefone() {
-        $("#telefone").val("").focus();
+        $("#telefone").val("");
+        $("#telefoneId").val("");
+        $("#sequencialTel").val("");
     }
 </script>
