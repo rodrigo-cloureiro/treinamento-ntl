@@ -258,61 +258,65 @@ include("inc/nav.php");
                                             <div id="collapseContato" class="panel-collapse collapse">
                                                 <div class="panel-body no-padding">
                                                     <fieldset class="col col-6">
-                                                        <div class="row"></div>
-                                                        <div class="row">
-                                                            <section class="col col-4">
-                                                                <label class="label">Telefone</label>
-                                                                <label class="input">
-                                                                    <i class="icon-prepend fa fa-phone"></i>
-                                                                    <input id="telefone" maxlength="50" name="telefone" class="" type="text" value="">
-                                                                </label>
-                                                            </section>
-                                                            <section class="col col-2">
-                                                                <label class="label">&nbsp;</label>
-                                                                <label id="labelAtivo" class="checkbox ">
-                                                                    <input checked="checked" id="principal" name="principal" type="checkbox" value="true"><i></i>
-                                                                    Principal 
-                                                                </label>                                                                                    
-                                                            </section>   
-                                                            <section class="col col-2">
-                                                                <label class="label">&nbsp;</label>
-                                                                <label id="labelAtivo" class="checkbox ">
-                                                                    <input checked="checked" id="whatsapp" name="whatsapp" type="checkbox" value="true"><i></i>
-                                                                    WhatsApp 
-                                                                </label>                                                                                    
-                                                            </section>
-                                                            <section class="col col-2">
-                                                                <label class="label">&nbsp;</label>
-                                                                <button id="btnAddTelefone" type="button" class="btn btn-primary">
-                                                                    <i class="fa fa-plus"></i>
-                                                                </button>
-                                                                <button id="btnRemoverTelefone" type="button" class="btn btn-danger">
-                                                                    <i class="fa fa-minus"></i>
-                                                                </button>
-                                                            </section>
-                                                        </div>
-                                                        <div class="row">
-                                                            <section class="col col-12">
-                                                                <div class="table-responsive" style="
-                                                                min-height: 115px;
-                                                                width: 95%;
-                                                                border: 1px solid #ddd;
-                                                                margin-bottom: 13px;
-                                                                overflow-x: hidden;
-                                                                ">
-                                                                    <table id="tableTelefone" class="table table-bordered table-striped table-condensed table-hover dataTable">
-                                                                        <thead>
-                                                                            <tr role="row">
-                                                                                <th></th>
-                                                                                <th class="text-left" style="min-width: 500%">Telefone</th>
-                                                                                <th class="text-left" style="min-width: 500%">Principal</th>
-                                                                                <th class="text-left" style="min-width: 500%">WhatsApp</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody></tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </section>
+                                                        <input id="jsonTelefone" name="jsonTelefone" type="hidden" value="[]">
+                                                        <div id="formTelefone" class="col-sm-12">
+                                                            <input type="hidden" id="telefoneId" name="telefoneId">
+                                                            <input type="hidden" id="sequecialTel" name="sequencialTel">
+                                                            <div class="row">
+                                                                <section class="col col-4">
+                                                                    <label class="label">Telefone</label>
+                                                                    <label class="input">
+                                                                        <i class="icon-prepend fa fa-phone"></i>
+                                                                        <input id="telefone" maxlength="50" name="telefone" class="" type="text" value="" data-mask="(99) 99999-9999">
+                                                                    </label>
+                                                                </section>
+                                                                <section class="col col-2">
+                                                                    <label class="label">&nbsp;</label>
+                                                                    <label id="labelAtivo" class="checkbox ">
+                                                                        <input checked="checked" id="principal" name="principal" type="checkbox" value="true"><i></i>
+                                                                        Principal 
+                                                                    </label>                                                                                    
+                                                                </section>   
+                                                                <section class="col col-2">
+                                                                    <label class="label">&nbsp;</label>
+                                                                    <label id="labelAtivo" class="checkbox ">
+                                                                        <input checked="checked" id="whatsapp" name="whatsapp" type="checkbox" value="true"><i></i>
+                                                                        WhatsApp 
+                                                                    </label>                                                                                    
+                                                                </section>
+                                                                <section class="col col-2">
+                                                                    <label class="label">&nbsp;</label>
+                                                                    <button id="btnAddTelefone" type="button" class="btn btn-primary">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                    <button id="btnRemoverTelefone" type="button" class="btn btn-danger">
+                                                                        <i class="fa fa-minus"></i>
+                                                                    </button>
+                                                                </section>
+                                                            </div>
+                                                            <div class="row">
+                                                                <section>
+                                                                    <div class="table-responsive" style="
+                                                                    min-height: 115px;
+                                                                    width: 95%;
+                                                                    border: 1px solid #ddd;
+                                                                    margin-bottom: 13px;
+                                                                    overflow-x: hidden;
+                                                                    ">
+                                                                        <table id="tableTelefone" class="table table-bordered table-striped table-condensed table-hover dataTable">
+                                                                            <thead>
+                                                                                <tr role="row">
+                                                                                    <th></th>
+                                                                                    <th class="text-left" style="min-width: 500%">Telefone</th>
+                                                                                    <th class="text-left" style="min-width: 500%">Principal</th>
+                                                                                    <th class="text-left" style="min-width: 500%">WhatsApp</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody></tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </section>
+                                                            </div>
                                                         </div>
                                                     </fieldset>
                                                     <fieldset class="col col-6">
@@ -454,6 +458,7 @@ include("inc/scripts.php");
     $(document).ready(function() {
         // $("#cpf").mask("999.999.999-99");
         // $("#dataNascimento").mask("99/99/9999");
+        jsonTelefoneArray = JSON.parse($("#jsonTelefone").val());
 
         $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
             _title: function(title) {
@@ -527,6 +532,10 @@ include("inc/scripts.php");
                     return '';
                 }
             });
+        });
+
+        $("#btnAddTelefone").on("click", function() {
+            addTelefone();
         });
 
         carregaPagina();
@@ -680,12 +689,12 @@ include("inc/scripts.php");
     }
 
     function addTelefone() {
-        var item = $("#formTelefone").toObject({
+        let item = $("#formTelefone").toObject({
             mode: 'combine',
             skipEmpty: false,
             nodeCallback: processDataTel
         });
-
+        debugger
         if (item["sequencialTel"] === '') {
             if (jsonTelefoneArray.length === 0) {
                 item["sequencialTel"] = 1;
@@ -701,6 +710,7 @@ include("inc/scripts.php");
 
         var index = -1;
         $.each(jsonTelefoneArray, function(i, obj) {
+            debugger
             if (+$('#sequencialTel').val() === obj.sequencialTel) {
                 index = i;
                 return false;
@@ -750,7 +760,8 @@ include("inc/scripts.php");
                 $("#tableTelefone tbody").append(row);
                 row.append($('<td><label class="checkbox"><input type="checkbox" name="checkbox" value="' + jsonTelefoneArray[i].sequencialTel + '"><i></i></label></td>'));
                 row.append($('<td class="text-nowrap" onclick="carregaTelefone(' + jsonTelefoneArray[i].sequencialTel + ');">' + jsonTelefoneArray[i].telefone + '</td>'));
-                row.append($('<td class="text-nowrap">' + jsonTelefoneArray[i].descricaoTelefonePrincipal + '</td>'));
+                row.append($('<td class="text-nowrap">' + (jsonTelefoneArray[i].principal ? 'Sim' : 'Não') + '</td>'));
+                row.append($('<td class="text-nowrap">' + (jsonTelefoneArray[i].whatsapp ? 'Sim' : 'Não') + '</td>'));
             }
         }
     }
@@ -812,5 +823,9 @@ include("inc/scripts.php");
             var item = arr[0];
             $("#telefoneId").val(item.telefoneId);
         }
+    }
+
+    function clearFormTelefone() {
+        $("#telefone").val("").focus();
     }
 </script>
