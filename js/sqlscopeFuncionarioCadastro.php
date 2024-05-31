@@ -55,8 +55,9 @@ function grava()
     $estadoCivil = $utils->formatarString($_POST['estadoCivil']);
     $dataNascimento = $utils->formatarDataSql($_POST['dataNascimento']);
 
-    $sql = " SELECT cpf FROM funcionarios WHERE cpf = $cpf ";
+    $sql = " SELECT codigo, cpf FROM funcionarios WHERE cpf = $cpf ";
     $result = $reposit->RunQuery($sql);
+    $row = $result[0];
 
     // if(!$utils->validaCPF($cpf)) {
     //     echo 'failed#CPF inválido';
@@ -64,15 +65,16 @@ function grava()
     // }
 
     // count($result)
-    if($result[0]) {
+    if($row && $row['codigo'] !== $codigo) {
         echo 'failed#CPF já cadastrado';
         return;
     }
 
-    $sql = " SELECT rg FROM funcionarios WHERE rg = $rg ";
+    $sql = " SELECT codigo, rg FROM funcionarios WHERE rg = $rg ";
     $result = $reposit->RunQuery($sql);
+    $row = $result[0];
 
-    if($result[0]) {
+    if($row && $row['codigo'] !== $codigo) {
         echo 'failed#RG já cadastrado';
         return;
     }
