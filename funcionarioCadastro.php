@@ -538,6 +538,10 @@ include("inc/scripts.php");
             addTelefone();
         });
 
+        $("#btnRemoverTelefone").on("click", function() {
+            excluirContato();
+        });
+
         carregaPagina();
     });
 
@@ -794,6 +798,7 @@ include("inc/scripts.php");
     }
 
     function excluirContato() {
+        debugger
         var arrSequencial = [];
         $('#tableTelefone input[type=checkbox]:checked').each(function() {
             arrSequencial.push(parseInt($(this).val()));
@@ -801,6 +806,10 @@ include("inc/scripts.php");
         if (arrSequencial.length > 0) {
             for (i = jsonTelefoneArray.length - 1; i >= 0; i--) {
                 var obj = jsonTelefoneArray[i];
+                // jQuery.inArray( value, array [, fromIndex ] )
+                // O método $.inArray() é semelhante ao método nativo .indexOf() do JavaScript,
+                // pois retorna -1 quando não encontra uma correspondência.
+                // Se o primeiro elemento da matriz corresponder ao valor, $.inArray() retornará 0.
                 if (jQuery.inArray(obj.sequencialTel, arrSequencial) > -1) {
                     jsonTelefoneArray.splice(i, 1);
                 }
