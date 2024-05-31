@@ -112,7 +112,7 @@ function recupera()
         $usuarioIdPesquisa = $_POST["id"];
     }
 
-    $sql = " SELECT codigo, ativo, nome, cpf, dataNascimento FROM cadastro.dbo.funcionarios WHERE (0 = 0) ";
+    $sql = " SELECT codigo, ativo, nome, cpf, rg, genero, estadoCivil, dataNascimento FROM cadastro.dbo.funcionarios WHERE (0 = 0) ";
 
     if ($condicaoId) {
         $sql = $sql . " AND funcionarios.codigo = " . $usuarioIdPesquisa . " ";
@@ -128,6 +128,9 @@ function recupera()
         $ativo = +$row['ativo'];
         $nome = $row['nome'];
         $cpf = $row['cpf'];
+        $rg = $row['rg'];
+        $genero = $row['genero'];
+        $estadoCivil = $row['estadoCivil'];
         $dataNascimento = $utils->validaDataInversa($row['dataNascimento']);
     }
 
@@ -135,6 +138,9 @@ function recupera()
         $ativo . "^" .
         $nome . "^" .
         $cpf . "^" .
+        $rg . "^" .
+        $genero . "^" .
+        $estadoCivil . "^" .
         $dataNascimento;
 
     if ($out == "") {

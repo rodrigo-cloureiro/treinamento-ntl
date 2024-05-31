@@ -52,27 +52,34 @@ function recuperaFuncionario(id) {
                 return;
             } else {
                 data = data.replace(/failed/g, '');
-                var piece = data.split("#");
+                let piece = data.split("#");
 
-                var mensagem = piece[0];
-                var out = piece[1];
+                let mensagem = piece[0];
+                let out = piece[1];
                 piece = out.split("^");
 
-                var codigo = +piece[0];
-                var ativo = +piece[1];
-                var nome = piece[2];
-                var cpf = piece[3];
-                var dataNascimento = piece[4];
+                let codigo = +piece[0];
+                let ativo = +piece[1];
+                let nome = piece[2];
+                let cpf = piece[3];
+                let rg = piece[4];
+                let genero = piece[5];
+                let estadoCivil = piece[6]
+                let dataNascimento = piece[7];
                
                 $("#codigo").val(codigo);
                 $("#nome").val(nome);
                 $("#cpf").val(cpf);
+                $("#rg").val(rg);
+                $("#sexo").val(genero);
+                $("#estadoCivil").val(estadoCivil);
                 $("#dataNascimento").val(dataNascimento);
-                if (ativo === 1) {
-                    $('#ativo').prop('checked', true);
-                } else {
-                    $('#ativo').prop('checked', false);
-                }
+                $("#ativo").val(ativo);
+                // if (ativo === 1) {
+                //     $('#ativo').prop('checked', true);
+                // } else {
+                //     $('#ativo').prop('checked', false);
+                // }
                 return;
             }
         },
