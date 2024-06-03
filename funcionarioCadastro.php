@@ -273,7 +273,7 @@ include("inc/nav.php");
                                                                 <section class="col col-2">
                                                                     <label class="label">&nbsp;</label>
                                                                     <label id="labelAtivo" class="checkbox ">
-                                                                        <input checked="checked" id="principal" name="principal" type="checkbox" value="true"><i></i>
+                                                                        <input checked="checked" id="telPrincipal" name="telPrincipal" type="checkbox" value="true"><i></i>
                                                                         Principal 
                                                                     </label>                                                                                    
                                                                 </section>   
@@ -335,7 +335,7 @@ include("inc/nav.php");
                                                                 <section class="col col-2">
                                                                     <label class="label">&nbsp;</label>
                                                                     <label id="labelAtivo" class="checkbox ">
-                                                                        <input checked="checked" id="principal" name="principal" type="checkbox" value="true"><i></i>
+                                                                        <input checked="checked" id="emailPrincipal" name="emailPrincipal" type="checkbox" value="true"><i></i>
                                                                         Principal 
                                                                     </label>                                                                                    
                                                                 </section>   
@@ -751,11 +751,11 @@ include("inc/scripts.php");
         let achou = false;
         let tel = $('#telefone').val();
         let sequencial = +$('#sequencialTel').val();
-        let telefonePrincipalMarcado = $("#principal").is(":checked") ? 1 : 0; // se input principal estiver marcado 1, caso não 0
+        let telefonePrincipalMarcado = $("#telPrincipal").is(":checked") ? 1 : 0; // se input principal estiver marcado 1, caso não 0
 
         for (i = jsonTelefoneArray.length - 1; i >= 0; i--) {
             if (telefonePrincipalMarcado === 1) {
-                if ((jsonTelefoneArray[i].principal === true) && (jsonTelefoneArray[i].sequencialTel !== sequencial)) {
+                if ((jsonTelefoneArray[i].telPrincipal === true) && (jsonTelefoneArray[i].sequencialTel !== sequencial)) {
                     achou = true;
                     break;
                 }
@@ -793,7 +793,7 @@ include("inc/scripts.php");
                 $("#tableTelefone tbody").append(row);
                 row.append($('<td><label class="checkbox"><input type="checkbox" name="checkbox" value="' + jsonTelefoneArray[i].sequencialTel + '"><i></i></label></td>'));
                 row.append($('<td class="text-nowrap" onclick="carregaTelefone(' + jsonTelefoneArray[i].sequencialTel + ');">' + jsonTelefoneArray[i].telefone + '</td>'));
-                row.append($('<td class="text-nowrap">' + (jsonTelefoneArray[i].principal ? 'Sim' : 'Não') + '</td>'));
+                row.append($('<td class="text-nowrap">' + (jsonTelefoneArray[i].telPrincipal ? 'Sim' : 'Não') + '</td>'));
                 row.append($('<td class="text-nowrap">' + (jsonTelefoneArray[i].whatsapp ? 'Sim' : 'Não') + '</td>'));
             }
         }
@@ -920,11 +920,11 @@ include("inc/scripts.php");
         let achou = false;
         let email = $("#email").val();
         let sequencial = $("#sequencialEmail").val();
-        let emailPrincipalMarcado = $("#principal").is(":checked") ? 1 : 0;
+        let emailPrincipalMarcado = $("#emailPrincipal").is(":checked") ? 1 : 0;
 
         for (i = jsonEmailArray.length -1; i >= 0; i--) {
             if (emailPrincipalMarcado === 1) {
-                if (jsonEmailArray[i].principal === true && jsonEmailArray[i].sequencialEmail !== sequencial) {
+                if (jsonEmailArray[i].emailPrincipal === 1 && jsonEmailArray[i].sequencialEmail !== sequencial) {
                     achou = true;
                     break;
                 }
@@ -962,7 +962,7 @@ include("inc/scripts.php");
                 $('#tableEmail tbody').append(row);
                 row.append($('<td><label class="checkbox"><input type="checkbox" name="checkbox" value="' + jsonEmailArray[i].sequencialEmail + '"><i></i></label></td>'));
                 row.append($('<td class="text-nowrap" onclick="carregaEmail(' + jsonEmailArray[i].sequencialEmail + ');">' + jsonEmailArray[i].email + '</td>'));
-                row.append($('<td class="text-nowrap">' + (jsonEmailArray[i].principal ? 'Sim' : 'Não') + '</td>'));
+                row.append($('<td class="text-nowrap">' + (jsonEmailArray[i].emailPrincipal ? 'Sim' : 'Não') + '</td>'));
             }
         }
     }
