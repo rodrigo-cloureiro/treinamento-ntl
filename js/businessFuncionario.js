@@ -1,9 +1,9 @@
-function gravaFuncionario(codigo, ativo, nome, cpf, rg, genero, estadoCivil, dataNascimento) {
+function gravaFuncionario(codigo, ativo, nome, cpf, rg, genero, estadoCivil, dataNascimento, jsonTelefone) {
     $.ajax({
         url: 'js/sqlscopeFuncionarioCadastro.php',
         dataType: 'html', //tipo do retorno
         type: 'post', //metodo de envio
-        data: {funcao: "grava", codigo:codigo, ativo:ativo, nome:nome, cpf:cpf, rg:rg, genero:genero, estadoCivil:estadoCivil, dataNascimento:dataNascimento}, //valores enviados ao script     
+        data: {funcao: "grava", codigo:codigo, ativo:ativo, nome:nome, cpf:cpf, rg:rg, genero:genero, estadoCivil:estadoCivil, dataNascimento:dataNascimento, jsonTelefone: jsonTelefone}, //valores enviados ao script     
         beforeSend: function () {
             //função chamada antes de realizar o ajax
         },

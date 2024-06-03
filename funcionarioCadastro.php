@@ -644,7 +644,7 @@ include("inc/scripts.php");
         }
 
 
-        gravaFuncionario(codigo, ativo, nome, cpf, rg, genero, estadoCivil, dataNascimento);
+        gravaFuncionario(codigo, ativo, nome, cpf, rg, genero, estadoCivil, dataNascimento, jsonTelefoneArray);
     }
 
     function calcularIdade() {
@@ -711,6 +711,9 @@ include("inc/scripts.php");
             skipEmpty: false,
             nodeCallback: processDataTel
         });
+        item["telPrincipal"] ? item["telPrincipal"] = 1 : item["telPrincipal"] = 0;
+        item["whatsapp"] ? item["whatsapp"] = 1 : item["whatsapp"] = 0;
+
         if (item["sequencialTel"] === '') {
             if (jsonTelefoneArray.length === 0) {
                 item["sequencialTel"] = 1;
@@ -880,6 +883,7 @@ include("inc/scripts.php");
             skipEmpty: false,
             nodeCallback: processDataEmail
         });
+        item["emailPrincipal"] ? item["emailPrincipal"] = 1 : item["emailPrincipal"] = 0;
 
         if (item["sequencialEmail"] === "") {
             if (jsonEmailArray.length === 0) {

@@ -54,6 +54,34 @@ function grava()
     $genero = $utils->formatarString($_POST['genero']);
     $estadoCivil = $utils->formatarString($_POST['estadoCivil']);
     $dataNascimento = $utils->formatarDataSql($_POST['dataNascimento']);
+    $arrayTelefone = $_POST['jsonTelefone'];
+
+    $nomeXml = "ArrayTelefone";
+    $nomeTabela = "xmlTelefone";
+    if (sizeof($arrayTelefone) > 0) {
+        $xmlTelefone = '<?xml version="1.0"?>';
+        $xmlTelefone = $xmlTelefone . '<' . $nomeXml . ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
+        foreach ($arrayTelefone as $chave) {
+            $xmlTelefone = $xmlTelefone . "<" . $nomeTabela . ">";
+            foreach ($chave as $campo => $valor) {
+                $xmlTelefone = $xmlTelefone . "<" . $campo . ">" . $valor . "</" . $campo . ">";
+            }
+            $xmlTelefone = $xmlTelefone . "</" . $nomeTabela . ">";
+        }
+        $xmlTelefone = $xmlTelefone . "</" . $nomeXml . ">";
+    } else {
+        $xmlTelefone = '<?xml version="1.0"?>';
+        $xmlTelefone = $xmlTelefone . '<' . $nomeXml . ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
+        $xmlTelefone = $xmlTelefone . "</" . $nomeXml . ">";
+    }
+    $xml = simplexml_load_string($xmlTelefone);
+    if ($xml === false) {
+        $mensagem = "Erro na criação do XML de Solicitação";
+        echo "failed#" . $mensagem . ' ';
+        return;
+    }
+    $xmlTelefone = "'" . $xmlTelefone . "'";
+
 
     $sql = " SELECT codigo, cpf FROM funcionarios WHERE cpf = $cpf ";
     $result = $reposit->RunQuery($sql);
@@ -87,7 +115,8 @@ function grava()
         $rg,
         $genero,
         $estadoCivil,
-        $dataNascimento";
+        $dataNascimento,
+        $xmlTelefone";
 
     $reposit = new reposit();
     $result = $reposit->Execprocedure($sql);
