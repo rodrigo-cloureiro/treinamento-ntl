@@ -747,6 +747,7 @@ include("inc/scripts.php");
     }
 
     function validaTelefone() {
+        debugger
         let existe = false;
         let achou = false;
         let tel = $('#telefone').val();
@@ -761,7 +762,7 @@ include("inc/scripts.php");
                 }
             }
 
-            if (jsonTelefoneArray[i].telefone === tel) {
+            if (jsonTelefoneArray[i].telefone === tel && jsonTelefoneArray[i].sequencialTel !== sequencial) {
                 existe = true;
                 break;
             }
@@ -919,7 +920,7 @@ include("inc/scripts.php");
         let existe = false;
         let achou = false;
         let email = $("#email").val();
-        let sequencial = $("#sequencialEmail").val();
+        let sequencial = +$("#sequencialEmail").val();
         let emailPrincipalMarcado = $("#emailPrincipal").is(":checked") ? 1 : 0;
 
         for (i = jsonEmailArray.length -1; i >= 0; i--) {
@@ -930,7 +931,7 @@ include("inc/scripts.php");
                 }
             }
 
-            if (jsonEmailArray[i].email === email) {
+            if (jsonEmailArray[i].email === email && jsonEmailArray[i].sequencialEmail !== sequencial) {
                 existe = true;
                 break;
             }
