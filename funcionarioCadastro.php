@@ -323,7 +323,7 @@ include("inc/nav.php");
                                                         <input type="=" id="jsonEmail" name="jsonEmail" value="[]">
                                                         <div id="formEmail" class="col-sm-12">
                                                             <input type="=" id="emailId" name="emailId">
-                                                            <input type="=" id="sequenciaEmail" name="sequenciaEmail">
+                                                            <input type="=" id="sequencialEmail" name="sequencialEmail">
                                                             <div class="row">
                                                                 <section class="col col-6">
                                                                     <label class="label">Email</label>
@@ -878,31 +878,31 @@ include("inc/scripts.php");
             nodeCallback: processDataEmail
         });
 
-        if (item["sequenciaEmail"] === "") {
+        if (item["sequencialEmail"] === "") {
             if (jsonEmailArray.length === 0) {
-                item["sequenciaEmail"] = 1;
+                item["sequencialEmail"] = 1;
             } else {
-                item["sequenciaEmail"] = Math.max.apply(Math, jsonEmailArray.map((obj) => {
-                    return obj.sequenciaEmail;
+                item["sequencialEmail"] = Math.max.apply(Math, jsonEmailArray.map((obj) => {
+                    return obj.sequencialEmail;
                 })) + 1;
             }
             item["emailId"] = 0;
         } else {
-            item["sequenciaEmail"] = +item["sequenciaEmail"];
+            item["sequencialEmail"] = +item["sequencialEmail"];
         }
 
         let index = -1;
         $.each(jsonEmailArray, (i, obj) => {
             debugger
-            if (+$("#sequenciaEmail").val() === obj.sequenciaEmail) {
+            if (+$("#sequencialEmail").val() === obj.sequencialEmail) {
                 index = i;
                 return false;
             }
         });
 
-        // if (!validaEmail()) {
-        //     return false;
-        // }
+        if (!validaEmail()) {
+            return false;
+        }
 
         if (index >= 0) {
             jsonEmailArray.splice(index, 1, item);
@@ -916,6 +916,41 @@ include("inc/scripts.php");
     }
 
     function validaEmail() {
+        let existe = false;
+        let achou = false;
+        let email = $("#email").val();
+        let sequencial = $("#sequencialEmail").val();
+        let emailPrincipalMarcado = $("#principal").is(":checked") ? 1 : 0;
+
+        for (i = jsonEmailArray.length -1; i >= 0; i--) {
+            if (emailPrincipalMarcado === 1) {
+                if (jsonEmailArray[i].principal === true && jsonEmailArray[i].sequencialEmail !== sequencial) {
+                    achou = true;
+                    break;
+                }
+            }
+
+            if (jsonEmailArray[i].email === email) {
+                existe = true;
+                break;
+            }
+        }
+
+        if (email === "") {
+            smartAlert("Erro", "Informe um email!", "error");
+            return false;
+        }
+
+        if (achou === true) {
+            smartAlert("Erro", "Já existe um email principal cadastrado.", "error");
+            return false;
+        }
+
+        if (existe === true) {
+            smartAlert("Erro", "Email já cadastrado!", "error");
+            return false;
+        }
+
         return true;
     }
 
@@ -925,8 +960,8 @@ include("inc/scripts.php");
             if (jsonEmailArray[i].email !== null && jsonEmailArray[i].email != '') {
                 let row = $('<tr />');
                 $('#tableEmail tbody').append(row);
-                row.append($('<td><label class="checkbox"><input type="checkbox" name="checkbox" value="' + jsonEmailArray[i].sequenciaEmail + '"><i></i></label></td>'));
-                row.append($('<td class="text-nowrap" onclick="carregaEmail(' + jsonEmailArray[i].sequenciaEmail + ');">' + jsonEmailArray[i].email + '</td>'));
+                row.append($('<td><label class="checkbox"><input type="checkbox" name="checkbox" value="' + jsonEmailArray[i].sequencialEmail + '"><i></i></label></td>'));
+                row.append($('<td class="text-nowrap" onclick="carregaEmail(' + jsonEmailArray[i].sequencialEmail + ');">' + jsonEmailArray[i].email + '</td>'));
                 row.append($('<td class="text-nowrap">' + (jsonEmailArray[i].principal ? 'Sim' : 'Não') + '</td>'));
             }
         }
@@ -965,9 +1000,9 @@ include("inc/scripts.php");
         return true;
     }
 
-    function carregaEmail(sequenciaEmail) {
+    function carregaEmail(sequencialEmail) {
         let arr = jQuery.grep(jsonEmailArray, function(item, i) {
-            return (item.sequenciaEmail === sequenciaEmail);
+            return (item.sequencialEmail === sequencialEmail);
         });
 
         clearFormEmail();
@@ -975,7 +1010,7 @@ include("inc/scripts.php");
         if (arr.length > 0) {
             let item = arr[0];
             $("#emailId").val(item.emailId);
-            $("#sequenciaEmail").val(item.sequenciaEmail);
+            $("#sequencialEmail").val(item.sequencialEmail);
             $("#email").val(item.email);
         }
     }
@@ -983,6 +1018,6 @@ include("inc/scripts.php");
     function clearFormEmail() {
         $("#email").val("");
         $("#emailId").val("");
-        $("#sequenciaEmail").val("");
+        $("#sequencialEmail").val("");
     }
 </script>
