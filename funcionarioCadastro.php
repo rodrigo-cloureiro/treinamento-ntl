@@ -258,10 +258,10 @@ include("inc/nav.php");
                                             <div id="collapseContato" class="panel-collapse collapse">
                                                 <div class="panel-body no-padding">
                                                     <fieldset class="col col-6">
-                                                        <input id="jsonTelefone" name="jsonTelefone" type="=" value="[]">
+                                                        <input id="jsonTelefone" name="jsonTelefone" type="hidden" value="[]">
                                                         <div id="formTelefone" class="col-sm-12">
-                                                            <input type="=" id="telefoneId" name="telefoneId">
-                                                            <input type="=" id="sequencialTel" name="sequencialTel">
+                                                            <input type="hidden" id="telefoneId" name="telefoneId">
+                                                            <input type="hidden" id="sequencialTel" name="sequencialTel">
                                                             <div class="row">
                                                                 <section class="col col-4">
                                                                     <label class="label">Telefone</label>
@@ -320,10 +320,10 @@ include("inc/nav.php");
                                                         </div>
                                                     </fieldset>
                                                     <fieldset class="col col-6">
-                                                        <input type="=" id="jsonEmail" name="jsonEmail" value="[]">
+                                                        <input type="hidden" id="jsonEmail" name="jsonEmail" value="[]">
                                                         <div id="formEmail" class="col-sm-12">
-                                                            <input type="=" id="emailId" name="emailId">
-                                                            <input type="=" id="sequencialEmail" name="sequencialEmail">
+                                                            <input type="hidden" id="emailId" name="emailId">
+                                                            <input type="hidden" id="sequencialEmail" name="sequencialEmail">
                                                             <div class="row">
                                                                 <section class="col col-6">
                                                                     <label class="label">Email</label>
