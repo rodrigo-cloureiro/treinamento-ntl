@@ -747,7 +747,6 @@ include("inc/scripts.php");
     }
 
     function validaTelefone() {
-        debugger
         let existe = false;
         let achou = false;
         let tel = $('#telefone').val();
@@ -862,6 +861,8 @@ include("inc/scripts.php");
             $("#telefoneId").val(item.telefoneId);
             $("#sequencialTel").val(item.sequencialTel);
             $("#telefone").val(item.telefone);
+            $("#telPrincipal").prop("checked", item.telPrincipal);
+            $("#whatsapp").prop("checked", item.whatsapp);
         }
     }
 
@@ -869,10 +870,11 @@ include("inc/scripts.php");
         $("#telefone").val("");
         $("#telefoneId").val("");
         $("#sequencialTel").val("");
+        $("#telPrincipal").prop("checked", true);
+        $("#whatsapp").prop("checked", true);
     }
 
     function addEmail() {
-        debugger
         let item = $("#formEmail").toObject({
             mode: 'combine',
             skipEmpty: false,
@@ -894,7 +896,6 @@ include("inc/scripts.php");
 
         let index = -1;
         $.each(jsonEmailArray, (i, obj) => {
-            debugger
             if (+$("#sequencialEmail").val() === obj.sequencialEmail) {
                 index = i;
                 return false;
@@ -1013,6 +1014,7 @@ include("inc/scripts.php");
             $("#emailId").val(item.emailId);
             $("#sequencialEmail").val(item.sequencialEmail);
             $("#email").val(item.email);
+            $("#emailPrincipal").prop("checked", item.emailPrincipal);
         }
     }
 
@@ -1020,5 +1022,6 @@ include("inc/scripts.php");
         $("#email").val("");
         $("#emailId").val("");
         $("#sequencialEmail").val("");
+        $("#emailPrincipal").prop("checked", true);
     }
 </script>
