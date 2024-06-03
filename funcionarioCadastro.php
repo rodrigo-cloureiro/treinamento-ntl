@@ -108,13 +108,13 @@ include("inc/nav.php");
                                                         <div class="row">
                                                         </div>
                                                         <div class="row">
-                                                            <section class="col col-3 hidden">
+                                                            <section class="col col-2 hidden">
                                                                 <label class="label">Código</label>
                                                                 <label class="input">
                                                                     <input id="codigo" name="codigo" type="text" class="readonly" readonly>
                                                                 </label>
                                                             </section>
-                                                            <section class="col col-3">
+                                                            <section class="col col-1">
                                                                 <label class="label">Ativo</label>
                                                                 <label class="select">
                                                                     <select id="ativo" name="ativo">
@@ -124,27 +124,27 @@ include("inc/nav.php");
                                                                     <i></i>
                                                                 </label>
                                                             </section>
-                                                            <section class="col col-3">
+                                                            <section class="col col-4">
                                                                 <label class="label">Nome</label>
                                                                 <label class="input"><i class="icon-prepend fa fa-user"></i>
                                                                     <input id="nome" maxlength="255" name="nome" class="required" type="text" value="">
                                                                 </label>
                                                             </section>
-                                                            <section class="col col-3">
+                                                            <section class="col col-2">
                                                                 <label class="label">CPF</label>
                                                                 <label class="input">
                                                                     <i class="icon-prepend fa fa-id-card-o"></i>
                                                                     <input id="cpf" maxlength="20" name="cpf" type="text" class="required" value="" placeholder="XXX.XXX.XXX-XX" data-mask="999.999.999-99" data-mask-placeholder="XXX.XXX.XXX-XX">
                                                                 </label>
                                                             </section>
-                                                            <section class="col col-3">
+                                                            <section class="col col-2">
                                                                 <label class="label">RG</label>
                                                                 <label class="input">
                                                                     <i class="icon-prepend fa fa-id-card-o"></i>
                                                                     <input type="text" id="rg" name="rg" class="required" value="" placeholder="XX.XXX.XXX-X" data-mask="99.999.999-9" data-mask-placeholder="XX.XXX.XXX-X">
                                                                 </label>
                                                             </section>
-                                                            <section class="col col-3">
+                                                            <section class="col col-2">
                                                                 <label class="label">Sexo</label>
                                                                 <label class="select">
                                                                     <select name="sexo" id="sexo" class="required">
@@ -176,7 +176,7 @@ include("inc/nav.php");
                                                                     </select>
                                                                 </label>
                                                             </section>
-                                                            <section class="col col-3">
+                                                            <section class="col col-2">
                                                                 <label class="label">Estado Civil</label>
                                                                 <label class="select">
                                                                     <select name="estadoCivil" id="estadoCivil" class="required">
@@ -199,13 +199,13 @@ include("inc/nav.php");
                                                                     </select>
                                                                 </label>
                                                             </section>
-                                                            <section class="col col-3">
+                                                            <section class="col col-2">
                                                                 <label class="label">Data de Nascimento</label>
                                                                 <label class="input">
                                                                     <input id="dataNascimento" name="dataNascimento" autocomplete="on" data-mask="99/99/9999" data-mask-placeholder="dd/mm/aaaa" data-dateformat="dd/mm/yy" placeholder="dd/mm/aaaa" type="text" class="required datepicker" value="">
                                                                 </label>
                                                             </section>
-                                                            <section class="col col-2">
+                                                            <section class="col col-1">
                                                                 <label class="label">Idade</label>
                                                                 <label class="input">
                                                                     <input type="text" id="idade" name="idade" class="readonly" readonly placeholder="0" value="">
