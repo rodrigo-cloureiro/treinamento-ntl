@@ -756,11 +756,11 @@ include("inc/scripts.php");
         let achou = false;
         let tel = $('#telefone').val();
         let sequencial = +$('#sequencialTel').val();
-        let telefonePrincipalMarcado = $("#telPrincipal").is(":checked") ? 1 : 0; // se input principal estiver marcado 1, caso não 0
+        let telefonePrincipalMarcado = $("#telPrincipal").is(":checked") ? 1 : 0;
 
         for (i = jsonTelefoneArray.length - 1; i >= 0; i--) {
             if (telefonePrincipalMarcado === 1) {
-                if ((jsonTelefoneArray[i].telPrincipal === true) && (jsonTelefoneArray[i].sequencialTel !== sequencial)) {
+                if ((jsonTelefoneArray[i].telPrincipal === 1) && (jsonTelefoneArray[i].sequencialTel !== sequencial)) {
                     achou = true;
                     break;
                 }
