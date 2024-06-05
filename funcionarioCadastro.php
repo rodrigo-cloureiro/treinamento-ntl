@@ -891,8 +891,8 @@ include("inc/scripts.php");
             if (jsonEmailArray.length === 0) {
                 item["sequencialEmail"] = 1;
             } else {
-                item["sequencialEmail"] = Math.max.apply(Math, jsonEmailArray.map((obj) => {
-                    return obj.sequencialEmail;
+                item["sequencialEmail"] = Math.max.apply(Math, jsonEmailArray.map(function(o) {
+                    return o.sequencialEmail;
                 })) + 1;
             }
             item["emailId"] = 0;
