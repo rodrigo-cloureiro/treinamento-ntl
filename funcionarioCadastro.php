@@ -1005,7 +1005,25 @@ include("inc/scripts.php");
     }
 
     function excluirEmail() {
-        return true;
+        let arrSequencial = [];
+        $('#tableEmail input[type=checkbox]:checked').each(function() {
+            arrSequencial.push(parseInt($(this).val()));
+        });
+        if (arrSequencial.length > 0) {
+            for (i = jsonEmailArray.length - 1; i >= 0; i--) {
+                let obj = jsonEmailArray[i];
+                // jQuery.inArray( value, array [, fromIndex ] )
+                // O método $.inArray() é semelhante ao método nativo .indexOf() do JavaScript,
+                // pois retorna -1 quando não encontra uma correspondência.
+                // Se o primeiro elemento da matriz corresponder ao valor, $.inArray() retornará 0.
+                if (jQuery.inArray(obj.sequencialEmail, arrSequencial) > -1) {
+                    jsonEmailArray.splice(i, 1);
+                }
+            }
+            $("#jsonTelefone").val(JSON.stringify(jsonEmailArray));
+            fillTableEmail();
+        } else
+            smartAlert("Erro", "Selecione pelo menos 1 email para excluir.", "error");
     }
 
     function carregaEmail(sequencialEmail) {
