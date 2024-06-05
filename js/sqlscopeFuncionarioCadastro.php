@@ -193,6 +193,23 @@ function recupera()
         $dataNascimento = $utils->validaDataInversa($row['dataNascimento']);
     }
 
+    $sql = " SELECT codigo, sequencial, telefone, principal, whatsapp FROM telefones WHERE funcionarioId = " . $usuarioIdPesquisa;
+    $result = $reposit->RunQuery($sql);
+
+    if (count($result) > 0) {
+        foreach ($result as $campo) {
+            $codigo = +$campo['codigo'];
+            $sequencial = +$campo['sequencial'];
+            $telefone = $campo['telefone'];
+            $principal = +$campo['principal'];
+            $whatsapp = +$campo['whatsapp'];
+            $jsonTelefone[] = array("telefoneId"=>$codigo, "sequencialTel"=>$sequencial, "telefone"=>$telefone, "telPrincipal"=>$principal, "whatsapp"=>$whatsapp);
+        }
+    }
+    
+    $jsonTelefoneArray = json_encode($jsonTelefone);
+    $emailArray = "";
+
     $out =   $id . "^" .
         $ativo . "^" .
         $nome . "^" .
@@ -207,7 +224,7 @@ function recupera()
         return;
     }
 
-    echo "sucess#" . $out;
+    echo "sucess#" . $out . "#" . $jsonTelefoneArray;
     return;
 }
 

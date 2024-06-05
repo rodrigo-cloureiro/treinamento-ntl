@@ -53,6 +53,7 @@ function recuperaFuncionario(id) {
             } else {
                 data = data.replace(/failed/g, '');
                 let piece = data.split("#");
+                let strJsonTelefone = piece[2];
 
                 let mensagem = piece[0];
                 let out = piece[1];
@@ -75,11 +76,11 @@ function recuperaFuncionario(id) {
                 $("#estadoCivil").val(estadoCivil);
                 $("#dataNascimento").val(dataNascimento);
                 $("#ativo").val(ativo);
-                // if (ativo === 1) {
-                //     $('#ativo').prop('checked', true);
-                // } else {
-                //     $('#ativo').prop('checked', false);
-                // }
+                $("#jsonTelefone").val(strJsonTelefone);
+
+                jsonTelefoneArray = JSON.parse($("#jsonTelefone").val());
+                fillTableTelefone();
+               
                 return;
             }
         },
