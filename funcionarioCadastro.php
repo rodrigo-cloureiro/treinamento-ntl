@@ -260,7 +260,7 @@ include("inc/nav.php");
                                             <div id="collapseContato" class="panel-collapse collapse">
                                                 <div class="panel-body no-padding">
                                                     <fieldset class="col col-6">
-                                                        <input class="col col-12" id="jsonTelefone" name="jsonTelefone" type="" value="[]">
+                                                        <input class="col col-12" id="jsonTelefone" name="jsonTelefone" type="hidden" value="[]">
                                                         <div id="formTelefone" class="col-sm-12">
                                                             <input type="hidden" id="telefoneId" name="telefoneId">
                                                             <input type="hidden" id="sequencialTel" name="sequencialTel">
@@ -322,7 +322,7 @@ include("inc/nav.php");
                                                         </div>
                                                     </fieldset>
                                                     <fieldset class="col col-6">
-                                                        <input type="" id="jsonEmail" name="jsonEmail" value="[]">
+                                                        <input type="hidden" id="jsonEmail" name="jsonEmail" value="[]">
                                                         <div id="formEmail" class="col-sm-12">
                                                             <input type="hidden" id="emailId" name="emailId">
                                                             <input type="hidden" id="sequencialEmail" name="sequencialEmail">
