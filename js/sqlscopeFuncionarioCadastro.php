@@ -206,9 +206,21 @@ function recupera()
             $jsonTelefone[] = array("telefoneId"=>$codigo, "sequencialTel"=>$sequencial, "telefone"=>$telefone, "telPrincipal"=>$principal, "whatsapp"=>$whatsapp);
         }
     }
-    
     $jsonTelefoneArray = json_encode($jsonTelefone);
-    $emailArray = "";
+    
+    $sql = " SELECT codigo, sequencial, email, principal FROM emails WHERE codigo_func = " . $usuarioIdPesquisa;
+    $result = $reposit->RunQuery($sql);
+
+    if (count($result) > 0) {
+        foreach ($result as $campo) {
+            $codigo = +$campo['codigo'];
+            $sequencial = +$campo['sequencial'];
+            $email = $campo['email'];
+            $principal = +$campo['principal'];
+            $jsonEmail[] = array("emailId"=>$codigo, "sequencialEmail"=>$sequencial, "email"=>$email, "emailPrincipal"=>$principal);
+        }
+    }
+    $jsonEmailArray = json_encode($jsonEmail);
 
     $out =   $id . "^" .
         $ativo . "^" .
@@ -224,7 +236,7 @@ function recupera()
         return;
     }
 
-    echo "sucess#" . $out . "#" . $jsonTelefoneArray;
+    echo "sucess#" . $out . "#" . $jsonTelefoneArray . "#" . $jsonEmailArray;
     return;
 }
 
