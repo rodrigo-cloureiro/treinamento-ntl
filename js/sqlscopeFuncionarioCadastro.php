@@ -55,6 +55,7 @@ function grava()
     $estadoCivil = $utils->formatarString($_POST['estadoCivil']);
     $dataNascimento = $utils->formatarDataSql($_POST['dataNascimento']);
     $arrayTelefone = $_POST['jsonTelefone'];
+    $arrayEmail = $_POST['jsonEmail'];
 
     $nomeXml = "ArrayTelefone";
     $nomeTabela = "xmlTelefone";
@@ -76,12 +77,38 @@ function grava()
     }
     $xml = simplexml_load_string($xmlTelefone);
     if ($xml === false) {
-        $mensagem = "Erro na criação do XML de Solicitação";
+        $mensagem = "Erro na criação do XML de cadastro de telefone";
         echo "failed#" . $mensagem . ' ';
         return;
     }
     $xmlTelefone = "'" . $xmlTelefone . "'";
 
+    $nomeXml = "ArrayEmail";
+    $nomeTabela = "xmlEmail";
+    if (sizeof($arrayEmail) > 0) {
+        $xmlEmail = '<?xml version="1.0"?>';
+        $xmlEmail = $xmlEmail . '<' . $nomeXml . ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
+        foreach ($arrayEmail as $chave) {
+            $xmlEmail = $xmlEmail . "<" . $nomeTabela . ">";
+            foreach ($chave as $campo => $valor) {
+                $xmlEmail = $xmlEmail . "<" . $campo . ">" . $valor . "</" . $campo . ">";
+            }
+            $xmlEmail = $xmlEmail . "</" . $nomeTabela . ">";
+        }
+        $xmlEmail = $xmlEmail . "</" . $nomeXml . ">";
+    } else {
+        $xmlEmail = '<?xml version="1.0"?>';
+        $xmlEmail = $xmlEmail . '<' . $nomeXml . ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
+        $xmlEmail = $xmlEmail . "</" . $nomeXml . ">";
+    }
+
+    $xml = simplexml_load_string($xmlEmail);
+    if ($xml === false) {
+        $mensagem = "Erro na criação do XML de cadastro de email";
+        echo "failed#" . $mensagem . ' ';
+        return;
+    }
+    $xmlEmail = "'" . $xmlEmail . "'";
 
     $sql = " SELECT codigo, cpf FROM funcionarios WHERE cpf = $cpf ";
     $result = $reposit->RunQuery($sql);
@@ -116,7 +143,8 @@ function grava()
         $genero,
         $estadoCivil,
         $dataNascimento,
-        $xmlTelefone";
+        $xmlTelefone,
+        $xmlEmail";
 
     $reposit = new reposit();
     $result = $reposit->Execprocedure($sql);
