@@ -148,7 +148,7 @@ include("inc/nav.php");
                                                                 <label class="label">Sexo</label>
                                                                 <label class="select">
                                                                     <select name="sexo" id="sexo" class="required">
-                                                                        <option value="" disabled selected>Selecione um gênero</option>
+                                                                        <option value="" disabled selected>Selecione um sexo</option>
                                                                         <!-- <option value="1">Mulher cisgênero</option>
                                                                         <option value="2">Mulher transgênero</option>
                                                                         <option value="3">Mulher transexual</option>
@@ -164,12 +164,12 @@ include("inc/nav.php");
                                                                         <?php
                                                                         $reposit = new reposit();
                                                                         $sql = "SELECT codigo, descricao
-                                                                                FROM generos
+                                                                                FROM sexo
                                                                                 WHERE ativo = 1";
                                                                         $result = $reposit->RunQuery($sql);
                                                                         foreach ($result as $row) {
                                                                             $codigo = $row['codigo'];
-                                                                            $descricao = $row['descricao'];
+                                                                            $descricao = ucfirst($row['descricao']);
                                                                             echo '<option value=' . $codigo . '>' . $descricao . '</option>';
                                                                         }
                                                                         ?>
@@ -188,7 +188,9 @@ include("inc/nav.php");
                                                                         <option value="5">Viúvo(a)</option> -->
                                                                         <?php
                                                                         $reposit = new reposit();
-                                                                        $sql = "SELECT codigo, descricao FROM cadastro.dbo.estadoCivil";
+                                                                        $sql = "SELECT codigo, descricao
+                                                                                FROM cadastro.dbo.estado_civil
+                                                                                WHERE ativo = 1";
                                                                         $result = $reposit->RunQuery($sql);
                                                                         foreach ($result as $row) {
                                                                             $codigo = $row['codigo'];
