@@ -902,8 +902,8 @@ include("inc/scripts.php");
         $("#telefone").val("");
         $("#telefoneId").val("");
         $("#sequencialTel").val("");
-        $("#telPrincipal").prop("checked", true);
-        $("#whatsapp").prop("checked", true);
+        $("#telPrincipal").prop("checked", false);
+        $("#whatsapp").prop("checked", false);
     }
 
     function addEmail() {
@@ -1073,6 +1073,6 @@ include("inc/scripts.php");
         $("#email").val("");
         $("#emailId").val("");
         $("#sequencialEmail").val("");
-        $("#emailPrincipal").prop("checked", true);
+        $("#emailPrincipal").prop("checked", false);
     }
 </script>
