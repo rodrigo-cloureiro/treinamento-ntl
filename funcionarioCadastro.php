@@ -269,7 +269,7 @@ include("inc/nav.php");
                                                                     <label class="label">Telefone</label>
                                                                     <label class="input">
                                                                         <i class="icon-prepend fa fa-phone"></i>
-                                                                        <input id="telefone" maxlength="50" name="telefone" class="" type="text" value="" data-mask="(99) 99999-9999" data-mask-placeholder="(XX) XXXXX-XXXX">
+                                                                        <input id="telefone" maxlength="50" name="telefone" class="" type="text" value="" placeholder="(XX) XXXXX-XXXX" data-mask="(99) 99999-9999" data-mask-placeholder="(XX) XXXXX-XXXX">
                                                                     </label>
                                                                 </section>
                                                                 <section class="col col-2">
@@ -626,7 +626,7 @@ include("inc/scripts.php");
             return;
         }
 
-        if (rg == "") {
+        if (rg == "" || rg === $("#rg").attr('placeholder')) {
             smartAlert("Atenção", "O RG precisa ser preenchido!", "error");
             $("#rg").focus();
             return;
@@ -799,7 +799,7 @@ include("inc/scripts.php");
             }
         }
 
-        if (tel == "") {
+        if (tel == "" || tel === $("#telefone").attr('placeholder')) {
             smartAlert("Erro", "Informe um telefone!", "error");
             return false;
         }
