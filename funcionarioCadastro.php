@@ -633,7 +633,7 @@ include("inc/scripts.php");
         }
 
         if (genero == "") {
-            smartAlert("Atenção", "O gênero precisa ser preenchido!", "error");
+            smartAlert("Atenção", "O sexo precisa ser preenchido!", "error");
             $("#sexo").focus();
             return;
         }
