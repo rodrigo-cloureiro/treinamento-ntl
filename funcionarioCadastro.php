@@ -666,34 +666,47 @@ include("inc/scripts.php");
     }
 
     function dataValida(data) {
-        var dataAtual = new Date();
-        var nascimentoSplit = data.split('/');
-        var dataNascimento = new Date(nascimentoSplit[2], nascimentoSplit[1] - 1, nascimentoSplit[0]);
-        var dias30 = [4, 6, 9, 11];
-        var dias31 = [1, 3, 5, 7, 8, 10, 12];
+        let dataAtual = new Date();
+        let nascimentoSplit = data.split('/');
+        let dataNascimento = new Date(nascimentoSplit[2], nascimentoSplit[1] - 1, nascimentoSplit[0]);
+        const dias30 = [4, 6, 9, 11];
+        const dias31 = [1, 3, 5, 7, 8, 10, 12];
+        const condicoes = [
+            dataAtual < dataNascimento,
+            nascimentoSplit[1] < 0 || nascimentoSplit[1] > 12 || nascimentoSplit[0] < 1 || nascimentoSplit[1] > 31,
+            dias30.includes(nascimentoSplit[1]) && nascimentoSplit[0] > 30,
+            dias31.includes(nascimentoSplit[1]) && nascimentoSplit[0] > 31,
+            !ehBissexto(nascimentoSplit[2]) && (nascimentoSplit[1] == 2 && nascimentoSplit[0] > 28),
+            ehBissexto(nascimentoSplit[2]) && (nascimentoSplit[1] == 2 && nascimentoSplit[0] > 29)
+        ];
 
-        if (dataAtual < dataNascimento) {
+        const valido = condicoes.every(condicao => condicao === false);
+        if (!valido) {
             return false;
         }
+
+        // if (dataAtual < dataNascimento) {
+        //     return false;
+        // }
 
         // nascimentoSplit[2] -> ano
         // nascimentoSplit[1]-1 -> mês
         // nascimentoSplit[0] -> dia
-        if (nascimentoSplit[1] < 0 || nascimentoSplit[1] > 12 || nascimentoSplit[0] < 1 || nascimentoSplit[1] > 31) {
-            return false;
-        }
+        // if (nascimentoSplit[1] < 0 || nascimentoSplit[1] > 12 || nascimentoSplit[0] < 1 || nascimentoSplit[1] > 31) {
+        //     return false;
+        // }
 
-        if (dias30.includes(nascimentoSplit[1]) && nascimentoSplit[0] > 30) {
-            return false;
-        }
+        // if (dias30.includes(nascimentoSplit[1]) && nascimentoSplit[0] > 30) {
+        //     return false;
+        // }
 
-        if (dias31.includes(nascimentoSplit[1]) && nascimentoSplit[0] > 31) {
-            return false;
-        }
+        // if (dias31.includes(nascimentoSplit[1]) && nascimentoSplit[0] > 31) {
+        //     return false;
+        // }
 
-        if (!ehBissexto(nascimentoSplit[2]) && (nascimentoSplit[1] == 2 && nascimentoSplit[0] > 28)) {
-            return false;
-        }
+        // if (!ehBissexto(nascimentoSplit[2]) && (nascimentoSplit[1] == 2 && nascimentoSplit[0] > 28)) {
+        //     return false;
+        // }
 
         return true;
     }
