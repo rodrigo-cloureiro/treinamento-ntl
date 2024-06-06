@@ -23,7 +23,8 @@ function gravaFuncionario(codigo, ativo, nome, cpf, rg, genero, estadoCivil, dat
                 return '';
             } else {
                 smartAlert("Sucesso", "Operação realizada com sucesso!", "success");
-                setInterval(() => codigo === 0 ? novo() : voltar(), 1500);
+                // setInterval(() => codigo === 0 ? novo() : voltar(), 1500);
+                setInterval(() => voltar(), 1500);
             }
             //retorno dos dados
         },
