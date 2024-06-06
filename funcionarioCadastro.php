@@ -978,6 +978,19 @@ include("inc/scripts.php");
             return false;
         }
 
+        const invalidos = ["&", "<", ">", '"'];
+        let validaCaracteres = true;
+        invalidos.forEach(char => {
+            if (email.indexOf(char) > 0) {
+                validaCaracteres = false;
+        }});
+
+        if (!validaCaracteres) {
+            smartAlert("Atenção", 'Os caracteres (&, <, >, ") são inválidos.', "error");
+            $("#email").val('').focus();
+            return;
+        }
+
         if (achou === true) {
             smartAlert("Erro", "Já existe um email principal cadastrado.", "error");
             return false;
