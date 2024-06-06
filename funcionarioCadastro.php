@@ -625,6 +625,8 @@ include("inc/scripts.php");
             const cep = $("#cep").val();
             if (cep !== "" && cep !==  $("#cep").attr('placeholder')) {
                 preencheEndereco(cep);
+            } else {
+                clearEndereco();
             }
         });
 
@@ -1162,5 +1164,14 @@ include("inc/scripts.php");
         $("#uf").val(data.uf);
         $("#cidade").val(data.localidade);
         $("#numero").focus();
+    }
+
+    function clearEndereco() {
+        $("#logradouro").val('');
+        $("#uf").val('');
+        $("#bairro").val('');
+        $("#cidade").val('');
+        $("#numero").val('');
+        $("#cep").focus();
     }
 </script>
