@@ -521,7 +521,11 @@ include("inc/scripts.php");
             voltar();
         });
 
-        $("#dataNascimento").on("change", function() {
+        $("#dataNascimento").on("focusout", function() {
+            if (!dataValida($("#dataNascimento").val())) {
+                smartAlert("Atenção", "A data de nascimento não é válida!", "error");
+                $("#dataNascimento").focus();
+            }
             calcularIdade();
         });
 
@@ -535,7 +539,7 @@ include("inc/scripts.php");
                     } else {
                         smartAlert("Atenção", "CPF Inválido", "error");
                     }
-
+                    $("#cpf").focus();
                     return '';
                 }
             });
@@ -638,11 +642,6 @@ include("inc/scripts.php");
             smartAlert("Atenção", "A data de nascimento precisa ser preenchida!", "error");
             $("#dataNascimento").focus();
             return;
-        } else {
-            if (!dataValida(dataNascimento)) {
-                smartAlert("Atenção", "A data de nascimento não é válida!", "error");
-                return;
-            }
         }
 
 
