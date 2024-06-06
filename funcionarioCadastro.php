@@ -530,19 +530,21 @@ include("inc/scripts.php");
         });
 
         $("#cpf").on("focusout", function(campo) {
-            validaCPF(campo.currentTarget.value, results => {
-                if (results.indexOf('success') < 0) {
-                    let piece = results.split('#');
-                    let mensagem = piece[1];
-                    if (mensagem !== "") {
-                        smartAlert("Atenção", mensagem, "error");
-                    } else {
-                        smartAlert("Atenção", "CPF Inválido", "error");
+            if ($("#cpf").val() !== 'XXX.XXX.XXX-XX') {
+                validaCPF(campo.currentTarget.value, results => {
+                    if (results.indexOf('success') < 0) {
+                        let piece = results.split('#');
+                        let mensagem = piece[1];
+                        if (mensagem !== "") {
+                            smartAlert("Atenção", mensagem, "error");
+                        } else {
+                            smartAlert("Atenção", "CPF Inválido", "error");
+                        }
+                        $("#cpf").focus();
+                        return '';
                     }
-                    $("#cpf").focus();
-                    return '';
-                }
-            });
+                });
+            }
         });
 
         $("#btnAddTelefone").on("click", function() {
@@ -644,6 +646,15 @@ include("inc/scripts.php");
             return;
         }
 
+        if (jsonTelefoneArray.length === 0) {
+            smartAlert("Atenção", "É necessário adicionar pelo menos 1 telefone.", "error");
+            return;
+        }
+
+        if (jsonEmailArray.length === 0) {
+            smartAlert("Atenção", "É necessário adicionar pelo menos 1 email.", "error");
+            return;
+        }
 
         gravaFuncionario(codigo, ativo, nome, cpf, rg, genero, estadoCivil, dataNascimento, jsonTelefoneArray, jsonEmailArray);
     }
