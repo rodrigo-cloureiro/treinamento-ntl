@@ -522,11 +522,15 @@ include("inc/scripts.php");
         });
 
         $("#dataNascimento").on("focusout", function() {
+            $("#idade").val(0);
             if (!dataValida($("#dataNascimento").val())) {
                 smartAlert("Atenção", "A data de nascimento não é válida!", "error");
                 $("#dataNascimento").focus();
+            } 
+            
+            if ($("#dataNascimento").val() !== 'dd/mm/aaaa') {
+                calcularIdade();
             }
-            calcularIdade();
         });
 
         $("#cpf").on("focusout", function(campo) {
