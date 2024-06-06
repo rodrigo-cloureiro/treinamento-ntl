@@ -366,6 +366,67 @@ include("inc/nav.php");
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a href="#collapseEndereco" data-toggle="collapse" data-parent="#accordion" id="accordionEndereco">
+                                                        <i class="fa fa-lg fa-angle-down pull-right"></i>
+                                                        <i class="fa fa-lg fa-angle-up pull-right"></i>
+                                                        Endereço
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseEndereco" class="panel-collapse collapse">
+                                                <div class="panel-body no-padding">
+                                                    <fieldset>
+                                                        <div class="row">
+                                                            <section class="col col-1">
+                                                                <label class="label">CEP</label>
+                                                                <label class="input">
+                                                                    <input id="cep" name="cep" type="text" class="required" placeholder="XXXXX-XXX" data-mask="99999-999" data-mask-placeholder="XXXXX-XXX">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-3">
+                                                                <label class="label">Logradouro</label>
+                                                                <label class="input">
+                                                                    <input id="logradouro" name="logradouro" type="text" class="required" placeholder="Logradouro" readonly>
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-1">
+                                                                <label class="label">UF</label>
+                                                                <label class="input">
+                                                                    <input type="text" id="uf" name="uf" class="required" placeholder="UF" readonly>
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="label">Bairro</label>
+                                                                <label class="input">
+                                                                    <input type="text" id="bairro" name="bairro" class="required" placeholder="Bairro" readonly>
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="label">Cidade</label>
+                                                                <label class="input">
+                                                                    <input type="text" id="cidade" name="cidade" class="required" placeholder="Cidade" readonly>
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-1">
+                                                                <label class="label">Número</label>
+                                                                <label class="input">
+                                                                    <input type="text" id="numero" name="numero" class="required" placeholder="Número">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="label">Complemento</label>
+                                                                <label class="input">
+                                                                    <input type="text" id="complemento" name="complemento" placeholder="Complemento">
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <footer>
                                         <button type="button" id="btnExcluir" class="btn btn-danger hidden" aria-hidden="true" title="Excluir" style="display:<?php echo $esconderBtnExcluir ?>">
@@ -558,6 +619,13 @@ include("inc/scripts.php");
 
         $("#btnRemoverEmail").on("click", function() {
             excluirEmail();
+        });
+
+        $("#cep").on("focusout", function() {
+            const cep = $("#cep").val();
+            if (cep !== "" && cep !==  $("#cep").attr('placeholder')) {
+                preencheEndereco(cep);
+            }
         });
 
         carregaPagina();
@@ -980,7 +1048,7 @@ include("inc/scripts.php");
 
         if (!validaCaracteres) {
             smartAlert("Atenção", 'Os caracteres (&, <, >, ") são inválidos.', "error");
-            $("#email").val('').focus();
+            $("#email").focus();
             return;
         }
 
@@ -1082,5 +1150,17 @@ include("inc/scripts.php");
         $("#emailId").val("");
         $("#sequencialEmail").val("");
         $("#emailPrincipal").prop("checked", false);
+    }
+
+    async function preencheEndereco(cep) {
+        const url = `https://viacep.com.br/ws/${cep}/json/`
+        const res = await fetch(url, { method: 'GET' });
+        const data = await res.json();
+
+        $("#logradouro").val(data.logradouro);
+        $("#bairro").val(data.bairro);
+        $("#uf").val(data.uf);
+        $("#cidade").val(data.localidade);
+        $("#numero").focus();
     }
 </script>
