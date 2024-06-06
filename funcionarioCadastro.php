@@ -72,7 +72,7 @@ include("inc/nav.php");
                         </header>
                         <div>
                             <div class="widget-body no-padding">
-                                <form action="javascript:gravar()" class="smart-form client-form" id="formUsuario" method="post">
+                                <form class="smart-form client-form" id="formUsuario">
                                     <div class="panel-group smart-accordion-default" id="accordion">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -298,13 +298,7 @@ include("inc/nav.php");
                                                             </div>
                                                             <div class="row">
                                                                 <section>
-                                                                    <div class="table-responsive" style="
-                                                                    min-height: 115px;
-                                                                    width: 95%;
-                                                                    border: 1px solid #ddd;
-                                                                    margin-bottom: 13px;
-                                                                    overflow-x: hidden;
-                                                                    ">
+                                                                    <div class="table-responsive" style="min-height: 115px;width: 95%;border: 1px solid #ddd;margin-bottom: 13px;overflow-x: hidden;">
                                                                         <table id="tableTelefone" class="table table-bordered table-striped table-condensed table-hover dataTable">
                                                                             <thead>
                                                                                 <tr role="row">
@@ -336,7 +330,7 @@ include("inc/nav.php");
                                                                 </section>
                                                                 <section class="col col-2">
                                                                     <label class="label">&nbsp;</label>
-                                                                    <label id="labelAtivo" class="checkbox ">
+                                                                    <label id="labelAtivo" class="checkbox">
                                                                         <input checked="checked" id="emailPrincipal" name="emailPrincipal" type="checkbox" value="true"><i></i>
                                                                         Principal 
                                                                     </label>                                                                                    
@@ -353,13 +347,7 @@ include("inc/nav.php");
                                                             </div>
                                                             <div class="row">
                                                                 <section class="col col-12">
-                                                                    <div class="table-responsive" style="
-                                                                    min-height: 115px;
-                                                                    width: 95%;
-                                                                    border: 1px solid #ddd;
-                                                                    margin-bottom: 13px;
-                                                                    overflow-x: hidden;
-                                                                    ">
+                                                                    <div class="table-responsive" style="min-height: 115px;width: 95%;border: 1px solid #ddd;margin-bottom: 13px;overflow-x: hidden;">
                                                                         <table id="tableEmail" class="table table-bordered table-striped table-condensed table-hover dataTable">
                                                                             <thead>
                                                                                 <tr role="row">
@@ -497,6 +485,11 @@ include("inc/scripts.php");
                     $(this).dialog("close");
                 }
             }]
+        });
+
+        $("#btnGravar").on("click", function(e) {
+            e.preventDefault();
+            gravar();
         });
 
         $("#btnExcluir").on("click", function() {
