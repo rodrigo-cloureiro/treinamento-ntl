@@ -609,21 +609,9 @@ include("inc/scripts.php");
         $("#btnAddTelefone").on("click", function() {
             addTelefone();
         });
-
+        
         $("#cpf").off('blur focus');
-        $("#rg").off('blur focus')
-
-        $("#telefone")
-        .focus(() => {
-            $("#telefone").mask("(99) 99999-9999");
-            $("#telefone").off('blur focus');
-        })
-        .focusout(function() {
-            const mask = $("#telefone").mask()
-            if (mask.length === 10) {
-                $("#telefone").mask("(99) 9999-9999" );
-            }
-        });
+        $("#rg").off('blur focus');
 
         $("#btnRemoverTelefone").on("click", function() {
             excluirContato();
@@ -638,8 +626,8 @@ include("inc/scripts.php");
         });
 
         $("#cep")
-        .off('blur focus').
-        on("focusout", function() {
+        .off('blur focus')
+        .on("focusout", function() {
             const cep = $("#cep").val();
             if (cep !== "" && cep !==  $("#cep").attr('placeholder')) {
                 preencheEndereco(cep);
