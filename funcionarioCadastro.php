@@ -607,12 +607,6 @@ include("inc/scripts.php");
         });
 
         $("#btnAddTelefone").on("click", function() {
-            let tel = $("#telefone").val();
-            if (tel[tel.length -1] === '_') {
-                tel = tel.replace('-', '').replaceAll('_', '');
-                tel = tel.substr(0, 9) + '-' + tel.substr(9);
-                $("#telefone").val(tel);
-            }
             addTelefone();
         });
 
@@ -962,6 +956,10 @@ include("inc/scripts.php");
             var valorTel = $("#telefone").val();
             if (valorTel !== '') {
                 fieldName = "telefone";
+            }
+            if (valorTel[valorTel.length -1] === '_') {
+                valorTel = valorTel.replace('-', '').replaceAll('_', '');
+                valorTel = valorTel.substr(0, 9) + '-' + valorTel.substr(9);
             }
             return {
                 name: fieldName,
