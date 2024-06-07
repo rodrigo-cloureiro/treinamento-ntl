@@ -185,7 +185,10 @@ function recupera()
         $usuarioIdPesquisa = $_POST["id"];
     }
 
-    $sql = " SELECT codigo, ativo, nome, cpf, rg, genero, estadoCivil, dataNascimento FROM cadastro.dbo.funcionarios WHERE (0 = 0) ";
+    $sql = " SELECT codigo, ativo, nome, cpf, rg, genero,
+             estadoCivil, dataNascimento, cep, logradouro,
+             uf, bairro, cidade, numero, complemento
+             FROM cadastro.dbo.funcionarios WHERE (0 = 0) ";
 
     if ($condicaoId) {
         $sql = $sql . " AND funcionarios.codigo = " . $usuarioIdPesquisa . " ";
@@ -205,6 +208,13 @@ function recupera()
         $genero = $row['genero'];
         $estadoCivil = $row['estadoCivil'];
         $dataNascimento = $utils->validaDataInversa($row['dataNascimento']);
+        $cep = $row['cep'];
+        $logradouro = $row['logradouro'];
+        $uf = $row['uf'];
+        $bairro = $row['bairro'];
+        $cidade = $row['cidade'];
+        $numero = $row['numero'];
+        $complemento = $row['complemento'];
     }
 
     $sql = " SELECT codigo, sequencial, telefone, principal, whatsapp FROM telefones WHERE funcionarioId = " . $usuarioIdPesquisa;
@@ -243,7 +253,14 @@ function recupera()
         $rg . "^" .
         $genero . "^" .
         $estadoCivil . "^" .
-        $dataNascimento;
+        $dataNascimento . "^" .
+        $cep . "^" .
+        $logradouro . "^" .
+        $uf . "^" .
+        $bairro . "^" .
+        $cidade . "^" .
+        $numero . "^" .
+        $complemento;
 
     if ($out == "") {
         echo "failed#";

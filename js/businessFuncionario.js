@@ -69,7 +69,14 @@ function recuperaFuncionario(id) {
                 let genero = piece[5];
                 let estadoCivil = piece[6]
                 let dataNascimento = piece[7];
-               
+                let cep = piece[8];
+                let logradouro = piece[9];
+                let uf = piece[10];
+                let bairro = piece[11];
+                let cidade = piece[12];
+                let numero = piece[13];
+                let complemento = piece[14];
+
                 $("#codigo").val(codigo);
                 $("#nome").val(nome);
                 $("#cpf").val(cpf);
@@ -77,6 +84,13 @@ function recuperaFuncionario(id) {
                 $("#sexo").val(genero);
                 $("#estadoCivil").val(estadoCivil);
                 $("#dataNascimento").val(dataNascimento);
+                $("#cep").val(cep);
+                $("#logradouro").val(logradouro);
+                $("#uf").val(uf);
+                $("#bairro").val(bairro);
+                $("#cidade").val(cidade);
+                $("#numero").val(numero);
+                $("#complemento").val(complemento);
                 $("#ativo").val(ativo);
                 $("#jsonTelefone").val(strJsonTelefone);
                 $("#jsonEmail").val(strJsonEmail);
