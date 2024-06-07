@@ -760,7 +760,10 @@ include("inc/scripts.php");
             return;
         }
 
-        if (uf === "") {}
+        if (uf === "") {
+            smartAlert("Atenção", "É necessário preencher a UF", "error");
+            return;
+        }
 
         if (bairro === "") {
             smartAlert("Atenção", "É necessário preencher o bairro", "error");
