@@ -269,7 +269,7 @@ include("inc/nav.php");
                                                                     <label class="label">Telefone</label>
                                                                     <label class="input">
                                                                         <i class="icon-prepend fa fa-phone"></i>
-                                                                        <input id="telefone" maxlength="50" name="telefone" class="" type="text" value="" placeholder="(XX) XXXXX-XXXX" data-mask="(99) 99999-9999" data-mask-placeholder="(XX) XXXXX-XXXX">
+                                                                        <input id="telefone" maxlength="50" name="telefone" class="" type="text" value="" placeholder="(XX) XXXXX-XXXX">
                                                                     </label>
                                                                 </section>
                                                                 <section class="col col-2">
@@ -609,6 +609,21 @@ include("inc/scripts.php");
             addTelefone();
         });
 
+        $("#cpf").off('blur focus');
+        $("#rg").off('blur focus')
+
+        $("#telefone")
+        .focus(() => {
+            $("#telefone").mask("(99) 99999-9999");
+            $("#telefone").off('blur focus');
+        })
+        .focusout(function() {
+            const mask = $("#telefone").mask()
+            if (mask.length === 10) {
+                $("#telefone").mask("(99) 9999-9999" );
+            }
+        });
+
         $("#btnRemoverTelefone").on("click", function() {
             excluirContato();
         });
@@ -621,7 +636,9 @@ include("inc/scripts.php");
             excluirEmail();
         });
 
-        $("#cep").on("focusout", function() {
+        $("#cep")
+        .off('blur focus').
+        on("focusout", function() {
             const cep = $("#cep").val();
             if (cep !== "" && cep !==  $("#cep").attr('placeholder')) {
                 preencheEndereco(cep);
