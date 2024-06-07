@@ -383,43 +383,43 @@ include("inc/nav.php");
                                                             <section class="col col-1">
                                                                 <label class="label">CEP</label>
                                                                 <label class="input">
-                                                                    <input id="cep" name="cep" type="text" class="required" placeholder="XXXXX-XXX" data-mask="99999-999" data-mask-placeholder="XXXXX-XXX">
+                                                                    <input id="cep" name="cep" type="text" value="" class="required" placeholder="XXXXX-XXX" data-mask="99999-999" data-mask-placeholder="XXXXX-XXX">
                                                                 </label>
                                                             </section>
                                                             <section class="col col-3">
                                                                 <label class="label">Logradouro</label>
                                                                 <label class="input">
-                                                                    <input id="logradouro" name="logradouro" type="text" class="required" placeholder="Logradouro" readonly>
+                                                                    <input id="logradouro" name="logradouro" type="text" value="" class="required" placeholder="Logradouro" readonly>
                                                                 </label>
                                                             </section>
                                                             <section class="col col-1">
                                                                 <label class="label">UF</label>
                                                                 <label class="input">
-                                                                    <input type="text" id="uf" name="uf" class="required" placeholder="UF" readonly>
+                                                                    <input type="text" value="" id="uf" name="uf" class="required" placeholder="UF" readonly>
                                                                 </label>
                                                             </section>
                                                             <section class="col col-2">
                                                                 <label class="label">Bairro</label>
                                                                 <label class="input">
-                                                                    <input type="text" id="bairro" name="bairro" class="required" placeholder="Bairro" readonly>
+                                                                    <input type="text" value="" id="bairro" name="bairro" class="required" placeholder="Bairro" readonly>
                                                                 </label>
                                                             </section>
                                                             <section class="col col-2">
                                                                 <label class="label">Cidade</label>
                                                                 <label class="input">
-                                                                    <input type="text" id="cidade" name="cidade" class="required" placeholder="Cidade" readonly>
+                                                                    <input type="text" value="" id="cidade" name="cidade" class="required" placeholder="Cidade" readonly>
                                                                 </label>
                                                             </section>
                                                             <section class="col col-1">
                                                                 <label class="label">Número</label>
                                                                 <label class="input">
-                                                                    <input type="text" id="numero" name="numero" class="required" placeholder="Número">
+                                                                    <input type="text" value="" id="numero" name="numero" class="required" placeholder="Número">
                                                                 </label>
                                                             </section>
                                                             <section class="col col-2">
                                                                 <label class="label">Complemento</label>
                                                                 <label class="input">
-                                                                    <input type="text" id="complemento" name="complemento" placeholder="Complemento">
+                                                                    <input type="text" value="" id="complemento" name="complemento" placeholder="Complemento">
                                                                 </label>
                                                             </section>
                                                         </div>
@@ -688,14 +688,21 @@ include("inc/scripts.php");
     }
 
     function gravar() {
-        let codigo = +($("#codigo").val());
-        let ativo = $("#ativo").val();
-        let nome = $("#nome").val();
-        let cpf = $("#cpf").val();
-        let dataNascimento = $("#dataNascimento").val();
-        let rg = $("#rg").val();
-        let genero = $("#sexo").val() || "";
-        let estadoCivil = $("#estadoCivil").val() || "";
+        const codigo = +($("#codigo").val());
+        const ativo = $("#ativo").val();
+        const nome = $("#nome").val();
+        const cpf = $("#cpf").val();
+        const dataNascimento = $("#dataNascimento").val();
+        const rg = $("#rg").val();
+        const genero = $("#sexo").val() || "";
+        const estadoCivil = $("#estadoCivil").val() || "";
+        const cep = $("#cep").val();
+        const logradouro = $("#logradouro").val();
+        const uf = $("#uf").val();
+        const bairro = $("#bairro").val();
+        const cidade = $("#cidade").val();
+        const numero = $("#numero").val();
+        const complemento = $("#complemento").val() || "";
 
         if (nome == "") {
             smartAlert("Atenção", "O nome precisa ser preenchido!", "error");
@@ -740,6 +747,33 @@ include("inc/scripts.php");
 
         if (jsonEmailArray.length === 0) {
             smartAlert("Atenção", "É necessário adicionar pelo menos 1 email.", "error");
+            return;
+        }
+
+        if (cep === "") {
+            smartAlert("Atenção", "É necessário preencher o CEP", "error");
+            return;
+        }
+
+        if (logradouro === "") {
+            smartAlert("Atenção", "É necessário preencher o logradouro", "error");
+            return;
+        }
+
+        if (uf === "") {}
+
+        if (bairro === "") {
+            smartAlert("Atenção", "É necessário preencher o bairro", "error");
+            return;
+        }
+
+        if (cidade === "") {
+            smartAlert("Atenção", "É necessário preencher a cidade", "error");
+            return;
+        }
+
+        if (numero === "") {
+            smartAlert("Atenção", "É necessário preencher o número", "error");
             return;
         }
 
