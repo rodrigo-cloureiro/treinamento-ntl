@@ -56,6 +56,13 @@ function grava()
     $dataNascimento = $utils->formatarDataSql($_POST['dataNascimento']);
     $arrayTelefone = $_POST['jsonTelefone'];
     $arrayEmail = $_POST['jsonEmail'];
+    $cep = $utils->formatarString($_POST['cep']);
+    $logradouro = $utils->formatarString($_POST['logradouro']);
+    $uf = $utils->formatarString($_POST['uf']);
+    $bairro = $utils->formatarString($_POST['bairro']);
+    $cidade = $utils->formatarString($_POST['cidade']);
+    $numero = $utils->formatarString($_POST['numero']);
+    $complemento = $utils->formatarString($_POST['complemento']);
 
     $nomeXml = "ArrayTelefone";
     $nomeTabela = "xmlTelefone";
@@ -144,7 +151,14 @@ function grava()
         $estadoCivil,
         $dataNascimento,
         $xmlTelefone,
-        $xmlEmail";
+        $xmlEmail,
+        $cep,
+        $logradouro,
+        $uf,
+        $bairro,
+        $cidade,
+        $numero,
+        $complemento";  
 
     $reposit = new reposit();
     $result = $reposit->Execprocedure($sql);

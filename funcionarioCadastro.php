@@ -778,7 +778,7 @@ include("inc/scripts.php");
             return;
         }
 
-        gravaFuncionario(codigo, ativo, nome, cpf, rg, genero, estadoCivil, dataNascimento, jsonTelefoneArray, jsonEmailArray);
+        gravaFuncionario(codigo, ativo, nome, cpf, rg, genero, estadoCivil, dataNascimento, jsonTelefoneArray, jsonEmailArray, cep, logradouro, uf, bairro, cidade, numero, complemento);
     }
 
     function calcularIdade() {
