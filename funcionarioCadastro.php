@@ -588,7 +588,8 @@ include("inc/scripts.php");
         });
 
         $("#cpf").on("focusout", function(campo) {
-            if ($("#cpf").val() !== 'XXX.XXX.XXX-XX') {
+            const mask = $("#cpf").mask();
+            if (mask.length === 11) {
                 validaCPF(campo.currentTarget.value, results => {
                     if (results.indexOf('success') < 0) {
                         let piece = results.split('#');
