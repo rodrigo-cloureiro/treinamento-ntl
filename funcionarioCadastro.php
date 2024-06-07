@@ -607,7 +607,17 @@ include("inc/scripts.php");
         });
 
         $("#btnAddTelefone").on("click", function() {
+            let tel = $("#telefone").val();
+            if (tel[tel.length -1] === '_') {
+                tel = tel.replace('-', '').replaceAll('_', '');
+                tel = tel.substr(0, 9) + '-' + tel.substr(9);
+                $("#telefone").val(tel);
+            }
             addTelefone();
+        });
+
+        $("#telefone").mask("(99) 99999-9999", {
+            autoclear:0
         });
         
         $("#cpf").off('blur focus');
@@ -909,6 +919,11 @@ include("inc/scripts.php");
 
         if (tel == "" || tel === $("#telefone").attr('placeholder')) {
             smartAlert("Erro", "Informe um telefone!", "error");
+            return false;
+        }
+
+        if (tel.length < 14 || tel.length > 15) {
+            smartAlert("Erro", "Formato de telefone inválido!", "error");
             return false;
         }
 
