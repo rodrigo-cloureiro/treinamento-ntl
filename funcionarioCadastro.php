@@ -249,7 +249,7 @@ include("inc/nav.php");
                                                                 </section>
                                                             </div>
                                                             <div class="row">
-                                                                <section>
+                                                                <section class="col col-12">
                                                                     <div class="table-responsive" style="min-height: 115px;width: 95%;border: 1px solid #ddd;margin-bottom: 13px;overflow-x: hidden;">
                                                                         <table id="tableTelefone" class="table table-bordered table-striped table-condensed table-hover dataTable">
                                                                             <thead>
