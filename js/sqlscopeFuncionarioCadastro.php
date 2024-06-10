@@ -33,6 +33,9 @@ return;
 
 function grava()
 {
+    $reposit = new reposit();
+    $utils = new comum();
+
     if ((empty($_POST['codigo'])) || (!isset($_POST['codigo'])) || (is_null($_POST['codigo']))) {
         $codigo = 0;
     } else {
@@ -45,8 +48,17 @@ function grava()
         $ativo = (int) $_POST["ativo"];
     }
 
-    $reposit = new reposit();
-    $utils = new comum();
+    if ((empty($_POST['primeiroEmprego'])) || (!isset($_POST['primeiroEmprego'])) || (is_null($_POST['primeiroEmprego']))) {
+        $primeiroEmprego = 0;
+    } else {
+        $primeiroEmprego = (int) $_POST["primeiroEmprego"];
+    }
+
+    if ((empty($_POST['pispasep'])) || (!isset($_POST['pispasep'])) || (is_null($_POST['pispasep']))) {
+        $pispasep = "'NULL'";
+    } else {
+        $pispasep = $utils->formatarString($_POST["pispasep"]);
+    }
 
     $nome = $utils->formatarString($_POST['nome']);
     $cpf = $utils->formatarString($_POST['cpf']);
@@ -121,11 +133,6 @@ function grava()
     $result = $reposit->RunQuery($sql);
     $row = $result[0];
 
-    // if(!$utils->validaCPF($cpf)) {
-    //     echo 'failed#CPF inválido';
-    //     return;
-    // }
-
     // count($result)
     if($row && $row['codigo'] !== $codigo) {
         echo 'failed#CPF já cadastrado';
@@ -158,7 +165,9 @@ function grava()
         $bairro,
         $cidade,
         $numero,
-        $complemento";  
+        $complemento,
+        $primeiroEmprego,
+        $pispasep";  
 
     $reposit = new reposit();
     $result = $reposit->Execprocedure($sql);
