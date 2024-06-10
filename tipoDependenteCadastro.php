@@ -288,14 +288,14 @@ include("inc/scripts.php");
     }
 
     function excluir() {
-        var id = +$("#codigo").val();
+        const id = +$("#codigo").val();
 
         if (id === 0) {
             smartAlert("Atenção", "Selecione um registro para excluir!", "error");
             return;
         }
 
-        // excluirFuncionario(id); // ALTERAR
+        excluirTipoDependente(id);
     }
 
     function gravar() {

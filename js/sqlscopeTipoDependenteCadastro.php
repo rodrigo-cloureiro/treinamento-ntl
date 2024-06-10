@@ -115,15 +115,7 @@ function recupera()
 
 function excluir()
 {
-
     $reposit = new reposit();
-    // $possuiPermissao = $reposit->PossuiPermissao("USUARIO_ACESSAR|USUARIO_EXCLUIR");
-
-    // if ($possuiPermissao === 0) {
-    //     $mensagem = "O usuário não tem permissão para excluir!";
-    //     echo "failed#" . $mensagem . ' ';
-    //     return;
-    // }
 
     $id = $_POST["id"];
 
@@ -133,11 +125,7 @@ function excluir()
         return;
     }
 
-    // session_start();
-    // $usuario = $_SESSION['login'];
-    // $usuario = "'" . $usuario . "'";
-
-    $sql = "excluir_funcionario " . $id;
+    $sql = "dbo.excluir_tipoDependente " . $id;
 
     $reposit = new reposit();
     $result = $reposit->Execprocedure($sql);
@@ -148,37 +136,5 @@ function excluir()
     }
 
     echo 'sucess#' . $result;
-    return;
-}
-
-function recuperaDadosTipoDependente()
-{
-
-    session_start();
-    $codigoLogin = $_SESSION['codigo'];
-
-    $sql = "SELECT codigo, login, ativo, restaurarSenha
-    FROM Ntl.usuario
-    WHERE (0=0) AND
-    codigo = " . $codigoLogin;
-
-    $reposit = new reposit();
-    $result = $reposit->RunQuery($sql);
-
-    $out = "";
-    if ($row = $result[0]) {
-        $codigo = (int)$row['codigo'];
-        $restaurarSenha = $row['restaurarSenha'];
-    }
-
-    $out = $codigo . "^" .
-        $restaurarSenha;
-
-    if ($out == "") {
-        echo "failed#";
-        return;
-    }
-
-    echo "sucess#" . $out;
     return;
 }

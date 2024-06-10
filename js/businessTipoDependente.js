@@ -79,7 +79,7 @@ function recuperaTipoDependente(id) {
 
 function excluirTipoDependente(id) {
     $.ajax({
-        url: 'js/sqlscopeFuncionarioCadastro.php', //caminho do arquivo a ser executado
+        url: 'js/sqlscopeTipoDependenteCadastro.php', //caminho do arquivo a ser executado
         dataType: 'html', //tipo do retorno
         type: 'post', //metodo de envio
         data: {funcao: 'excluir', id: id}, //valores enviados ao script     
@@ -99,30 +99,15 @@ function excluirTipoDependente(id) {
                 } else {
                     smartAlert("Atenção", "Operação não realizada - entre em contato com a GIR!", "error");
                 }
-                novo();
+                voltar();
             } else {
                 smartAlert("Sucesso", "Operação realizada com sucesso!", "success");
-                novo();
+                voltar();
             }
         },
         error: function (xhr, er) {
             //tratamento de erro
         }
     });
-}
-
-function recuperaDadosTipoDependente(callback) {
-    $.ajax({
-        url: 'js/sqlscopeUsuario.php', //caminho do arquivo a ser executado
-        dataType: 'html', //tipo do retorno
-        type: 'post', //metodo de envio
-        data: { funcao: 'recuperarDadosUsuario'}, //valores enviados ao script
-  
-        success: function (data) {
-            callback(data)
-        },
-    })
-    
-    return
 }
   
