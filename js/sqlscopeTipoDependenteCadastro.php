@@ -47,7 +47,7 @@ function grava()
     $row = $result[0];
 
     // count($result)
-    if($row) {
+    if($row && $row['codigo'] !== $codigo) {
         echo 'failed#Tipo de dependente já cadastrado';
         return;
     }
