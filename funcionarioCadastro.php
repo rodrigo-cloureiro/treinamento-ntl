@@ -87,24 +87,6 @@ include("inc/nav.php");
                                             <div id="collapseCadastro" class="panel-collapse collapse in">
                                                 <div class="panel-body no-padding">
                                                     <fieldset>
-                                                        <!-- <div class="row">
-                                                            <section class="col col-1 hidden">
-                                                                <label class="label">Código</label>
-                                                                <label class="input">
-                                                                    <input id="codigo" name="codigo" type="text" class="readonly" readonly>
-                                                                </label>
-                                                            </section>
-                                                            <section class="col col-2">
-                                                                <label class="label">Ativo</label>
-                                                                <label class="select">
-                                                                    <select id="ativo" name="ativo">
-                                                                        <option value="1">Sim</option>
-                                                                        <option value="0">Não</option>
-                                                                    </select>
-                                                                    <i></i>
-                                                                </label>
-                                                            </section>                                               
-                                                        </div> -->
                                                         <div class="row">
                                                         </div>
                                                         <div class="row">
@@ -149,18 +131,6 @@ include("inc/nav.php");
                                                                 <label class="select">
                                                                     <select name="sexo" id="sexo" class="required">
                                                                         <option value="" disabled selected>Selecione um sexo</option>
-                                                                        <!-- <option value="1">Mulher cisgênero</option>
-                                                                        <option value="2">Mulher transgênero</option>
-                                                                        <option value="3">Mulher transexual</option>
-                                                                        <option value="4">Homem cisgênero</option>
-                                                                        <option value="5">Homem transgênero</option>
-                                                                        <option value="6">Homem transexual</option>
-                                                                        <option value="7">Gênero não-binário</option>
-                                                                        <option value="8">Gênero-fluido</option>
-                                                                        <option value="9">Gênero neutro</option>
-                                                                        <option value="10">Agênero</option>
-                                                                        <option value="11">Bigênero</option>
-                                                                        <option value="12">Poligênero</option> -->
                                                                         <?php
                                                                         $reposit = new reposit();
                                                                         $sql = "SELECT codigo, descricao
@@ -181,11 +151,6 @@ include("inc/nav.php");
                                                                 <label class="select">
                                                                     <select name="estadoCivil" id="estadoCivil" class="required">
                                                                         <option value="" disabled selected>Selecione um estado civil</option>
-                                                                        <!-- <option value="1">Solteiro(a)</option>
-                                                                        <option value="2">Casado(a)</option>
-                                                                        <option value="3">Separado(a)</option>
-                                                                        <option value="4">Divorciado(a)</option>
-                                                                        <option value="5">Viúvo(a)</option> -->
                                                                         <?php
                                                                         $reposit = new reposit();
                                                                         $sql = "SELECT codigo, descricao
@@ -213,35 +178,22 @@ include("inc/nav.php");
                                                                     <input type="text" id="idade" name="idade" class="readonly" readonly placeholder="0" value="">
                                                                 </label>
                                                             </section>
-                                                            <!-- <section class="col col-4 col-auto">
-                                                                <label class="label " for="funcionario">Funcionário</label>
+                                                            <section class="col col-2">
+                                                                <label class="label">Primeiro Emprego</label>
                                                                 <label class="select">
-                                                                    <select id="funcionario" name="funcionario">
-                                                                        <option></option>
-                                                                        <?php
-                                                                        $reposit = new reposit();
-                                                                        $sql = "SELECT codigo, nome 
-                                                                        FROM Ntl.funcionario 
-                                                                        WHERE ativo = 1 AND dataDemissaoFuncionario IS NULL order by nome";
-                                                                        $result = $reposit->RunQuery($sql);
-                                                                        foreach ($result as $row) {
-                                                                            $id = $row['codigo'];
-                                                                            $descricao = $row['nome'];
-                                                                            echo '<option value=' . $id . '>' . $descricao . '</option>';
-                                                                        }
-                                                                        ?>
-                                                                    </select><i></i>
+                                                                    <select name="primeiroEmprego" id="primeiroEmprego" class="required">
+                                                                        <option value="" disabled selected>Selecione uma opção</option>
+                                                                        <option value="1">Sim</option>
+                                                                        <option value="0">Não</option>
+                                                                    </select>
                                                                 </label>
-                                                            </section> -->
-                                                            <!-- <section class="col col-2 col-auto">
-                                                                <label class="label">Restaurar senha</label>
-                                                                <label class="select">
-                                                                    <select id="restaurarSenha" name="restaurarSenha">
-                                                                        <option value="1" >Sim</option> 
-                                                                        <option value="0">Não</option> 
-                                                                    </select><i></i> 
-                                                                </label> 
-                                                            </section>  -->
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="label">PIS-PASEP</label>
+                                                                <label class="input">
+                                                                    <input type="text" id="pispasep" class="required" name="pispasep" value="">
+                                                                </label>
+                                                            </section>
                                                         </div>
                                                     </fieldset>
                                                 </div>
@@ -640,6 +592,21 @@ include("inc/scripts.php");
             }
         });
 
+        $("#primeiroEmprego").on("change", function() {
+            const primeiroEmprego = +$("#primeiroEmprego").val();
+
+            if (primeiroEmprego != 0) {
+                $("#pispasep")
+                .val("")
+                .removeClass('required')
+                .attr('readonly', true);
+            } else {
+                $("#pispasep")
+                .addClass('required')
+                .removeAttr('readonly');
+            }
+        });
+
         carregaPagina();
     });
 
@@ -695,6 +662,8 @@ include("inc/scripts.php");
         const cidade = $("#cidade").val();
         const numero = $("#numero").val();
         const complemento = $("#complemento").val() || "";
+        const primeiroEmprego = $("#primeiroEmprego").val() || "";
+        const pispasep = $("#pispasep").val();
 
         if (nome == "") {
             smartAlert("Atenção", "O nome precisa ser preenchido!", "error");
@@ -732,6 +701,18 @@ include("inc/scripts.php");
             return;
         }
 
+        if (primeiroEmprego === "") {
+            smartAlert("Atenção", "É necessário informar se é primeiro emprego ou não", "error");
+            $("#primeiroEmprego").focus();
+            return;
+        }
+
+        if (primeiroEmprego == 0 && pispasep === "") {
+            smartAlert("Atenção", "É necessário informar o PIS-PASEP", "error");
+            $("#pispasep").focus();
+            return;
+        }
+
         if (jsonTelefoneArray.length === 0) {
             smartAlert("Atenção", "É necessário adicionar pelo menos 1 telefone.", "error");
             return;
@@ -744,6 +725,7 @@ include("inc/scripts.php");
 
         if (cep === "") {
             smartAlert("Atenção", "É necessário preencher o CEP", "error");
+            $("#cep").focus();
             return;
         }
 
@@ -769,6 +751,7 @@ include("inc/scripts.php");
 
         if (numero === "") {
             smartAlert("Atenção", "É necessário preencher o número", "error");
+            $("#numero").focus();
             return;
         }
 
