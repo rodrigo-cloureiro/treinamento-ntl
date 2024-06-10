@@ -33,7 +33,7 @@ if ($condicaoExcluirOK === false) {
   YOU CAN SET CONFIGURATION VARIABLES HERE BEFORE IT GOES TO NAV, RIBBON, ETC.
   E.G. $page_title = "Custom Title" */
 
-$page_title = "Funcionário";
+$page_title = "Funcionários";
 
 /* ---------------- END PHP Custom Scripts ------------- */
 
@@ -45,7 +45,7 @@ include("inc/header.php");
 
 //include left panel (navigation)
 //follow the tree in inc/config.ui.php
-$page_nav["configuracao"]["sub"]["funcionarios"]["active"] = true;
+$page_nav["cadastro"]["sub"]["funcionario"]["active"] = true;
 
 include("inc/nav.php");
 ?>
@@ -55,7 +55,7 @@ include("inc/nav.php");
     <?php
     //configure ribbon (breadcrumbs) array("name"=>"url"), leave url empty if no url
     //$breadcrumbs["New Crumb"] => "http://url.com"
-    $breadcrumbs["Configurações"] = "";
+    $breadcrumbs["Cadastro"] = "";
     include("inc/ribbon.php");
     ?>
 
@@ -68,7 +68,7 @@ include("inc/nav.php");
                     <div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
                         <header>
                             <span class="widget-icon"><i class="fa fa-cog"></i></span>
-                            <h2>Funcionário</h2>
+                            <h2>Funcionários</h2>
                         </header>
                         <div>
                             <div class="widget-body no-padding">
