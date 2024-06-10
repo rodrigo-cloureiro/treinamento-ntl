@@ -196,7 +196,8 @@ function recupera()
 
     $sql = " SELECT codigo, ativo, nome, cpf, rg, genero,
              estadoCivil, dataNascimento, cep, logradouro,
-             uf, bairro, cidade, numero, complemento
+             uf, bairro, cidade, numero, complemento,
+             primeiroEmprego, pispasep
              FROM cadastro.dbo.funcionarios WHERE (0 = 0) ";
 
     if ($condicaoId) {
@@ -224,6 +225,8 @@ function recupera()
         $cidade = $row['cidade'];
         $numero = $row['numero'];
         $complemento = $row['complemento'];
+        $primeiroEmprego = $row['primeiroEmprego'];
+        $pispasep = $row['pispasep'];
     }
 
     $sql = " SELECT codigo, sequencial, telefone, principal, whatsapp FROM telefones WHERE funcionarioId = " . $usuarioIdPesquisa;
@@ -269,7 +272,9 @@ function recupera()
         $bairro . "^" .
         $cidade . "^" .
         $numero . "^" .
-        $complemento;
+        $complemento . "^" .
+        $primeiroEmprego . "^" .
+        $pispasep;
 
     if ($out == "") {
         echo "failed#";

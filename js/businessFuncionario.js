@@ -76,6 +76,8 @@ function recuperaFuncionario(id) {
                 let cidade = piece[12];
                 let numero = piece[13];
                 let complemento = piece[14];
+                let primeiroEmprego = +piece[15];
+                let pispasep = piece[16];
 
                 $("#codigo").val(codigo);
                 $("#nome").val(nome);
@@ -100,6 +102,22 @@ function recuperaFuncionario(id) {
                 fillTableTelefone();
                 jsonEmailArray = JSON.parse($("#jsonEmail").val());
                 fillTableEmail();
+
+                $("#primeiroEmprego").val(primeiroEmprego);
+                if (primeiroEmprego != 0) {
+                    $("#pispasep")
+                    .val("")
+                    .removeClass('required')
+                    .attr('readonly', true);
+                } else {
+                    $("#pispasep")
+                    .addClass('required')
+                    .removeAttr('readonly');
+
+                    if (pispasep !== 'NULL') {
+                        $("#pispasep").val(pispasep);
+                    }
+                }
                
                 return;
             }
