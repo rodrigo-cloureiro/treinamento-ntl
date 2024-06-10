@@ -15,6 +15,8 @@ $page_nav = array("home" => array("title" => "Home", "icon" => "fa-home", "url" 
 $page_nav['tabelaBasica'] = array("title" => "Tabela Básica", "icon" => "fa-table");
 $page_nav['tabelaBasica']['sub'] = array();
 $page_nav['tabelaBasica']['sub'] += array("tipoDependente" => array("title" => "Tipo de Dependente", "url" => APP_URL . "/tipoDependenteCadastro.php"));
+$page_nav['tabelaBasica']['sub'] += array("sexo" => array("title" => "Sexo", "url" => APP_URL . "/sexoCadastro.php"));
+$page_nav['tabelaBasica']['sub'] += array("estadoCivil" => array("title" => "Estado Civil", "url" => APP_URL . "/estadoCivilCadastro.php"));
 
 $page_nav['cadastro'] = array("title" => "Cadastro", "icon" => "fa-pencil-square-o");
 $page_nav['cadastro']['sub'] = array();
