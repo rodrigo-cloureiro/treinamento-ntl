@@ -40,119 +40,23 @@ function grava()
     $reposit = new reposit();
     $utils = new comum();
 
-    $nome = $utils->formatarString($_POST['nome']);
-    $cpf = $utils->formatarString($_POST['cpf']);
-    $rg = $utils->formatarString($_POST['rg']);
-    $genero = $utils->formatarString($_POST['genero']);
-    $estadoCivil = $utils->formatarString($_POST['estadoCivil']);
-    $dataNascimento = $utils->formatarDataSql($_POST['dataNascimento']);
-    $arrayTelefone = $_POST['jsonTelefone'];
-    $arrayEmail = $_POST['jsonEmail'];
-    $cep = $utils->formatarString($_POST['cep']);
-    $logradouro = $utils->formatarString($_POST['logradouro']);
-    $uf = $utils->formatarString($_POST['uf']);
-    $bairro = $utils->formatarString($_POST['bairro']);
-    $cidade = $utils->formatarString($_POST['cidade']);
-    $numero = $utils->formatarString($_POST['numero']);
-    $complemento = $utils->formatarString($_POST['complemento']);
+    $descricao = $utils->formatarString($_POST['descricao']);
 
-    $nomeXml = "ArrayTelefone";
-    $nomeTabela = "xmlTelefone";
-    if (sizeof($arrayTelefone) > 0) {
-        $xmlTelefone = '<?xml version="1.0"?>';
-        $xmlTelefone = $xmlTelefone . '<' . $nomeXml . ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
-        foreach ($arrayTelefone as $chave) {
-            $xmlTelefone = $xmlTelefone . "<" . $nomeTabela . ">";
-            foreach ($chave as $campo => $valor) {
-                $xmlTelefone = $xmlTelefone . "<" . $campo . ">" . $valor . "</" . $campo . ">";
-            }
-            $xmlTelefone = $xmlTelefone . "</" . $nomeTabela . ">";
-        }
-        $xmlTelefone = $xmlTelefone . "</" . $nomeXml . ">";
-    } else {
-        $xmlTelefone = '<?xml version="1.0"?>';
-        $xmlTelefone = $xmlTelefone . '<' . $nomeXml . ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
-        $xmlTelefone = $xmlTelefone . "</" . $nomeXml . ">";
-    }
-    $xml = simplexml_load_string($xmlTelefone);
-    if ($xml === false) {
-        $mensagem = "Erro na criação do XML de cadastro de telefone";
-        echo "failed#" . $mensagem . ' ';
-        return;
-    }
-    $xmlTelefone = "'" . $xmlTelefone . "'";
-
-    $nomeXml = "ArrayEmail";
-    $nomeTabela = "xmlEmail";
-    if (sizeof($arrayEmail) > 0) {
-        $xmlEmail = '<?xml version="1.0"?>';
-        $xmlEmail = $xmlEmail . '<' . $nomeXml . ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
-        foreach ($arrayEmail as $chave) {
-            $xmlEmail = $xmlEmail . "<" . $nomeTabela . ">";
-            foreach ($chave as $campo => $valor) {
-                $xmlEmail = $xmlEmail . "<" . $campo . ">" . $valor . "</" . $campo . ">";
-            }
-            $xmlEmail = $xmlEmail . "</" . $nomeTabela . ">";
-        }
-        $xmlEmail = $xmlEmail . "</" . $nomeXml . ">";
-    } else {
-        $xmlEmail = '<?xml version="1.0"?>';
-        $xmlEmail = $xmlEmail . '<' . $nomeXml . ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
-        $xmlEmail = $xmlEmail . "</" . $nomeXml . ">";
-    }
-
-    $xml = simplexml_load_string($xmlEmail);
-    if ($xml === false) {
-        $mensagem = "Erro na criação do XML de cadastro de email";
-        echo "failed#" . $mensagem . ' ';
-        return;
-    }
-    $xmlEmail = "'" . $xmlEmail . "'";
-
-    $sql = " SELECT codigo, cpf FROM funcionarios WHERE cpf = $cpf ";
+    $sql = " SELECT codigo FROM tipos_dependentes WHERE descricao = $descricao ";
     $result = $reposit->RunQuery($sql);
     $row = $result[0];
-
-    // if(!$utils->validaCPF($cpf)) {
-    //     echo 'failed#CPF inválido';
-    //     return;
-    // }
 
     // count($result)
-    if($row && $row['codigo'] !== $codigo) {
-        echo 'failed#CPF já cadastrado';
+    if($row) {
+        echo 'failed#Tipo de dependente já cadastrado';
         return;
     }
 
-    $sql = " SELECT codigo, rg FROM funcionarios WHERE rg = $rg ";
-    $result = $reposit->RunQuery($sql);
-    $row = $result[0];
-
-    if($row && $row['codigo'] !== $codigo) {
-        echo 'failed#RG já cadastrado';
-        return;
-    }
-
-    $sql = "dbo.funcionarioCadastro_Atualiza
+    $sql = "dbo.tipoDependenteCadastro_Atualiza
         $codigo,
-        $ativo,
-        $nome,
-        $cpf,
-        $rg,
-        $genero,
-        $estadoCivil,
-        $dataNascimento,
-        $xmlTelefone,
-        $xmlEmail,
-        $cep,
-        $logradouro,
-        $uf,
-        $bairro,
-        $cidade,
-        $numero,
-        $complemento";  
+        $descricao,
+        $ativo";  
 
-    $reposit = new reposit();
     $result = $reposit->Execprocedure($sql);
 
     $ret = 'sucess#';

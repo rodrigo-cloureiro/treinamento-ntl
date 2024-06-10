@@ -1,9 +1,9 @@
-function gravaTipoDependente() {
+function gravaTipoDependente(codigo, descricao, ativo) {
     $.ajax({
-        url: 'js/sqlscopeFuncionarioCadastro.php',
+        url: 'js/sqlscopeTipoDependenteCadastro.php',
         dataType: 'html', //tipo do retorno
         type: 'post', //metodo de envio
-        data: {funcao: "grava", codigo:codigo, ativo:ativo, nome:nome, cpf:cpf, rg:rg, genero:genero, estadoCivil:estadoCivil, dataNascimento:dataNascimento, jsonTelefone: jsonTelefone, jsonEmail:jsonEmail, cep:cep, logradouro:logradouro, uf:uf, bairro:bairro, cidade:cidade, numero:numero, complemento:complemento}, //valores enviados ao script     
+        data: {funcao: "grava", codigo:codigo, descricao:descricao, ativo:ativo}, //valores enviados ao script     
         beforeSend: function () {
             //função chamada antes de realizar o ajax
         },
@@ -23,7 +23,6 @@ function gravaTipoDependente() {
                 return '';
             } else {
                 smartAlert("Sucesso", "Operação realizada com sucesso!", "success");
-                // setInterval(() => codigo === 0 ? novo() : voltar(), 1500);
                 setInterval(() => voltar(), 1500);
             }
             //retorno dos dados

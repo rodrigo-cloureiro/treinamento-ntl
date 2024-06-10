@@ -173,7 +173,7 @@ include("inc/footer.php");
 include("inc/scripts.php");
 ?>
 
-<script src="<?php echo ASSETS_URL; ?>/js/businessFuncionario.js" type="text/javascript"></script>
+<script src="<?php echo ASSETS_URL; ?>/js/businessTipoDependente.js" type="text/javascript"></script>
 
 <!-- PAGE RELATED PLUGIN(S) 
 <script src="..."></script>-->
@@ -300,14 +300,15 @@ include("inc/scripts.php");
 
     function gravar() {
         const codigo = +($("#codigo").val());
+        const descricao = $.trim($("#descricao").val());
         const ativo = $("#ativo").val();
 
-        // if (nome == "") {
-        //     smartAlert("Atenção", "O nome precisa ser preenchido!", "error");
-        //     $("#nome").focus();
-        //     return;
-        // }
+        if (descricao == "") {
+            smartAlert("Atenção", "A descrição precisa ser preenchida!", "error");
+            $("#descricao").focus();
+            return;
+        }
 
-        // gravaFuncionario(codigo, ativo); // ALTERAR
+        gravaTipoDependente(codigo, descricao, ativo);
     }
 </script>
