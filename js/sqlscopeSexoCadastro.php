@@ -121,7 +121,7 @@ function excluir()
         return;
     }
 
-    $sql = "dbo.excluir_tipoDependente " . $id;
+    $sql = "dbo.excluir_sexo " . $id;
 
     $reposit = new reposit();
     $result = $reposit->Execprocedure($sql);
