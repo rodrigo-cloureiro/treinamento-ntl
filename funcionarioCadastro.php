@@ -379,6 +379,65 @@ include("inc/nav.php");
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a href="#collapseDependente" data-toggle="collapse" data-parent="#accordion" id="accordionDependente">
+                                                        <i class="fa fa-lg fa-angle-down pull-right"></i>
+                                                        <i class="fa fa-lg fa-angle-up pull-right"></i>
+                                                        Dependente
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div class="panel-collapse collapse" id="collapseDependente">
+                                                <div class="panel-body no-padding">
+                                                    <fieldset>
+                                                        <div class="row">
+                                                            <section class="col col-4">
+                                                                <label class="label">Nome</label>
+                                                                <label class="input">
+                                                                    <i class="icon-prepend fa fa-user"></i>
+                                                                    <input type="text" id="nomeDependente" name="nomeDependente" value="">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="label">CPF</label>
+                                                                <label class="input">
+                                                                    <i class="icon-prepend fa fa-id-card-o"></i>
+                                                                    <input type="text" id="cpfDependente" name="cpfDependente" value="" placeholder="XXX.XXX.XXX-XX" data-mask="999.999.999-99" data-mask-placeholder="XXX.XXX.XXX-XX">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="label">Data de Nascimento</label>
+                                                                <label class="input">
+                                                                    <input type="text" class="datepicker" id="dataNascimentoDependente" name="dataNascimentoDependente" value="" data-mask="99/99/9999" data-mask-placeholder="dd/mm/aaaa" data-dateformat="dd/mm/yy" placeholder="dd/mm/aaaa">
+                                                                </label>
+                                                            </section>
+                                                            <secion class="col col-2">
+                                                                <label class="label">Tipo de Dependente</label>
+                                                                <label class="select">
+                                                                    <select name="tipoDependente" id="tipoDependente">
+                                                                        <option value="" disabled selected>Selecione uma opção</option>
+                                                                        <?php
+                                                                        $reposit = new reposit();
+                                                                        $sql = "SELECT codigo, descricao
+                                                                                FROM tipos_dependentes
+                                                                                WHERE ativo = 1";
+                                                                        $result = $reposit->RunQuery($sql);
+                                                                        foreach($result as $row) {
+                                                                            $codigo = +$row['codigo'];
+                                                                            $descricao = $row['descricao'];
+                                                                            echo "<option value=" . $codigo . ">" . ucfirst($descricao) . "</option>";
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                </label>
+                                                            </secion>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <footer>
                                         <button type="button" id="btnExcluir" class="btn btn-danger hidden" aria-hidden="true" title="Excluir" style="display:<?php echo $esconderBtnExcluir ?>">
