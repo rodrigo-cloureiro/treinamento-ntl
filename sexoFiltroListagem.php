@@ -43,7 +43,7 @@ include "js/girComum.php";
                     }
 
                     echo '<tr >';
-                    echo '<td class="text-left"><a href="tipoDependenteCadastro.php?id=' . $id . '">' . ucfirst($descricao) . '</a></td>';
+                    echo '<td class="text-left"><a href="sexoCadastro.php?id=' . $id . '">' . ucfirst($descricao) . '</a></td>';
                     echo '<td class="text-left">' . $descricaoAtivo . '</td>';
                     echo '</tr >';
                 }

@@ -78,10 +78,10 @@ function recupera()
     }
 
     $sql = " SELECT codigo, descricao, ativo
-             FROM cadastro.dbo.tipos_dependentes WHERE (0 = 0) ";
+             FROM cadastro.dbo.sexo WHERE (0 = 0) ";
 
     if ($condicaoId) {
-        $sql = $sql . " AND tipos_dependentes.codigo = " . $usuarioIdPesquisa . " ";
+        $sql = $sql . " AND sexo.codigo = " . $usuarioIdPesquisa . " ";
     }
 
     $reposit = new reposit();
