@@ -37,7 +37,7 @@ function gravaTipoDependente(codigo, descricao, ativo) {
 
 function recuperaTipoDependente(id) {
     $.ajax({
-        url: 'js/sqlscopeFuncionarioCadastro.php', //caminho do arquivo a ser executado
+        url: 'js/sqlscopeTipoDependenteCadastro.php', //caminho do arquivo a ser executado
         dataType: 'html', //tipo do retorno
         type: 'post', //metodo de envio
         data: {funcao: 'recupera', id: id}, //valores enviados ao script     
@@ -53,53 +53,19 @@ function recuperaTipoDependente(id) {
             } else {
                 data = data.replace(/failed/g, '');
                 let piece = data.split("#");
-                let strJsonTelefone = piece[2];
-                let strJsonEmail = piece[3];
 
                 let mensagem = piece[0];
                 let out = piece[1];
                 piece = out.split("^");
 
                 let codigo = +piece[0];
-                let ativo = +piece[1];
-                let nome = piece[2];
-                let cpf = piece[3];
-                let rg = piece[4];
-                let genero = piece[5];
-                let estadoCivil = piece[6]
-                let dataNascimento = piece[7];
-                let cep = piece[8];
-                let logradouro = piece[9];
-                let uf = piece[10];
-                let bairro = piece[11];
-                let cidade = piece[12];
-                let numero = piece[13];
-                let complemento = piece[14];
+                let descricao = piece[1];
+                let ativo = +piece[2];
 
                 $("#codigo").val(codigo);
-                $("#nome").val(nome);
-                $("#cpf").val(cpf);
-                $("#rg").val(rg);
-                $("#sexo").val(genero);
-                $("#estadoCivil").val(estadoCivil);
-                $("#dataNascimento").val(dataNascimento);
-                $("#cep").val(cep);
-                $("#logradouro").val(logradouro);
-                $("#uf").val(uf);
-                $("#bairro").val(bairro);
-                $("#cidade").val(cidade);
-                $("#numero").val(numero);
-                $("#complemento").val(complemento);
+                $("#descricao").val(descricao);
                 $("#ativo").val(ativo);
-                $("#jsonTelefone").val(strJsonTelefone);
-                $("#jsonEmail").val(strJsonEmail);
-                calcularIdade();
 
-                jsonTelefoneArray = JSON.parse($("#jsonTelefone").val());
-                fillTableTelefone();
-                jsonEmailArray = JSON.parse($("#jsonEmail").val());
-                fillTableEmail();
-               
                 return;
             }
         },

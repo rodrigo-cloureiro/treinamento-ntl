@@ -81,89 +81,35 @@ function recupera()
         $usuarioIdPesquisa = $_POST["id"];
     }
 
-    $sql = " SELECT codigo, ativo, nome, cpf, rg, genero,
-             estadoCivil, dataNascimento, cep, logradouro,
-             uf, bairro, cidade, numero, complemento
-             FROM cadastro.dbo.funcionarios WHERE (0 = 0) ";
+    $sql = " SELECT codigo, descricao, ativo
+             FROM cadastro.dbo.tipos_dependentes WHERE (0 = 0) ";
 
     if ($condicaoId) {
-        $sql = $sql . " AND funcionarios.codigo = " . $usuarioIdPesquisa . " ";
+        $sql = $sql . " AND tipos_dependentes.codigo = " . $usuarioIdPesquisa . " ";
     }
 
     $reposit = new reposit();
     $utils = new comum();
     $result = $reposit->RunQuery($sql);
+    $row = $result[0];
 
     $out = "";
-    if ($row = $result[0]) {
+    if ($row) {
         $id = +$row['codigo'];
+        $descricao = $row['descricao'];
         $ativo = +$row['ativo'];
-        $nome = $row['nome'];
-        $cpf = $row['cpf'];
-        $rg = $row['rg'];
-        $genero = $row['genero'];
-        $estadoCivil = $row['estadoCivil'];
-        $dataNascimento = $utils->validaDataInversa($row['dataNascimento']);
-        $cep = $row['cep'];
-        $logradouro = $row['logradouro'];
-        $uf = $row['uf'];
-        $bairro = $row['bairro'];
-        $cidade = $row['cidade'];
-        $numero = $row['numero'];
-        $complemento = $row['complemento'];
     }
 
-    $sql = " SELECT codigo, sequencial, telefone, principal, whatsapp FROM telefones WHERE funcionarioId = " . $usuarioIdPesquisa;
-    $result = $reposit->RunQuery($sql);
-
-    if (count($result) > 0) {
-        foreach ($result as $campo) {
-            $codigo = +$campo['codigo'];
-            $sequencial = +$campo['sequencial'];
-            $telefone = $campo['telefone'];
-            $principal = +$campo['principal'];
-            $whatsapp = +$campo['whatsapp'];
-            $jsonTelefone[] = array("telefoneId"=>$codigo, "sequencialTel"=>$sequencial, "telefone"=>$telefone, "telPrincipal"=>$principal, "whatsapp"=>$whatsapp);
-        }
-    }
-    $jsonTelefoneArray = json_encode($jsonTelefone);
-    
-    $sql = " SELECT codigo, sequencial, email, principal FROM emails WHERE codigo_func = " . $usuarioIdPesquisa;
-    $result = $reposit->RunQuery($sql);
-
-    if (count($result) > 0) {
-        foreach ($result as $campo) {
-            $codigo = +$campo['codigo'];
-            $sequencial = +$campo['sequencial'];
-            $email = $campo['email'];
-            $principal = +$campo['principal'];
-            $jsonEmail[] = array("emailId"=>$codigo, "sequencialEmail"=>$sequencial, "email"=>$email, "emailPrincipal"=>$principal);
-        }
-    }
-    $jsonEmailArray = json_encode($jsonEmail);
-
-    $out =   $id . "^" .
-        $ativo . "^" .
-        $nome . "^" .
-        $cpf . "^" .
-        $rg . "^" .
-        $genero . "^" .
-        $estadoCivil . "^" .
-        $dataNascimento . "^" .
-        $cep . "^" .
-        $logradouro . "^" .
-        $uf . "^" .
-        $bairro . "^" .
-        $cidade . "^" .
-        $numero . "^" .
-        $complemento;
+    $out = $id . "^" .
+        $descricao . "^" .
+        $ativo;
 
     if ($out == "") {
         echo "failed#";
         return;
     }
 
-    echo "sucess#" . $out . "#" . $jsonTelefoneArray . "#" . $jsonEmailArray;
+    echo "sucess#" . $out;
     return;
 }
 

@@ -271,7 +271,7 @@ include("inc/scripts.php");
             var idx = id.split("=");
             var idd = idx[1];
             if (idd !== "") {
-                // recuperaFuncionario(idd); // ALTERAR
+                recuperaTipoDependente(idd);
             }
             $("#btnExcluir").removeClass("hidden");
             $("#btnNovo").removeClass("hidden");
