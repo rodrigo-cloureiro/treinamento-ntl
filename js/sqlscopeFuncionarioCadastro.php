@@ -78,7 +78,7 @@ function grava()
 
     $nomeXml = "ArrayTelefone";
     $nomeTabela = "xmlTelefone";
-    if (sizeof($arrayTelefone) > 0) {
+    if ($arrayTelefone !== null && sizeof($arrayTelefone) > 0) {
         $xmlTelefone = '<?xml version="1.0"?>';
         $xmlTelefone = $xmlTelefone . '<' . $nomeXml . ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
         foreach ($arrayTelefone as $chave) {
@@ -104,7 +104,7 @@ function grava()
 
     $nomeXml = "ArrayEmail";
     $nomeTabela = "xmlEmail";
-    if (sizeof($arrayEmail) > 0) {
+    if ($arrayEmail !== null && sizeof($arrayEmail) > 0) {
         $xmlEmail = '<?xml version="1.0"?>';
         $xmlEmail = $xmlEmail . '<' . $nomeXml . ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
         foreach ($arrayEmail as $chave) {

@@ -832,13 +832,8 @@ include("inc/scripts.php");
             return;
         }
 
-        if (jsonTelefoneArray.length === 0) {
-            smartAlert("Atenção", "É necessário adicionar pelo menos 1 telefone.", "error");
-            return;
-        }
-
-        if (jsonEmailArray.length === 0) {
-            smartAlert("Atenção", "É necessário adicionar pelo menos 1 email.", "error");
+        if (jsonTelefoneArray.length === 0 && jsonEmailArray.length === 0) {
+            smartAlert("Atenção", "É necessário adicionar pelo menos 1 contato.", "error");
             return;
         }
 
