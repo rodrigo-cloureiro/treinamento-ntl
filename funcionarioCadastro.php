@@ -699,6 +699,25 @@ include("inc/scripts.php");
             }
         });
 
+        $("#cpfDependente").on("focusout", function(campo) {
+            const mask = $("#cpfDependente").mask();
+            if (mask.length === 11) {
+                validaCPF(campo.currentTarget.value, results => {
+                    if (results.indexOf('success') < 0) {
+                        let piece = results.split('#');
+                        let mensagem = piece[1];
+                        if (mensagem !== "") {
+                            smartAlert("Atenção", mensagem, "error");
+                        } else {
+                            smartAlert("Atenção", "CPF Inválido", "error");
+                        }
+                        $("#cpfDependente").focus();
+                        return '';
+                    }
+                });
+            }
+        });
+
         $("#btnAddDependente").on("click", function() {
             addDependente();
         });
@@ -1362,7 +1381,6 @@ include("inc/scripts.php");
     }
 
     function validaDependente() {
-        debugger
         let existe = false;
         const nome = $("#nomeDependente").val();
         const cpf = $("#cpfDependente").val();
@@ -1384,21 +1402,25 @@ include("inc/scripts.php");
 
         if (nome == "") {
             smartAlert("Erro", "É necessário preencher o nome.", "error");
+            $("#nomeDependente").focus();
             return false;
         }
 
         if (cpf == "" || cpf == $("#cpfDependente").attr('placeholder')) {
             smartAlert("Erro", "É necessário informar o CPF.", "error");
+            $("#cpfDependente").focus();
             return false;
         }
 
         if (dataNasimento == "" || dataNasimento == $("#dataNascimentoDependente").attr('placeholder')) {
             smartAlert("Erro", "É necessário informar a data de nascimento.", "error");
+            $("#dataNascimentoDependente").focus();
             return false;
         }
 
         if (tipoDependente == "") {
             smartAlert("Erro", "É necessário selecionar o tipo de dependente.", "error");
+            $("#tipoDependente").focus();
             return false;
         }
 
