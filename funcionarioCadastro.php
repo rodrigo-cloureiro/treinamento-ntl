@@ -228,15 +228,15 @@ include("inc/nav.php");
                                                                     <label class="label">&nbsp;</label>
                                                                     <label id="labelAtivo" class="checkbox ">
                                                                         <input checked="checked" id="telPrincipal" name="telPrincipal" type="checkbox" value="true"><i></i>
-                                                                        Principal 
-                                                                    </label>                                                                                    
-                                                                </section>   
+                                                                        Principal
+                                                                    </label>
+                                                                </section>
                                                                 <section class="col col-2">
                                                                     <label class="label">&nbsp;</label>
                                                                     <label id="labelAtivo" class="checkbox ">
                                                                         <input checked="checked" id="whatsapp" name="whatsapp" type="checkbox" value="true"><i></i>
-                                                                        WhatsApp 
-                                                                    </label>                                                                                    
+                                                                        WhatsApp
+                                                                    </label>
                                                                 </section>
                                                                 <section class="col col-2">
                                                                     <label class="label">&nbsp;</label>
@@ -284,9 +284,9 @@ include("inc/nav.php");
                                                                     <label class="label">&nbsp;</label>
                                                                     <label id="labelAtivo" class="checkbox">
                                                                         <input checked="checked" id="emailPrincipal" name="emailPrincipal" type="checkbox" value="true"><i></i>
-                                                                        Principal 
-                                                                    </label>                                                                                    
-                                                                </section>   
+                                                                        Principal
+                                                                    </label>
+                                                                </section>
                                                                 <section class="col col-2">
                                                                     <label class="label">&nbsp;</label>
                                                                     <button id="btnAddEmail" type="button" class="btn btn-primary">
@@ -424,7 +424,7 @@ include("inc/nav.php");
                                                                                 FROM tipos_dependentes
                                                                                 WHERE ativo = 1";
                                                                         $result = $reposit->RunQuery($sql);
-                                                                        foreach($result as $row) {
+                                                                        foreach ($result as $row) {
                                                                             $codigo = +$row['codigo'];
                                                                             $descricao = $row['descricao'];
                                                                             echo "<option value=" . $codigo . ">" . ucfirst($descricao) . "</option>";
@@ -433,6 +433,23 @@ include("inc/nav.php");
                                                                     </select>
                                                                 </label>
                                                             </secion>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-12">
+                                                                <div class="table-responsive" style="min-height: 115px;width: 100%;border: 1px solid #ddd;margin-bottom: 13px;overflow-x: hidden;">
+                                                                    <table id="tableTelefone" class="table table-bordered table-striped table-condensed table-hover dataTable">
+                                                                        <thead>
+                                                                            <tr role="row">
+                                                                                <th></th>
+                                                                                <th class="text-left" style="min-width: 500%">Telefone</th>
+                                                                                <th class="text-left" style="min-width: 500%">Principal</th>
+                                                                                <th class="text-left" style="min-width: 500%">WhatsApp</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody></tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </section>
                                                         </div>
                                                     </fieldset>
                                                 </div>
@@ -591,8 +608,8 @@ include("inc/scripts.php");
             if (!dataValida($("#dataNascimento").val())) {
                 smartAlert("Atenção", "A data de nascimento não é válida!", "error");
                 $("#dataNascimento").focus();
-            } 
-            
+            }
+
             if ($("#dataNascimento").val() !== 'dd/mm/aaaa') {
                 calcularIdade();
             }
@@ -622,9 +639,9 @@ include("inc/scripts.php");
         });
 
         $("#telefone").mask("(99) 99999-9999", {
-            autoclear:0
+            autoclear: 0
         });
-        
+
         $("#cpf").off('blur focus');
         $("#rg").off('blur focus');
 
@@ -641,28 +658,28 @@ include("inc/scripts.php");
         });
 
         $("#cep")
-        .off('blur focus')
-        .on("focusout", function() {
-            const cep = $("#cep").val();
-            if (cep !== "" && cep !==  $("#cep").attr('placeholder')) {
-                preencheEndereco(cep);
-            } else {
-                clearEndereco();
-            }
-        });
+            .off('blur focus')
+            .on("focusout", function() {
+                const cep = $("#cep").val();
+                if (cep !== "" && cep !== $("#cep").attr('placeholder')) {
+                    preencheEndereco(cep);
+                } else {
+                    clearEndereco();
+                }
+            });
 
         $("#primeiroEmprego").on("change", function() {
             const primeiroEmprego = +$("#primeiroEmprego").val();
 
             if (primeiroEmprego != 0) {
                 $("#pispasep")
-                .val("")
-                .removeClass('required')
-                .attr('readonly', true);
+                    .val("")
+                    .removeClass('required')
+                    .attr('readonly', true);
             } else {
                 $("#pispasep")
-                .addClass('required')
-                .removeAttr('readonly');
+                    .addClass('required')
+                    .removeAttr('readonly');
             }
         });
 
@@ -999,7 +1016,7 @@ include("inc/scripts.php");
             if (valorTel !== '') {
                 fieldName = "telefone";
             }
-            if (valorTel[valorTel.length -1] === '_') {
+            if (valorTel[valorTel.length - 1] === '_') {
                 valorTel = valorTel.replace('-', '').replaceAll('_', '');
                 valorTel = valorTel.substr(0, 9) + '-' + valorTel.substr(9);
             }
@@ -1120,7 +1137,7 @@ include("inc/scripts.php");
         let sequencial = +$("#sequencialEmail").val();
         let emailPrincipalMarcado = $("#emailPrincipal").is(":checked") ? 1 : 0;
 
-        for (i = jsonEmailArray.length -1; i >= 0; i--) {
+        for (i = jsonEmailArray.length - 1; i >= 0; i--) {
             if (emailPrincipalMarcado === 1) {
                 if (jsonEmailArray[i].emailPrincipal === 1 && jsonEmailArray[i].sequencialEmail !== sequencial) {
                     achou = true;
@@ -1144,7 +1161,8 @@ include("inc/scripts.php");
         invalidos.forEach(char => {
             if (email.indexOf(char) > 0) {
                 validaCaracteres = false;
-        }});
+            }
+        });
 
         if (!validaCaracteres) {
             smartAlert("Atenção", 'Os caracteres (&, <, >, ") são inválidos.', "error");
@@ -1254,7 +1272,9 @@ include("inc/scripts.php");
 
     async function preencheEndereco(cep) {
         const url = `https://viacep.com.br/ws/${cep}/json/`
-        const res = await fetch(url, { method: 'GET' });
+        const res = await fetch(url, {
+            method: 'GET'
+        });
         const data = await res.json();
 
         $("#logradouro").val(data.logradouro);
