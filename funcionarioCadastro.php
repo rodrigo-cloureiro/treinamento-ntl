@@ -392,6 +392,11 @@ include("inc/nav.php");
                                             <div class="panel-collapse collapse" id="collapseDependente">
                                                 <div class="panel-body no-padding">
                                                     <fieldset>
+                                                        <input class="col col-12" id="jsonDependentes" name="jsonDependentes" type="hidden" value="[]"/>
+                                                        <div id="formTelefone" class="col-sm-12">
+                                                            <input type="hidden" id="dependenteId" name="dependenteId">
+                                                            <input type="hidden" id="sequencialDep" name="sequencialDep">
+                                                        </div>
                                                         <div class="row">
                                                             <section class="col col-4">
                                                                 <label class="label">Nome</label>
@@ -433,17 +438,27 @@ include("inc/nav.php");
                                                                     </select>
                                                                 </label>
                                                             </secion>
+                                                            <section class="col col-2">
+                                                                    <label class="label">&nbsp;</label>
+                                                                    <button id="btnAddDependente" type="button" class="btn btn-primary">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                    <button id="btnRemoverDependente" type="button" class="btn btn-danger">
+                                                                        <i class="fa fa-minus"></i>
+                                                                    </button>
+                                                                </section>
                                                         </div>
                                                         <div class="row">
                                                             <section class="col col-12">
                                                                 <div class="table-responsive" style="min-height: 115px;width: 100%;border: 1px solid #ddd;margin-bottom: 13px;overflow-x: hidden;">
-                                                                    <table id="tableTelefone" class="table table-bordered table-striped table-condensed table-hover dataTable">
+                                                                    <table id="tableDependentes" class="table table-bordered table-striped table-condensed table-hover dataTable">
                                                                         <thead>
                                                                             <tr role="row">
                                                                                 <th></th>
-                                                                                <th class="text-left" style="min-width: 500%">Telefone</th>
-                                                                                <th class="text-left" style="min-width: 500%">Principal</th>
-                                                                                <th class="text-left" style="min-width: 500%">WhatsApp</th>
+                                                                                <th class="text-left" style="min-width: 500%">Nome</th>
+                                                                                <th class="text-left" style="min-width: 500%">CPF</th>
+                                                                                <th class="text-left" style="min-width: 500%">Data de Nascimento</th>
+                                                                                <th class="text-left" style="min-width: 500%">Tipo de Dependente</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody></tbody>
