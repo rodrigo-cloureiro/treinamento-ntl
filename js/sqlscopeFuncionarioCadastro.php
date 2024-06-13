@@ -289,6 +289,22 @@ function recupera()
     }
     $jsonEmailArray = json_encode($jsonEmail);
 
+    $sql = " SELECT d.codigo, nome, cpf, dataNascimento, tipo, descricao FROM dependentes d JOIN tipos_dependentes t ON d.tipo = t.codigo WHERE funcionarioId = " . $usuarioIdPesquisa;
+    $result = $reposit->RunQuery($sql);
+
+    if (count($result) > 0) {
+        foreach ($result as $campo) {
+            $codigoDependente = +$campo['codigo'];
+            $nomeDependente = $campo['nome'];
+            $cpfDependente = $campo['cpf'];
+            $dataNascimentoDependente = $campo['dataNascimento'];
+            $tipoDependente = $campo['tipo'];
+            $descricaoTipo = $campo['descricao'];
+            $jsonDependente[] = array("dependenteId"=>$codigoDependente, "nomeDependente"=>$nomeDependente, "cpfDependente"=>$cpfDependente, "dataNascimentoDependente"=>$dataNascimentoDependente, "tipoDependente"=>$tipoDependente, "descricaoTipo"=>$descricaoTipo);
+        }
+    }
+    $jsonDependenteArray = json_encode($jsonDependente);
+
     $out =   $id . "^" .
         $ativo . "^" .
         $nome . "^" .
@@ -312,7 +328,7 @@ function recupera()
         return;
     }
 
-    echo "sucess#" . $out . "#" . $jsonTelefoneArray . "#" . $jsonEmailArray;
+    echo "sucess#" . $out . "#" . $jsonTelefoneArray . "#" . $jsonEmailArray . "#" . $jsonDependenteArray;
     return;
 }
 

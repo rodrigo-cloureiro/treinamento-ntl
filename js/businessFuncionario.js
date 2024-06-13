@@ -56,6 +56,7 @@ function recuperaFuncionario(id) {
                 let piece = data.split("#");
                 let strJsonTelefone = piece[2];
                 let strJsonEmail = piece[3];
+                let strJsonDependente = piece[4];
 
                 let mensagem = piece[0];
                 let out = piece[1];
@@ -96,12 +97,15 @@ function recuperaFuncionario(id) {
                 $("#ativo").val(ativo);
                 $("#jsonTelefone").val(strJsonTelefone);
                 $("#jsonEmail").val(strJsonEmail);
+                $("#jsonDependentes").val(strJsonDependente);
                 calcularIdade();
 
                 jsonTelefoneArray = JSON.parse($("#jsonTelefone").val());
-                fillTableTelefone();
+                jsonTelefoneArray != null && fillTableTelefone();
                 jsonEmailArray = JSON.parse($("#jsonEmail").val());
-                fillTableEmail();
+                jsonEmailArray != null && fillTableEmail();
+                jsonDependenteArray = JSON.parse($("#jsonDependentes").val());
+                jsonDependenteArray != null && fillTableDependente();
 
                 $("#primeiroEmprego").val(primeiroEmprego);
                 if (primeiroEmprego != 0) {

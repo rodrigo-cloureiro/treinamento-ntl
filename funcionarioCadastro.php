@@ -392,10 +392,10 @@ include("inc/nav.php");
                                             <div class="panel-collapse collapse" id="collapseDependente">
                                                 <div class="panel-body no-padding">
                                                     <fieldset>
-                                                        <input class="col col-12" id="jsonDependentes" name="jsonDependentes" type="" value="[]" />
+                                                        <input class="col col-12" id="jsonDependentes" name="jsonDependentes" type="hidden" value="[]" />
                                                         <div id="formDependente" class="col-sm-12">
-                                                            <input type="" id="dependenteId" name="dependenteId">
-                                                            <input type="" id="sequencialDep" name="sequencialDep">
+                                                            <input type="hidden" id="dependenteId" name="dependenteId">
+                                                            <input type="hidden" id="sequencialDep" name="sequencialDep">
                                                             <div class="row">
                                                                 <section class="col col-4">
                                                                     <label class="label">Nome</label>
