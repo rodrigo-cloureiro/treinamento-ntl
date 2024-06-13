@@ -297,7 +297,7 @@ function recupera()
             $codigoDependente = +$campo['codigo'];
             $nomeDependente = $campo['nome'];
             $cpfDependente = $campo['cpf'];
-            $dataNascimentoDependente = $campo['dataNascimento'];
+            $dataNascimentoDependente = $utils->validaDataInversa($campo['dataNascimento']);
             $tipoDependente = $campo['tipo'];
             $descricaoTipo = $campo['descricao'];
             $jsonDependente[] = array("dependenteId"=>$codigoDependente, "nomeDependente"=>$nomeDependente, "cpfDependente"=>$cpfDependente, "dataNascimentoDependente"=>$dataNascimentoDependente, "tipoDependente"=>$tipoDependente, "descricaoTipo"=>$descricaoTipo);
