@@ -784,92 +784,92 @@ include("inc/scripts.php");
         const primeiroEmprego = $("#primeiroEmprego").val() || "";
         const pispasep = $("#pispasep").val();
 
-        if (nome == "") {
-            smartAlert("Atenção", "O nome precisa ser preenchido!", "error");
-            $("#nome").focus();
-            return;
-        }
+        // if (nome == "") {
+        //     smartAlert("Atenção", "O nome precisa ser preenchido!", "error");
+        //     $("#nome").focus();
+        //     return;
+        // }
 
-        if (cpf == "") {
-            smartAlert("Atenção", "O CPF precisa ser preenchido!", "error");
-            $("#cpf").focus();
-            return;
-        }
+        // if (cpf == "") {
+        //     smartAlert("Atenção", "O CPF precisa ser preenchido!", "error");
+        //     $("#cpf").focus();
+        //     return;
+        // }
 
-        if (rg == "" || rg === $("#rg").attr('placeholder')) {
-            smartAlert("Atenção", "O RG precisa ser preenchido!", "error");
-            $("#rg").focus();
-            return;
-        }
+        // if (rg == "" || rg === $("#rg").attr('placeholder')) {
+        //     smartAlert("Atenção", "O RG precisa ser preenchido!", "error");
+        //     $("#rg").focus();
+        //     return;
+        // }
 
-        if (genero == "") {
-            smartAlert("Atenção", "O sexo precisa ser preenchido!", "error");
-            $("#sexo").focus();
-            return;
-        }
+        // if (genero == "") {
+        //     smartAlert("Atenção", "O sexo precisa ser preenchido!", "error");
+        //     $("#sexo").focus();
+        //     return;
+        // }
 
-        if (estadoCivil == "") {
-            smartAlert("Atenção", "O estado civil precisa ser preenchido!", "error");
-            $("#estadoCivil").focus();
-            return;
-        }
+        // if (estadoCivil == "") {
+        //     smartAlert("Atenção", "O estado civil precisa ser preenchido!", "error");
+        //     $("#estadoCivil").focus();
+        //     return;
+        // }
 
-        if (dataNascimento == "") {
-            smartAlert("Atenção", "A data de nascimento precisa ser preenchida!", "error");
-            $("#dataNascimento").focus();
-            return;
-        }
+        // if (dataNascimento == "") {
+        //     smartAlert("Atenção", "A data de nascimento precisa ser preenchida!", "error");
+        //     $("#dataNascimento").focus();
+        //     return;
+        // }
 
-        if (primeiroEmprego === "") {
-            smartAlert("Atenção", "É necessário informar se é primeiro emprego ou não", "error");
-            $("#primeiroEmprego").focus();
-            return;
-        }
+        // if (primeiroEmprego === "") {
+        //     smartAlert("Atenção", "É necessário informar se é primeiro emprego ou não", "error");
+        //     $("#primeiroEmprego").focus();
+        //     return;
+        // }
 
-        if (primeiroEmprego == 0 && pispasep === "") {
-            smartAlert("Atenção", "É necessário informar o PIS-PASEP", "error");
-            $("#pispasep").focus();
-            return;
-        }
+        // if (primeiroEmprego == 0 && pispasep === "") {
+        //     smartAlert("Atenção", "É necessário informar o PIS-PASEP", "error");
+        //     $("#pispasep").focus();
+        //     return;
+        // }
 
-        if (jsonTelefoneArray.length === 0 && jsonEmailArray.length === 0) {
-            smartAlert("Atenção", "É necessário adicionar pelo menos 1 contato.", "error");
-            return;
-        }
+        // if (jsonTelefoneArray.length === 0 && jsonEmailArray.length === 0) {
+        //     smartAlert("Atenção", "É necessário adicionar pelo menos 1 contato.", "error");
+        //     return;
+        // }
 
-        if (cep === "") {
-            smartAlert("Atenção", "É necessário preencher o CEP", "error");
-            $("#cep").focus();
-            return;
-        }
+        // if (cep === "") {
+        //     smartAlert("Atenção", "É necessário preencher o CEP", "error");
+        //     $("#cep").focus();
+        //     return;
+        // }
 
-        if (logradouro === "") {
-            smartAlert("Atenção", "É necessário preencher o logradouro", "error");
-            return;
-        }
+        // if (logradouro === "") {
+        //     smartAlert("Atenção", "É necessário preencher o logradouro", "error");
+        //     return;
+        // }
 
-        if (uf === "") {
-            smartAlert("Atenção", "É necessário preencher a UF", "error");
-            return;
-        }
+        // if (uf === "") {
+        //     smartAlert("Atenção", "É necessário preencher a UF", "error");
+        //     return;
+        // }
 
-        if (bairro === "") {
-            smartAlert("Atenção", "É necessário preencher o bairro", "error");
-            return;
-        }
+        // if (bairro === "") {
+        //     smartAlert("Atenção", "É necessário preencher o bairro", "error");
+        //     return;
+        // }
 
-        if (cidade === "") {
-            smartAlert("Atenção", "É necessário preencher a cidade", "error");
-            return;
-        }
+        // if (cidade === "") {
+        //     smartAlert("Atenção", "É necessário preencher a cidade", "error");
+        //     return;
+        // }
 
-        if (numero === "") {
-            smartAlert("Atenção", "É necessário preencher o número", "error");
-            $("#numero").focus();
-            return;
-        }
+        // if (numero === "") {
+        //     smartAlert("Atenção", "É necessário preencher o número", "error");
+        //     $("#numero").focus();
+        //     return;
+        // }
 
-        gravaFuncionario(codigo, ativo, nome, cpf, rg, genero, estadoCivil, dataNascimento, jsonTelefoneArray, jsonEmailArray, cep, logradouro, uf, bairro, cidade, numero, complemento, primeiroEmprego, pispasep);
+        gravaFuncionario(codigo, ativo, nome, cpf, rg, genero, estadoCivil, dataNascimento, jsonTelefoneArray, jsonEmailArray, cep, logradouro, uf, bairro, cidade, numero, complemento, primeiroEmprego, pispasep, jsonDependenteArray);
     }
 
     function calcularIdade() {

@@ -1,5 +1,7 @@
 <?php
 
+use function Matrix\add;
+
 include "repositorio.php";
 include "girComum.php";
 
@@ -75,6 +77,7 @@ function grava()
     $cidade = $utils->formatarString($_POST['cidade']);
     $numero = $utils->formatarString($_POST['numero']);
     $complemento = $utils->formatarString($_POST['complemento']);
+    $arrayDependente = $_POST['jsonDependente'];
 
     $nomeXml = "ArrayTelefone";
     $nomeTabela = "xmlTelefone";
@@ -129,6 +132,33 @@ function grava()
     }
     $xmlEmail = "'" . $xmlEmail . "'";
 
+    $nomeXml = "ArrayDependente";
+    $nomeTabela = "xmlDependente";
+    if ($arrayDependente !== null && sizeof($arrayDependente) > 0) {
+        $xmlDependente = '<?xml version="1.0"?>';
+        $xmlDependente = $xmlDependente . "<" . $nomeXml . ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
+        foreach ($arrayDependente as $chave) {
+            $xmlDependente = $xmlDependente . "<" . $nomeTabela . ">";
+            foreach ($chave as $campo => $valor) {
+                $xmlDependente = $xmlDependente . "<" . $campo . ">" . $valor . "</" . $campo . ">";                
+            }
+            $xmlDependente = $xmlDependente . "</" . $nomeTabela . ">";
+        }
+        $xmlDependente = $xmlDependente . "</" . $nomeXml . ">";
+    } else {
+        $xmlDependente = '<?xml version="1.0"?>';
+        $xmlDependente = $xmlDependente . "<" . $nomeXml . '  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
+        $xmlDependente = $xmlDependente . "</" . $nomeXml . ">";
+    }
+
+    $xml = simplexml_load_string($xmlDependente);
+    if ($xml === false) {
+        $mensagem = "Erro na criação do XML de cadastro de dependente";
+        echo "failed#" . $mensagem . ' ';
+        return;
+    }
+    $xmlDependente = "'" . $xmlDependente . "'";
+
     $sql = " SELECT codigo, cpf FROM funcionarios WHERE cpf = $cpf ";
     $result = $reposit->RunQuery($sql);
     $row = $result[0];
@@ -167,7 +197,8 @@ function grava()
         $numero,
         $complemento,
         $primeiroEmprego,
-        $pispasep";  
+        $pispasep,
+        $xmlDependente";
 
     $reposit = new reposit();
     $result = $reposit->Execprocedure($sql);
@@ -473,3 +504,25 @@ function validarCPF() {
     echo $result ? "success" : "failed#CPF Inválido!";
     return;
 }
+
+// function verificarCadastroCPF() {
+//     $reposit = new reposit();
+//     $cpfs = [];
+
+//     if ((empty($_POST['cpf'])) || (!isset($_POST['cpf'])) || (is_null($_POST['cpf']))) {
+//         echo "failed#Parâmetro não enviado";
+//         return;
+//     } else {
+//         $cpf = $_POST["cpf"];
+//     }
+    
+//     $sql = " SELECT cpf FROM funcionarios ";
+//     $result = $reposit->RunQuery($sql);
+//     array_push($cpfs, ...$result);
+
+//     $sql = " SELECT cpf FROM dependentes ";
+//     $result = $reposit->RunQuery($sql);
+//     array_push($cpfs, ...$result);
+
+//     $exists = in_array($cpf, $cpfs);
+// }
