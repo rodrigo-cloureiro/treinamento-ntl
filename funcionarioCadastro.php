@@ -1501,6 +1501,7 @@ include("inc/scripts.php");
     }
 
     function excluirDependente() {
+        debugger
         const arrSequencial = [];
         $("#tableDependentes input[type=checkbox]:checked").each(function() {
             arrSequencial.push(parseInt($(this).val()));

@@ -81,7 +81,7 @@ function grava()
 
     $nomeXml = "ArrayTelefone";
     $nomeTabela = "xmlTelefone";
-    if ($arrayTelefone !== null && sizeof($arrayTelefone) > 0) {
+    if ($arrayTelefone != null && sizeof($arrayTelefone) > 0) {
         $xmlTelefone = '<?xml version="1.0"?>';
         $xmlTelefone = $xmlTelefone . '<' . $nomeXml . ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
         foreach ($arrayTelefone as $chave) {
@@ -107,7 +107,7 @@ function grava()
 
     $nomeXml = "ArrayEmail";
     $nomeTabela = "xmlEmail";
-    if ($arrayEmail !== null && sizeof($arrayEmail) > 0) {
+    if ($arrayEmail != null && sizeof($arrayEmail) > 0) {
         $xmlEmail = '<?xml version="1.0"?>';
         $xmlEmail = $xmlEmail . '<' . $nomeXml . ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
         foreach ($arrayEmail as $chave) {
@@ -134,7 +134,7 @@ function grava()
 
     $nomeXml = "ArrayDependente";
     $nomeTabela = "xmlDependente";
-    if ($arrayDependente !== null && sizeof($arrayDependente) > 0) {
+    if ($arrayDependente != null && sizeof($arrayDependente) > 0) {
         $xmlDependente = '<?xml version="1.0"?>';
         $xmlDependente = $xmlDependente . "<" . $nomeXml . ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
         foreach ($arrayDependente as $chave) {
@@ -289,7 +289,7 @@ function recupera()
     }
     $jsonEmailArray = json_encode($jsonEmail);
 
-    $sql = " SELECT d.codigo, nome, cpf, dataNascimento, tipo, descricao FROM dependentes d JOIN tipos_dependentes t ON d.tipo = t.codigo WHERE funcionarioId = " . $usuarioIdPesquisa;
+    $sql = " SELECT d.codigo, nome, cpf, dataNascimento, tipo, sequencial, descricao FROM dependentes d JOIN tipos_dependentes t ON d.tipo = t.codigo WHERE funcionarioId = " . $usuarioIdPesquisa;
     $result = $reposit->RunQuery($sql);
 
     if (count($result) > 0) {
@@ -299,8 +299,9 @@ function recupera()
             $cpfDependente = $campo['cpf'];
             $dataNascimentoDependente = $utils->validaDataInversa($campo['dataNascimento']);
             $tipoDependente = $campo['tipo'];
+            $sequencialDep = $campo['sequencial'];
             $descricaoTipo = $campo['descricao'];
-            $jsonDependente[] = array("dependenteId"=>$codigoDependente, "nomeDependente"=>$nomeDependente, "cpfDependente"=>$cpfDependente, "dataNascimentoDependente"=>$dataNascimentoDependente, "tipoDependente"=>$tipoDependente, "descricaoTipo"=>$descricaoTipo);
+            $jsonDependente[] = array("dependenteId"=>$codigoDependente, "nomeDependente"=>$nomeDependente, "cpfDependente"=>$cpfDependente, "dataNascimentoDependente"=>$dataNascimentoDependente, "tipoDependente"=>$tipoDependente, "sequencialDep"=>$sequencialDep, "descricaoTipo"=>$descricaoTipo);
         }
     }
     $jsonDependenteArray = json_encode($jsonDependente);
