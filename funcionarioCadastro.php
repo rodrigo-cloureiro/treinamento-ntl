@@ -1176,6 +1176,7 @@ include("inc/scripts.php");
         let email = $("#email").val();
         let sequencial = +$("#sequencialEmail").val();
         let emailPrincipalMarcado = $("#emailPrincipal").is(":checked") ? 1 : 0;
+        const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
         for (i = jsonEmailArray.length - 1; i >= 0; i--) {
             if (emailPrincipalMarcado === 1) {
@@ -1189,6 +1190,11 @@ include("inc/scripts.php");
                 existe = true;
                 break;
             }
+        }
+
+        if (!pattern.test(email)) {
+            smartAlert("Erro", "Formato de email inválido!", "error");
+            return false;
         }
 
         if (email === "") {
