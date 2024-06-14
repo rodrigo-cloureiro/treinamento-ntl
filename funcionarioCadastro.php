@@ -633,8 +633,9 @@ include("inc/scripts.php");
 
         $("#cpf").on("focusout", function(campo) {
             const mask = $("#cpf").mask();
+            const codigo = $("#codigo").val();
             if (mask.length === 11) {
-                validaCPF(campo.currentTarget.value, results => {
+                validaCPF(codigo, campo.currentTarget.value, results => {
                     if (results.indexOf('success') < 0) {
                         let piece = results.split('#');
                         let mensagem = piece[1];
@@ -701,8 +702,9 @@ include("inc/scripts.php");
 
         $("#cpfDependente").on("focusout", function(campo) {
             const mask = $("#cpfDependente").mask();
+            const codigo = $("#cpf").val();
             if (mask.length === 11) {
-                validaCPF(campo.currentTarget.value, results => {
+                validaCPF(codigo, campo.currentTarget.value, results => {
                     if (results.indexOf('success') < 0) {
                         let piece = results.split('#');
                         let mensagem = piece[1];
@@ -1378,20 +1380,14 @@ include("inc/scripts.php");
     function validaDependente() {
         let existe = false;
         const nome = $("#nomeDependente").val();
-        const cpf = $("#cpfDependente").val();
+        const cpfDependente = $("#cpfDependente").val();
         const dataNasimento = $("#dataNascimentoDependente").val();
         const tipoDependente = $("#tipoDependente").val() || "";
         let sequencial = +$("#sequencialDep").val();
+        const cpfFuncionario = $("#cpf").val();
 
-        for (i = jsonDependenteArray.length - 1; i >= 0; i--) {
-            if (jsonDependenteArray[i].cpfDependente === cpf && jsonDependenteArray[i].sequencialDep !== sequencial) {
-                existe = true;
-                break;
-            }
-        }
-
-        if (existe === true) {
-            smartAlert("Erro", "Já existe um dependente com esse CPF cadastrado.", "error");
+        if (cpfDependente == cpfFuncionario) {
+            smartAlert("Erro", "Não é possível cadastrar o CPF do funcionário como dependente.", "error");
             return false;
         }
 
@@ -1401,7 +1397,7 @@ include("inc/scripts.php");
             return false;
         }
 
-        if (cpf == "" || cpf == $("#cpfDependente").attr('placeholder')) {
+        if (cpfDependente == "" || cpfDependente == $("#cpfDependente").attr('placeholder')) {
             smartAlert("Erro", "É necessário informar o CPF.", "error");
             $("#cpfDependente").focus();
             return false;

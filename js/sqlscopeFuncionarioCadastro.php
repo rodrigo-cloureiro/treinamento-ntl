@@ -140,7 +140,7 @@ function grava()
         foreach ($arrayDependente as $chave) {
             $xmlDependente = $xmlDependente . "<" . $nomeTabela . ">";
             foreach ($chave as $campo => $valor) {
-                $xmlDependente = $xmlDependente . "<" . $campo . ">" . $valor . "</" . $campo . ">";                
+                $xmlDependente = $xmlDependente . "<" . $campo . ">" . $valor . "</" . $campo . ">";
             }
             $xmlDependente = $xmlDependente . "</" . $nomeTabela . ">";
         }
@@ -164,7 +164,7 @@ function grava()
     $row = $result[0];
 
     // count($result)
-    if($row && $row['codigo'] !== $codigo) {
+    if ($row && $row['codigo'] !== $codigo) {
         echo 'failed#CPF já cadastrado';
         return;
     }
@@ -173,7 +173,7 @@ function grava()
     $result = $reposit->RunQuery($sql);
     $row = $result[0];
 
-    if($row && $row['codigo'] !== $codigo) {
+    if ($row && $row['codigo'] !== $codigo) {
         echo 'failed#RG já cadastrado';
         return;
     }
@@ -270,11 +270,11 @@ function recupera()
             $telefone = $campo['telefone'];
             $principal = +$campo['principal'];
             $whatsapp = +$campo['whatsapp'];
-            $jsonTelefone[] = array("telefoneId"=>$codigo, "sequencialTel"=>$sequencial, "telefone"=>$telefone, "telPrincipal"=>$principal, "whatsapp"=>$whatsapp);
+            $jsonTelefone[] = array("telefoneId" => $codigo, "sequencialTel" => $sequencial, "telefone" => $telefone, "telPrincipal" => $principal, "whatsapp" => $whatsapp);
         }
     }
     $jsonTelefoneArray = json_encode($jsonTelefone);
-    
+
     $sql = " SELECT codigo, sequencial, email, principal FROM emails WHERE codigo_func = " . $usuarioIdPesquisa;
     $result = $reposit->RunQuery($sql);
 
@@ -284,7 +284,7 @@ function recupera()
             $sequencial = +$campo['sequencial'];
             $email = $campo['email'];
             $principal = +$campo['principal'];
-            $jsonEmail[] = array("emailId"=>$codigo, "sequencialEmail"=>$sequencial, "email"=>$email, "emailPrincipal"=>$principal);
+            $jsonEmail[] = array("emailId" => $codigo, "sequencialEmail" => $sequencial, "email" => $email, "emailPrincipal" => $principal);
         }
     }
     $jsonEmailArray = json_encode($jsonEmail);
@@ -301,7 +301,7 @@ function recupera()
             $tipoDependente = $campo['tipo'];
             $sequencialDep = $campo['sequencial'];
             $descricaoTipo = $campo['descricao'];
-            $jsonDependente[] = array("dependenteId"=>$codigoDependente, "nomeDependente"=>$nomeDependente, "cpfDependente"=>$cpfDependente, "dataNascimentoDependente"=>$dataNascimentoDependente, "tipoDependente"=>$tipoDependente, "sequencialDep"=>$sequencialDep, "descricaoTipo"=>$descricaoTipo);
+            $jsonDependente[] = array("dependenteId" => $codigoDependente, "nomeDependente" => $nomeDependente, "cpfDependente" => $cpfDependente, "dataNascimentoDependente" => $dataNascimentoDependente, "tipoDependente" => $tipoDependente, "sequencialDep" => $sequencialDep, "descricaoTipo" => $descricaoTipo);
         }
     }
     $jsonDependenteArray = json_encode($jsonDependente);
@@ -505,7 +505,8 @@ function gravarNovaSenha()
     return;
 }
 
-function validarCPF() {
+function validarCPF()
+{
 
     if ((empty($_POST['cpf'])) || (!isset($_POST['cpf'])) || (is_null($_POST['cpf']))) {
         echo "failed#Parâmetro não enviado";
@@ -514,32 +515,45 @@ function validarCPF() {
         $cpf = $_POST["cpf"];
     }
 
+    if ((empty($_POST['codigo'])) || (!isset($_POST['codigo'])) || (is_null($_POST['codigo']))) {
+        $codigo = 0;
+    } else {
+        $codigo = $_POST["codigo"];
+    }
+
     $utils = new comum();
 
-    $result = $utils->validaCPF($cpf);
+    if (!$utils->validaCPF($cpf)) {
+        echo "failed#CPF Inválido!";
+        return;
+    }
 
-    echo $result ? "success" : "failed#CPF Inválido!";
+    if ($cpf == $codigo) {
+        echo "failed#Não é possível cadastrar o CPF do funcionário como dependente.";
+        return;
+    }
+
+    if (verificarCadastroCPF($cpf, +$codigo)) {
+        echo "failed#CPF já cadastrado.";
+        return;
+    }
+
+    echo "success";
     return;
 }
 
-// function verificarCadastroCPF() {
-//     $reposit = new reposit();
-//     $cpfs = [];
+function verificarCadastroCPF($cpf, $codigo)
+{
+    $reposit = new reposit();
 
-//     if ((empty($_POST['cpf'])) || (!isset($_POST['cpf'])) || (is_null($_POST['cpf']))) {
-//         echo "failed#Parâmetro não enviado";
-//         return;
-//     } else {
-//         $cpf = $_POST["cpf"];
-//     }
-    
-//     $sql = " SELECT cpf FROM funcionarios ";
-//     $result = $reposit->RunQuery($sql);
-//     array_push($cpfs, ...$result);
+    $sql = " SELECT codigo, cpf FROM funcionarios WHERE cpf = '$cpf' ";
+    $result = $reposit->RunQuery($sql);
+    $row = $result[0];
 
-//     $sql = " SELECT cpf FROM dependentes ";
-//     $result = $reposit->RunQuery($sql);
-//     array_push($cpfs, ...$result);
+    // count($result)
+    if ($row && $row['codigo'] !== $codigo) {
+        return true;
+    }
 
-//     $exists = in_array($cpf, $cpfs);
-// }
+    return false;
+}

@@ -200,12 +200,12 @@ function recuperaDadosUsuario(callback) {
     })
   }
 
-  function validaCPF(cpf, callback) {
+  function validaCPF(codigo, cpf, callback) {
     $.ajax({
         url: 'js/sqlscopeFuncionarioCadastro.php', //caminho do arquivo a ser executado
         dataType: 'html', //tipo do retorno
         type: 'post', //metodo de envio
-        data: { funcao: 'validarCPF', cpf:cpf }, //valores enviados ao script
+        data: { funcao: 'validarCPF', codigo:codigo, cpf:cpf }, //valores enviados ao script
     
         success: function (data) {
           callback(data)
