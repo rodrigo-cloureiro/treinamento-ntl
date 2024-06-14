@@ -95,9 +95,9 @@ function recuperaFuncionario(id) {
                 $("#numero").val(numero);
                 $("#complemento").val(complemento);
                 $("#ativo").val(ativo);
-                $("#jsonTelefone").val(strJsonTelefone);
-                $("#jsonEmail").val(strJsonEmail);
-                $("#jsonDependentes").val(strJsonDependente);
+                JSON.parse(strJsonTelefone) != null && $("#jsonTelefone").val(strJsonTelefone);
+                JSON.parse(strJsonEmail) != null && $("#jsonEmail").val(strJsonEmail);
+                JSON.parse(strJsonDependente) != null && $("#jsonDependentes").val(strJsonDependente);
                 calcularIdade();
 
                 jsonTelefoneArray = JSON.parse($("#jsonTelefone").val());
