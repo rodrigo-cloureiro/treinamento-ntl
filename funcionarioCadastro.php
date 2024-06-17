@@ -651,6 +651,13 @@ include("inc/scripts.php");
             }
         });
 
+        $("#rg").on("focusout", function(campo) {
+            if (!validaRG(campo.currentTarget.value)) {
+                smartAlert("Atenção", "RG inválido.", "error");
+                $("#rg").focus();
+            }
+        });
+
         $("#btnAddTelefone").on("click", function() {
             addTelefone();
         });
@@ -720,6 +727,13 @@ include("inc/scripts.php");
             }
         });
 
+        $("#dataNascimentoDependente").on("focusout", function() {
+            if (!dataValida($("#dataNascimentoDependente").val())) {
+                smartAlert("Atenção", "A data de nascimento não é válida!", "error");
+                $("#dataNascimentoDependente").focus();
+            }
+        });
+
         $("#btnAddDependente").on("click", function() {
             addDependente();
         });
@@ -786,90 +800,90 @@ include("inc/scripts.php");
         const primeiroEmprego = $("#primeiroEmprego").val() || "";
         const pispasep = $("#pispasep").val();
 
-        // if (nome == "") {
-        //     smartAlert("Atenção", "O nome precisa ser preenchido!", "error");
-        //     $("#nome").focus();
-        //     return;
-        // }
+        if (nome == "") {
+            smartAlert("Atenção", "O nome precisa ser preenchido!", "error");
+            $("#nome").focus();
+            return;
+        }
 
-        // if (cpf == "") {
-        //     smartAlert("Atenção", "O CPF precisa ser preenchido!", "error");
-        //     $("#cpf").focus();
-        //     return;
-        // }
+        if (cpf == "") {
+            smartAlert("Atenção", "O CPF precisa ser preenchido!", "error");
+            $("#cpf").focus();
+            return;
+        }
 
-        // if (rg == "" || rg === $("#rg").attr('placeholder')) {
-        //     smartAlert("Atenção", "O RG precisa ser preenchido!", "error");
-        //     $("#rg").focus();
-        //     return;
-        // }
+        if (rg == "" || rg === $("#rg").attr('placeholder')) {
+            smartAlert("Atenção", "O RG precisa ser preenchido!", "error");
+            $("#rg").focus();
+            return;
+        }
 
-        // if (genero == "") {
-        //     smartAlert("Atenção", "O sexo precisa ser preenchido!", "error");
-        //     $("#sexo").focus();
-        //     return;
-        // }
+        if (genero == "") {
+            smartAlert("Atenção", "O sexo precisa ser preenchido!", "error");
+            $("#sexo").focus();
+            return;
+        }
 
-        // if (estadoCivil == "") {
-        //     smartAlert("Atenção", "O estado civil precisa ser preenchido!", "error");
-        //     $("#estadoCivil").focus();
-        //     return;
-        // }
+        if (estadoCivil == "") {
+            smartAlert("Atenção", "O estado civil precisa ser preenchido!", "error");
+            $("#estadoCivil").focus();
+            return;
+        }
 
-        // if (dataNascimento == "") {
-        //     smartAlert("Atenção", "A data de nascimento precisa ser preenchida!", "error");
-        //     $("#dataNascimento").focus();
-        //     return;
-        // }
+        if (dataNascimento == "") {
+            smartAlert("Atenção", "A data de nascimento precisa ser preenchida!", "error");
+            $("#dataNascimento").focus();
+            return;
+        }
 
-        // if (primeiroEmprego === "") {
-        //     smartAlert("Atenção", "É necessário informar se é primeiro emprego ou não", "error");
-        //     $("#primeiroEmprego").focus();
-        //     return;
-        // }
+        if (primeiroEmprego === "") {
+            smartAlert("Atenção", "É necessário informar se é primeiro emprego ou não", "error");
+            $("#primeiroEmprego").focus();
+            return;
+        }
 
-        // if (primeiroEmprego == 0 && pispasep === "") {
-        //     smartAlert("Atenção", "É necessário informar o PIS-PASEP", "error");
-        //     $("#pispasep").focus();
-        //     return;
-        // }
+        if (primeiroEmprego == 0 && pispasep === "") {
+            smartAlert("Atenção", "É necessário informar o PIS-PASEP", "error");
+            $("#pispasep").focus();
+            return;
+        }
 
-        // if (jsonTelefoneArray.length === 0 && jsonEmailArray.length === 0) {
-        //     smartAlert("Atenção", "É necessário adicionar pelo menos 1 contato.", "error");
-        //     return;
-        // }
+        if (jsonTelefoneArray.length === 0 && jsonEmailArray.length === 0) {
+            smartAlert("Atenção", "É necessário adicionar pelo menos 1 contato.", "error");
+            return;
+        }
 
-        // if (cep === "") {
-        //     smartAlert("Atenção", "É necessário preencher o CEP", "error");
-        //     $("#cep").focus();
-        //     return;
-        // }
+        if (cep === "") {
+            smartAlert("Atenção", "É necessário preencher o CEP", "error");
+            $("#cep").focus();
+            return;
+        }
 
-        // if (logradouro === "") {
-        //     smartAlert("Atenção", "É necessário preencher o logradouro", "error");
-        //     return;
-        // }
+        if (logradouro === "") {
+            smartAlert("Atenção", "É necessário preencher o logradouro", "error");
+            return;
+        }
 
-        // if (uf === "") {
-        //     smartAlert("Atenção", "É necessário preencher a UF", "error");
-        //     return;
-        // }
+        if (uf === "") {
+            smartAlert("Atenção", "É necessário preencher a UF", "error");
+            return;
+        }
 
-        // if (bairro === "") {
-        //     smartAlert("Atenção", "É necessário preencher o bairro", "error");
-        //     return;
-        // }
+        if (bairro === "") {
+            smartAlert("Atenção", "É necessário preencher o bairro", "error");
+            return;
+        }
 
-        // if (cidade === "") {
-        //     smartAlert("Atenção", "É necessário preencher a cidade", "error");
-        //     return;
-        // }
+        if (cidade === "") {
+            smartAlert("Atenção", "É necessário preencher a cidade", "error");
+            return;
+        }
 
-        // if (numero === "") {
-        //     smartAlert("Atenção", "É necessário preencher o número", "error");
-        //     $("#numero").focus();
-        //     return;
-        // }
+        if (numero === "") {
+            smartAlert("Atenção", "É necessário preencher o número", "error");
+            $("#numero").focus();
+            return;
+        }
 
         gravaFuncionario(codigo, ativo, nome, cpf, rg, genero, estadoCivil, dataNascimento, jsonTelefoneArray, jsonEmailArray, cep, logradouro, uf, bairro, cidade, numero, complemento, primeiroEmprego, pispasep, jsonDependenteArray);
     }
@@ -898,6 +912,7 @@ include("inc/scripts.php");
         const dias30 = [4, 6, 9, 11];
         const dias31 = [1, 3, 5, 7, 8, 10, 12];
         const condicoes = [
+            dataAtual.getFullYear() - 125 > dataNascimento.getFullYear(),
             dataAtual < dataNascimento,
             nascimentoSplit[1] < 0 || nascimentoSplit[1] > 12 || nascimentoSplit[0] < 1 || nascimentoSplit[1] > 31,
             dias30.includes(nascimentoSplit[1]) && nascimentoSplit[0] > 30,
@@ -943,6 +958,17 @@ include("inc/scripts.php");
         }
 
         return false;
+    }
+
+    function validaRG(rg) {
+        const invalidos = ['00.000.000-0', '11.111.111-1', '22.222.222-2', '33.333.333-3', '44.444.444-4',
+            '55.555.555-5', '66.666.666-6', '77.777.777-7', '88.888.888-8', '99.999.999-9'
+        ];
+
+        if (invalidos.includes(rg)) {
+            return false;
+        }
+        return true;
     }
 
     function addTelefone() {
@@ -1436,14 +1462,14 @@ include("inc/scripts.php");
                 (cpf !== null && cpf !== '') &&
                 (dataNascimento !== null && dataNascimento !== '') &&
                 (tipoDependente !== null && tipoDependente !== '')) {
-                    const row = $("<tr />");
-                    $("#tableDependentes tbody").append(row);
-                    row.append($('<td><label class="checkbox"><input type="checkbox" name="checkbox" value="' + (sequencialDep) + '"><i></i></label></td>'));
-                    row.append($('<td class="text-nowrap" onclick="carregaDependente(' + (sequencialDep) + ');">' + nome + '</td>'));
-                    row.append($('<td class="text-nowrap">' + (cpf) + '</td>'));
-                    row.append($('<td class="text-nowrap">' + (dataNascimento) + '</td>'));
-                    row.append($('<td class="text-nowrap">' + (descricaoDependente) + '</td>'));
-                }
+                const row = $("<tr />");
+                $("#tableDependentes tbody").append(row);
+                row.append($('<td><label class="checkbox"><input type="checkbox" name="checkbox" value="' + (sequencialDep) + '"><i></i></label></td>'));
+                row.append($('<td class="text-nowrap" onclick="carregaDependente(' + (sequencialDep) + ');">' + nome + '</td>'));
+                row.append($('<td class="text-nowrap">' + (cpf) + '</td>'));
+                row.append($('<td class="text-nowrap">' + (dataNascimento) + '</td>'));
+                row.append($('<td class="text-nowrap">' + (descricaoDependente) + '</td>'));
+            }
         }
     }
 
