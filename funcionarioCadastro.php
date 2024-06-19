@@ -666,6 +666,10 @@ include("inc/scripts.php");
             autoclear: 0
         });
 
+        $("#telPrincipal").prop("checked", false);
+        $("#whatsapp").prop("checked", false);
+        $("#emailPrincipal").prop("checked", false);
+
         $("#cpf").off('blur focus keydown');
         $("#rg").off('blur focus keydown');
 
