@@ -135,6 +135,9 @@ include("inc/nav.php");
                                                             <span class="fa fa-file"></span>
                                                         </button>
                                                     <?php } ?>
+                                                    <button id="btnPDF" type="button" class="btn btn-danger pull-left" title="Gerar PDF">
+                                                        <span class="fa fa-file-pdf-o"></span>
+                                                    </button>
                                                 </footer>
                                             </div>
                                         </div>
@@ -187,13 +190,17 @@ include("inc/scripts.php");
 
 <script>
     $(document).ready(function() {
-        // $("#cpf").mask("999.999.999-99");
-        // $("#dataNascimento").mask("99/99/9999");
         $('#btnSearch').on("click", function() {
+            $("#cpf").val() === "XXX.XXX.XXX-XX" ? $("#cpf").val("") : null;
+            $("#dataInicio").val() === "dd/mm/aaaa" ? $("#dataInicio").val("") : null;
+            $("#dataFim").val() === "dd/mm/aaaa" ? $("#dataFim").val("") : null;
             listarFiltro();
         });
         $('#btnNovo').on("click", function() {
             novo();
+        });
+        $("#btnPDF").on("click", function() {
+            gerarPDF();
         });
     });
 
@@ -203,7 +210,7 @@ include("inc/scripts.php");
         var cpf = $('#cpf').val();
         var dataInicio = $('#dataInicio').val();
         var dataFim = $('#dataFim').val();
- 
+
         $('#resultadoBusca').load('funcionarioFiltroListagem.php?', {
             ativoFiltro: ativo,
             nomeFiltro: nome,
@@ -215,5 +222,9 @@ include("inc/scripts.php");
 
     function novo() {
         $(location).attr('href', 'funcionarioCadastro.php');
+    }
+
+    function gerarPDF() {
+        $(location).attr('href', 'pdfFuncionarios.php');
     }
 </script>

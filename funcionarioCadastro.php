@@ -666,8 +666,8 @@ include("inc/scripts.php");
             autoclear: 0
         });
 
-        $("#cpf").off('blur focus');
-        $("#rg").off('blur focus');
+        $("#cpf").off('blur focus keydown');
+        $("#rg").off('blur focus keydown');
 
         $("#btnRemoverTelefone").on("click", function() {
             excluirContato();
