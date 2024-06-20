@@ -289,4 +289,9 @@ include("inc/scripts.php");
 
         $(location).attr('href', params);
     }
+
+    function gerarRelatorio(e) {
+        const id = e.currentTarget.value;
+        $(location).attr('href', 'pdfFuncionario.php?id=' + id);
+    }
 </script>

@@ -11,6 +11,7 @@ include "js/girComum.php";
                     <th class="text-left" style="min-width:35px;">CPF</th>
                     <th class="text-left" style="min-width:30px;">Data de Nascimento</th>
                     <th class="text-left" style="min-width:35px;">Ativo</th>
+                    <th class="text-left" style="max-width: 70px;">Relatório</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,12 +29,12 @@ include "js/girComum.php";
 
                 if ($ativoFiltro != "") {
                     $where = $where . " AND f.ativo = $ativoFiltro";
-                } 
-                
+                }
+
                 if ($nomeFiltro != "") {
                     $where = $where . " AND f.nome like replace('%$nomeFiltro', ' ', '') + '%'";
-                } 
-                
+                }
+
                 if ($cpfFiltro != "") {
                     $where = $where . " AND f.cpf ='$cpfFiltro'";
                 }
@@ -45,7 +46,7 @@ include "js/girComum.php";
                 if ($sexoFiltro != "") {
                     $where = $where . " AND s.codigo = $sexoFiltro";
                 }
-                
+
                 // if ($dataNascimentoFiltro != "NULL") {
                 //     $where = $where . " AND dataNascimento = $dataNascimentoFiltro";
                 // }
@@ -70,7 +71,7 @@ include "js/girComum.php";
                 $utils = new comum();
                 $result = $reposit->RunQuery($sql);
 
-                foreach($result as $row) {
+                foreach ($result as $row) {
                     $id = (int) $row['fcodigo'];
                     $nome = $row['nome'];
                     $ativo = (int) $row['ativo'];
@@ -88,6 +89,11 @@ include "js/girComum.php";
                     echo '<td class="text-left">' . $cpf . '</td>';
                     echo '<td class="text-left">' . $dataNascimento . '</td>';
                     echo '<td class="text-left">' . $descricaoAtivo . '</td>';
+                    echo '<td class="text-center" style="max-width: 70px;">
+                            <button id="btnRelatorio" type="button" class="btn btn-danger pull-center btnRelatorio" title="Gerar relatório" value=' . $id . '>
+                                <span class="fa fa-file-pdf-o"></span>
+                            </button>
+                          </td>';
                     echo '</tr >';
                 }
                 ?>
@@ -113,6 +119,8 @@ include "js/girComum.php";
             tablet: 1024,
             phone: 480
         };
+
+        $(".btnRelatorio").click((e) => gerarRelatorio(e));
 
         /* TABLETOOLS */
         $('#tableSearchResult').dataTable({
