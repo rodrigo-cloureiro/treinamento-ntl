@@ -58,7 +58,7 @@ include "js/girComum.php";
                     $where = $where . " AND dataNascimento <= $dataFimFiltro";
                 }
 
-                $sql = " SELECT f.codigo, f.ativo, f.nome, f.cpf, f.dataNascimento, s.codigo, s.descricao
+                $sql = " SELECT f.codigo AS fcodigo, f.ativo, f.nome, f.cpf, f.dataNascimento, s.codigo, s.descricao
                          FROM cadastro.dbo.funcionarios f
                          JOIN cadastro.dbo.estado_civil ec ON f.estadoCivil = ec.codigo
                          JOIN cadastro.dbo.sexo s ON f.genero = s.codigo ";
@@ -71,7 +71,7 @@ include "js/girComum.php";
                 $result = $reposit->RunQuery($sql);
 
                 foreach($result as $row) {
-                    $id = (int) $row['codigo'];
+                    $id = (int) $row['fcodigo'];
                     $nome = $row['nome'];
                     $ativo = (int) $row['ativo'];
                     $cpf = $row['cpf'];
