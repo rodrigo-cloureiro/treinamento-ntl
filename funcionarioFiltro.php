@@ -103,6 +103,46 @@ include("inc/nav.php");
                                                                     <input id="cpf" maxlength="14" name="cpf" type="text" value="" placeholder="XXX.XXX.XXX-XX" data-mask="999.999.999-99" data-mask-placeholder="XXX.XXX.XXX-XX">
                                                                 </label>
                                                             </section>
+                                                            <section class="col col-2">
+                                                                <label class="label">Estado Civil</label>
+                                                                <label class="select">
+                                                                    <select name="estadoCivil" id="estadoCivil">
+                                                                        <option value="" selected>Selecione um estado civil</option>
+                                                                        <?php
+                                                                            $reposit = new reposit();
+                                                                            $sql = "SELECT codigo, descricao
+                                                                                    FROM estado_civil
+                                                                                    WHERE ativo = 1";
+                                                                            $result = $reposit->RunQuery($sql);
+                                                                            foreach ($result as $row) {
+                                                                                $codigo = +$row['codigo'];
+                                                                                $descricao = $row['descricao'];
+                                                                                echo "<option value=" . $codigo . ">" . ucfirst($descricao) . "</option>";
+                                                                            }
+                                                                            ?>
+                                                                    </select>
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="label">Sexo</label>
+                                                                <label class="select">
+                                                                    <select name="sexo" id="sexo">
+                                                                        <option value="" selected>Selecione um sexo</option>
+                                                                        <?php
+                                                                            $reposit = new reposit();
+                                                                            $sql = "SELECT codigo, descricao
+                                                                                    FROM sexo
+                                                                                    WHERE ativo = 1";
+                                                                            $result = $reposit->RunQuery($sql);
+                                                                            foreach ($result as $row) {
+                                                                                $codigo = +$row['codigo'];
+                                                                                $descricao = $row['descricao'];
+                                                                                echo "<option value=" . $codigo . ">" . ucfirst($descricao) . "</option>";
+                                                                            }
+                                                                            ?>
+                                                                    </select>
+                                                                </label>
+                                                            </section>
                                                             <!-- <section class="col col-3">
                                                                 <label class="label">Data de Nascimento</label>
                                                                 <label class="input">
@@ -205,16 +245,20 @@ include("inc/scripts.php");
     });
 
     function listarFiltro() {
-        var ativo = $('#ativo').val();
-        var nome = $('#nome').val();
-        var cpf = $('#cpf').val();
-        var dataInicio = $('#dataInicio').val();
-        var dataFim = $('#dataFim').val();
+        const ativo = $('#ativo').val();
+        const nome = $('#nome').val();
+        const cpf = $('#cpf').val();
+        const estadoCivil = $("#estadoCivil").val();
+        const sexo = $("#sexo").val();
+        const dataInicio = $('#dataInicio').val();
+        const dataFim = $('#dataFim').val();
 
         $('#resultadoBusca').load('funcionarioFiltroListagem.php?', {
             ativoFiltro: ativo,
             nomeFiltro: nome,
             cpfFiltro: cpf,
+            estadoCivil: estadoCivil,
+            sexo: sexo,
             dataInicio: dataInicio,
             dataFim: dataFim
         });

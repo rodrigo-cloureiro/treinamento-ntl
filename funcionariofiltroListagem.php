@@ -19,6 +19,8 @@ include "js/girComum.php";
                 $ativoFiltro = $_POST["ativoFiltro"];
                 $nomeFiltro = $_POST["nomeFiltro"];
                 $cpfFiltro = $_POST["cpfFiltro"];
+                $estadoCivilFiltro = $_POST["estadoCivil"];
+                $sexoFiltro = $_POST["sexo"];
                 // $dataNascimentoFiltro = $utils->formatarDataSql($_POST["dataNascimentoFiltro"]);
                 $dataInicioFiltro = $utils->formatarDataSql($_POST["dataInicio"]);
                 $dataFimFiltro = $utils->formatarDataSql($_POST["dataFim"]);
@@ -34,7 +36,15 @@ include "js/girComum.php";
                 
                 if ($cpfFiltro != "") {
                     $where = $where . " AND cpf ='$cpfFiltro'";
-                } 
+                }
+
+                if ($estadoCivilFiltro != "") {
+                    $where = $where . " AND ec.codigo = $estadoCivilFiltro";
+                }
+
+                if ($sexoFiltro != "") {
+                    $where = $where . " AND s.codigo = $sexoFiltro";
+                }
                 
                 // if ($dataNascimentoFiltro != "NULL") {
                 //     $where = $where . " AND dataNascimento = $dataNascimentoFiltro";
@@ -48,7 +58,10 @@ include "js/girComum.php";
                     $where = $where . " AND dataNascimento <= $dataFimFiltro";
                 }
 
-                $sql = " SELECT codigo, ativo, nome, cpf, dataNascimento FROM cadastro.dbo.funcionarios ";
+                $sql = " SELECT f.codigo, f.ativo, f.nome, f.cpf, f.dataNascimento, s.codigo, s.descricao
+                         FROM cadastro.dbo.funcionarios f
+                         JOIN cadastro.dbo.estado_civil ec ON f.estadoCivil = ec.codigo
+                         JOIN cadastro.dbo.sexo s ON f.genero = s.codigo ";
                 // $where = $where . " AND USU.tipoUsuario = 'C' ";
 
                 $sql = $sql . $where;
