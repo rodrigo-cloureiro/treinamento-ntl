@@ -27,15 +27,15 @@ include "js/girComum.php";
                 $where = "WHERE (0 = 0)";
 
                 if ($ativoFiltro != "") {
-                    $where = $where . " AND ativo = $ativoFiltro";
+                    $where = $where . " AND f.ativo = $ativoFiltro";
                 } 
                 
                 if ($nomeFiltro != "") {
-                    $where = $where . " AND nome like replace('%$nomeFiltro', ' ', '') + '%'";
+                    $where = $where . " AND f.nome like replace('%$nomeFiltro', ' ', '') + '%'";
                 } 
                 
                 if ($cpfFiltro != "") {
-                    $where = $where . " AND cpf ='$cpfFiltro'";
+                    $where = $where . " AND f.cpf ='$cpfFiltro'";
                 }
 
                 if ($estadoCivilFiltro != "") {

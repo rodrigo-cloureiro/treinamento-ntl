@@ -109,17 +109,17 @@ include("inc/nav.php");
                                                                     <select name="estadoCivil" id="estadoCivil">
                                                                         <option value="" selected>Selecione um estado civil</option>
                                                                         <?php
-                                                                            $reposit = new reposit();
-                                                                            $sql = "SELECT codigo, descricao
+                                                                        $reposit = new reposit();
+                                                                        $sql = "SELECT codigo, descricao
                                                                                     FROM estado_civil
                                                                                     WHERE ativo = 1";
-                                                                            $result = $reposit->RunQuery($sql);
-                                                                            foreach ($result as $row) {
-                                                                                $codigo = +$row['codigo'];
-                                                                                $descricao = $row['descricao'];
-                                                                                echo "<option value=" . $codigo . ">" . ucfirst($descricao) . "</option>";
-                                                                            }
-                                                                            ?>
+                                                                        $result = $reposit->RunQuery($sql);
+                                                                        foreach ($result as $row) {
+                                                                            $codigo = +$row['codigo'];
+                                                                            $descricao = $row['descricao'];
+                                                                            echo "<option value=" . $codigo . ">" . ucfirst($descricao) . "</option>";
+                                                                        }
+                                                                        ?>
                                                                     </select>
                                                                 </label>
                                                             </section>
@@ -129,17 +129,17 @@ include("inc/nav.php");
                                                                     <select name="sexo" id="sexo">
                                                                         <option value="" selected>Selecione um sexo</option>
                                                                         <?php
-                                                                            $reposit = new reposit();
-                                                                            $sql = "SELECT codigo, descricao
+                                                                        $reposit = new reposit();
+                                                                        $sql = "SELECT codigo, descricao
                                                                                     FROM sexo
                                                                                     WHERE ativo = 1";
-                                                                            $result = $reposit->RunQuery($sql);
-                                                                            foreach ($result as $row) {
-                                                                                $codigo = +$row['codigo'];
-                                                                                $descricao = $row['descricao'];
-                                                                                echo "<option value=" . $codigo . ">" . ucfirst($descricao) . "</option>";
-                                                                            }
-                                                                            ?>
+                                                                        $result = $reposit->RunQuery($sql);
+                                                                        foreach ($result as $row) {
+                                                                            $codigo = +$row['codigo'];
+                                                                            $descricao = $row['descricao'];
+                                                                            echo "<option value=" . $codigo . ">" . ucfirst($descricao) . "</option>";
+                                                                        }
+                                                                        ?>
                                                                     </select>
                                                                 </label>
                                                             </section>
@@ -269,6 +269,24 @@ include("inc/scripts.php");
     }
 
     function gerarPDF() {
-        $(location).attr('href', 'pdfFuncionarios.php');
+        const estadoCivil = $('#estadoCivil').val();
+        const sexo = $('#sexo').val();
+        let params = '';
+
+        if (estadoCivil != '' && sexo != '') {
+            params = 'pdfFuncionarios.php?estadoCivil=' + estadoCivil + '&sexo=' + sexo;
+            $(location).attr('href', params);
+        }
+        else if (estadoCivil != '') {
+            params = 'pdfFuncionarios.php?estadoCivil=' + estadoCivil;
+            $(location).attr('href', params);
+        } else if (sexo != "") {
+            params = 'pdfFuncionarios.php?sexo=' + sexo;
+            $(location).attr('href', params);
+        } else {
+            params = 'pdfFuncionarios.php';
+        }
+
+        $(location).attr('href', params);
     }
 </script>

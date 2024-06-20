@@ -113,7 +113,7 @@ require_once('fpdf/fpdf.php');
 
 session_start();
 
-// $params = explode('/', $_SERVER['QUERY_STRING']);
+$params = $_SERVER['QUERY_STRING'];
 
 $sql = "SELECT f.ativo, nome, cpf, dataNascimento, ec.descricao, s.descricao AS sexo
         FROM funcionarios f
@@ -121,18 +121,43 @@ $sql = "SELECT f.ativo, nome, cpf, dataNascimento, ec.descricao, s.descricao AS 
             JOIN sexo s ON f.genero = s.codigo
         WHERE f.ativo = 1 ";
 
-// if (count($params) > 0) {
-//     foreach ($params as $filters) {
-//         $filters = explode('=', $filters);
-//         if ($filters[0] === 'sexo') {
-//             $where = 'AND s.descricao = ' . "'" . $filters[1] . "'";
-//         }
-//         if ($filters[0] === 'estadoCivil') {
-//             $where = 'AND ec.descricao = ' . "'" . $filters[1] . "'";
-//         }
-//     }
-//     $sql .= $where;
-// }
+$where = '';
+
+if ($params != '') {
+    if (str_contains($params, '&')) {
+        $params = explode('&', $params);
+        foreach ($params as $filters) {
+            $filters = explode('=', $filters);
+            if ($filters[0] === 'sexo') {
+                $where .= ' AND s.codigo = ' . $filters[1];
+            }
+            if ($filters[0] === 'estadoCivil') {
+                $where .= ' AND ec.codigo = ' . $filters[1];
+            }
+        }
+    } else {
+        $params = explode('=', $params);
+        if ($params[0] === 'sexo') {
+            $where .= ' AND s.codigo = ' . $params[1];
+        }
+        if ($params[0] === 'estadoCivil') {
+            $where .= ' AND ec.codigo = ' . $params[1];
+        }
+    }
+
+    $sql .= $where;
+
+    // foreach ($params as $filters) {
+    //     $filters = explode('=', $filters);
+    //     if ($filters[0] === 'sexo') {
+    //         $where = 'AND s.descricao = ' . "'" . $filters[1] . "'";
+    //     }
+    //     if ($filters[0] === 'estadoCivil') {
+    //         $where = 'AND ec.descricao = ' . "'" . $filters[1] . "'";
+    //     }
+    // }
+    // $sql .= $where;
+}
 
 $reposit = new reposit();
 $result = $reposit->RunQuery($sql);
@@ -185,7 +210,7 @@ $pdf->Ln(1);
 // $pdf->Cell(2.5, 1, 'Estado Civil', 1, 1, 'L', true);
 
 $y = $pdf->GetY() + 1.5;
-array_push($result, ...$result);
+// array_push($result, ...$result);
 foreach ($result  as $index => $row) {
     $dataNasc = (new DateTime($row['dataNascimento']))->format('d/m/Y');
 
@@ -212,18 +237,22 @@ foreach ($result  as $index => $row) {
     $pdf->Ln(3);
 
     if ($index > 0 && $index < 6 && $index % 5 == 0) {
-        $pdf->AddPage();
-        $pdf->SetAutoPageBreak(false, 0);
-        $y = $pdf->GetY() + 1.5;
+        if (count($result) - 1 > $index) {
+            $pdf->AddPage();
+            $pdf->SetAutoPageBreak(false, 0);
+            $y = $pdf->GetY() + 1.5;
+        }
     } else if ($index > 0 && ($index + 1) % 6 == 0) {
-        $pdf->AddPage();
-        $pdf->SetAutoPageBreak(false, 0);
-        $y = $pdf->GetY() + 1.5;
+        if (count($result) - 1 > $index) {
+            $pdf->AddPage();
+            $pdf->SetAutoPageBreak(false, 0);
+            $y = $pdf->GetY() + 1.5;
+        }
     } else {
         $y += 2.5;
     }
 
-    $pdf->SetAutoPageBreak(true, 2);
+    // $pdf->SetAutoPageBreak(true, 2);
 }
 
 // $pdf->SetFont('Arial', 'B', 10);
