@@ -194,7 +194,7 @@ $date = date('d/m/Y');
 
 $pdf->Image('./img/ntl-2.png', 0.8, 0.25, -1000);
 $pdf->SetFont('Arial', 'B', 17);
-$pdf->Cell(0, -2, iconv('UTF-8', 'windows-1252', 'Relatório de Funcionários'), 0, 0, 'C', 0);
+$pdf->Cell(0, -2, iconv('UTF-8', 'windows-1252', 'Relação de Funcionários'), 0, 0, 'C', 0);
 $pdf->Ln(0.5);
 $pdf->SetFont('Arial', 'I', 10);
 $pdf->Cell(0, -2, iconv('UTF-8', 'windows-1252', $date), 0, 0, 'C', 0);
@@ -223,11 +223,12 @@ foreach ($result  as $index => $row) {
     // $pdf->Cell(2.5, 1, ucfirst($row['descricao']), 1, 1, 'L');
     // $pdf->Ln(0);
 
-    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetFont('Arial', 'B', 12);
     $pdf->SetFillColor(144, 148, 152);
     $pdf->SetTextColor(255, 255, 255);
-    $pdf->Cell($pdf->GetPageWidth() - 2, 1,  iconv('UTF-8', 'windows-1252', 'Nome: ' . $row['nome']), 1, 0, 'L', true);
+    $pdf->Cell($pdf->GetPageWidth() - 2, 1,  iconv('UTF-8', 'windows-1252', $row['nome']), 1, 0, 'L', true);
     $pdf->Ln(1);
+    $pdf->SetFont('Arial', 'B', 10);
     $pdf->SetTextColor(0, 0, 0);
     $pdf->Cell($pdf->GetPageWidth() - 2, 2.3, '', 1, 0, 'L');
     $pdf->Text(1.1, $y, 'CPF: ' . $row['cpf']);

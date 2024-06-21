@@ -78,7 +78,7 @@ $date = date('d/m/Y');
 
 $pdf->Image('./img/ntl-2.png', 0.8, 0.25, -1000);
 $pdf->SetFont('Arial', 'B', 17);
-$pdf->Cell(0, -2, iconv('UTF-8', 'windows-1252', $resultFuncionario[0]['nome']), 0, 0, 'C', 0);
+$pdf->Cell(0, -2, iconv('UTF-8', 'windows-1252', 'Relatório'), 0, 0, 'C', 0);
 $pdf->Ln(0.5);
 $pdf->SetFont('Arial', 'I', 10);
 $pdf->Cell(0, -2, iconv('UTF-8', 'windows-1252', $date), 0, 0, 'C', 0);
@@ -88,11 +88,12 @@ $y = $pdf->GetY() + 1.5;
 foreach ($resultFuncionario  as $index => $row) {
     $dataNasc = (new DateTime($row['dataNascimento']))->format('d/m/Y');
 
-    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetFont('Arial', 'B', 12);
     $pdf->SetFillColor(144, 148, 152);
     $pdf->SetTextColor(255, 255, 255);
-    $pdf->Cell($pdf->GetPageWidth() - 2, 1,  iconv('UTF-8', 'windows-1252', 'Funcionário: ' . $row['nome']), 1, 0, 'L', true);
+    $pdf->Cell($pdf->GetPageWidth() - 2, 1,  iconv('UTF-8', 'windows-1252', $row['nome']), 1, 0, 'L', true);
     $pdf->Ln(1);
+    $pdf->SetFont('Arial', 'B', 10);
     $pdf->SetTextColor(0, 0, 0);
     $pdf->Text(1.1, $y, 'CPF: ' . $row['cpf']);
     $pdf->Text(1.1, $y += 0.5, 'RG: ' . $row['rg']);
@@ -129,11 +130,12 @@ foreach ($resultFuncionario  as $index => $row) {
 if (count($telefonesFuncionario) > 0 || count($emailsFuncionario) > 0) {
     $y = $pdf->GetY() + 5.5;
     $pdf->Ln(4);
-    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetFont('Arial', 'B', 12);
     $pdf->SetFillColor(144, 148, 152);
     $pdf->SetTextColor(255, 255, 255);
     $pdf->Cell($pdf->GetPageWidth() - 2, 1,  'Lista de contatos', 1, 0, 'L', true);
     $pdf->Ln(1);
+    $pdf->SetFont('Arial', 'B', 10);
     $pdf->SetTextColor(0, 0, 0);
 
     if (count($telefonesFuncionario) > 0) {
@@ -163,11 +165,12 @@ if (count($dependentesFuncionario) > 0) {
         $pdf->Ln(1 + (count($emailsFuncionario) + count($telefonesFuncionario)) * 0.5);
     }
     // $pdf->Ln(1.5);
-    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetFont('Arial', 'B', 12);
     $pdf->SetFillColor(144, 148, 152);
     $pdf->SetTextColor(255, 255, 255);
     $pdf->Cell($pdf->GetPageWidth() - 2, 1,  'Lista de dependentes', 1, 0, 'L', true);
     $pdf->Ln(1);
+    $pdf->SetFont('Arial', 'B', 10);
     $pdf->SetTextColor(0, 0, 0);
 
     $y = $pdf->GetY(); 
