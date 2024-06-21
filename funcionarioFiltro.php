@@ -275,23 +275,23 @@ include("inc/scripts.php");
 
         if (estadoCivil != '' && sexo != '') {
             params = 'pdfFuncionarios.php?estadoCivil=' + estadoCivil + '&sexo=' + sexo;
-            $(location).attr('href', params);
+            window.open(params);
         }
         else if (estadoCivil != '') {
             params = 'pdfFuncionarios.php?estadoCivil=' + estadoCivil;
-            $(location).attr('href', params);
+            window.open(params);
         } else if (sexo != "") {
             params = 'pdfFuncionarios.php?sexo=' + sexo;
-            $(location).attr('href', params);
+            window.open(params);
         } else {
             params = 'pdfFuncionarios.php';
         }
 
-        $(location).attr('href', params);
+        window.open(params);
     }
 
     function gerarRelatorio(e) {
         const id = e.currentTarget.value;
-        $(location).attr('href', 'pdfFuncionario.php?id=' + id);
+        window.open('pdfFuncionario.php?id=' + id);
     }
 </script>
