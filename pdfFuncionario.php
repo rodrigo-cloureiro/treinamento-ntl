@@ -16,10 +16,35 @@ $sql = "SELECT f.nome, f.cpf, f.rg, f.dataNascimento, s.descricao AS sexo,
         FROM funcionarios f
             JOIN sexo s ON f.genero = s.codigo
             JOIN estado_civil ec ON f.estadoCivil = ec.codigo
-        WHERE f.ativo = 1 AND f.codigo = $id ";
+        WHERE f.codigo = $id ";
 
 $reposit = new reposit();
-$result = $reposit->RunQuery($sql);
+$resultFuncionario = $reposit->RunQuery($sql);
+
+$sql = "SELECT t.telefone
+        FROM funcionarios f
+            JOIN telefones t ON f.codigo = t.funcionarioId
+        WHERE f.codigo = $id ";
+
+$reposit = new reposit();
+$telefonesFuncionario = $reposit->RunQuery($sql);
+
+$sql = "SELECT e.email
+        FROM funcionarios f
+            JOIN emails e ON f.codigo = e.codigo_func
+        WHERE f.codigo = $id ";
+
+$reposit = new reposit();
+$emailsFuncionario = $reposit->RunQuery($sql);
+
+$sql = "SELECT d.nome, d.cpf, d.dataNascimento, td.descricao AS tipo_dep
+        FROM funcionarios f
+            JOIN dependentes d ON f.codigo = d.funcionarioId
+            JOIN tipos_dependentes td ON d.tipo = td.codigo
+        WHERE f.codigo = $id ";
+
+$reposit = new reposit();
+$dependentesFuncionario = $reposit->RunQuery($sql);
 
 class PDF extends FPDF
 {
@@ -53,23 +78,22 @@ $date = date('d/m/Y');
 
 $pdf->Image('./img/ntl-2.png', 0.8, 0.25, -1000);
 $pdf->SetFont('Arial', 'B', 17);
-$pdf->Cell(0, -2, iconv('UTF-8', 'windows-1252', 'Relatório de Funcionários'), 0, 0, 'C', 0);
+$pdf->Cell(0, -2, iconv('UTF-8', 'windows-1252', $resultFuncionario[0]['nome']), 0, 0, 'C', 0);
 $pdf->Ln(0.5);
 $pdf->SetFont('Arial', 'I', 10);
 $pdf->Cell(0, -2, iconv('UTF-8', 'windows-1252', $date), 0, 0, 'C', 0);
 $pdf->Ln(1);
 
 $y = $pdf->GetY() + 1.5;
-foreach ($result  as $index => $row) {
+foreach ($resultFuncionario  as $index => $row) {
     $dataNasc = (new DateTime($row['dataNascimento']))->format('d/m/Y');
 
     $pdf->SetFont('Arial', 'B', 10);
     $pdf->SetFillColor(144, 148, 152);
     $pdf->SetTextColor(255, 255, 255);
-    $pdf->Cell($pdf->GetPageWidth() - 2, 1,  iconv('UTF-8', 'windows-1252', 'Nome: ' . $row['nome']), 1, 0, 'L', true);
+    $pdf->Cell($pdf->GetPageWidth() - 2, 1,  iconv('UTF-8', 'windows-1252', 'Funcionário: ' . $row['nome']), 1, 0, 'L', true);
     $pdf->Ln(1);
     $pdf->SetTextColor(0, 0, 0);
-    $pdf->Cell($pdf->GetPageWidth() - 2, 10, '', 1, 0, 'L');
     $pdf->Text(1.1, $y, 'CPF: ' . $row['cpf']);
     $pdf->Text(1.1, $y += 0.5, 'RG: ' . $row['rg']);
     $pdf->Text(1.1, $y += 0.5, 'Data de Nascimento: ' . $dataNasc);
@@ -86,19 +110,77 @@ foreach ($result  as $index => $row) {
     $pdf->Ln(3);
 
     if ($index > 0 && $index < 6 && $index % 5 == 0) {
-        if (count($result) - 1 > $index) {
+        if (count($resultFuncionario) - 1 > $index) {
             $pdf->AddPage();
             $pdf->SetAutoPageBreak(false, 0);
             $y = $pdf->GetY() + 1.5;
         }
     } else if ($index > 0 && ($index + 1) % 6 == 0) {
-        if (count($result) - 1 > $index) {
+        if (count($resultFuncionario) - 1 > $index) {
             $pdf->AddPage();
             $pdf->SetAutoPageBreak(false, 0);
             $y = $pdf->GetY() + 1.5;
         }
     } else {
         $y += 2.5;
+    }
+}
+
+if (count($telefonesFuncionario) > 0 || count($emailsFuncionario) > 0) {
+    $y = $pdf->GetY() + 5.5;
+    $pdf->Ln(4);
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetFillColor(144, 148, 152);
+    $pdf->SetTextColor(255, 255, 255);
+    $pdf->Cell($pdf->GetPageWidth() - 2, 1,  'Lista de contatos', 1, 0, 'L', true);
+    $pdf->Ln(1);
+    $pdf->SetTextColor(0, 0, 0);
+
+    if (count($telefonesFuncionario) > 0) {
+        foreach ($telefonesFuncionario  as $index => $row) {
+            $pdf->Text(1.1, $y, 'Telefone ' . $index + 1 . ': ' . $row['telefone']);
+            $y += 0.5;
+        }
+        $y += 0.5;
+    }
+
+    if (count($emailsFuncionario) > 0) {
+        foreach ($emailsFuncionario  as $index => $row) {
+            $pdf->Text(1.1, $y, 'Email ' . $index + 1 . ': ' . $row['email']);
+            $y += 0.5;
+        }
+        $y += 0.5;
+    }
+}
+
+if (count($dependentesFuncionario) > 0) {
+    $y = $pdf->GetY();
+    if (count($telefonesFuncionario) > 0 && count($emailsFuncionario) == 0) {
+        $pdf->Ln(1 + (count($emailsFuncionario) - 1 + count($telefonesFuncionario)) * 0.5);
+    } else if (count($emailsFuncionario) > 0 && count($telefonesFuncionario) == 0) {
+        $pdf->Ln(1 + (count($emailsFuncionario) + count($telefonesFuncionario) - 1) * 0.5);
+    } else {
+        $pdf->Ln(1 + (count($emailsFuncionario) + count($telefonesFuncionario)) * 0.5);
+    }
+    // $pdf->Ln(1.5);
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetFillColor(144, 148, 152);
+    $pdf->SetTextColor(255, 255, 255);
+    $pdf->Cell($pdf->GetPageWidth() - 2, 1,  'Lista de dependentes', 1, 0, 'L', true);
+    $pdf->Ln(1);
+    $pdf->SetTextColor(0, 0, 0);
+
+    $y = $pdf->GetY(); 
+    foreach ($dependentesFuncionario  as $index => $row) {
+        $y += 0.5;
+        $dataNasc = (new DateTime($row['dataNascimento']))->format('d/m/Y');
+
+        $pdf->Text(1.1, $y, 'Dependente ' . $index + 1 . ':');
+        $pdf->Text(1.1, $y += 0.5, iconv('UTF-8', 'windows-1252', 'Nome: ' . $row['nome']));
+        $pdf->Text(1.1, $y += 0.5, 'CPF: ' . $row['cpf']);
+        $pdf->Text(1.1, $y += 0.5, 'Data de nascimento: ' . $dataNasc);
+        $pdf->Text(1.1, $y += 0.5, 'Tipo de dependente: ' . iconv('UTF-8', 'windows-1252', $row['tipo_dep']));
+        $y += 0.5;
     }
 }
 
