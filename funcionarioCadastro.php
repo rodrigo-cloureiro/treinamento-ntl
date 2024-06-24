@@ -103,7 +103,7 @@ include("inc/nav.php");
                                                                         <option value="1">Sim</option>
                                                                         <option value="0">Não</option>
                                                                     </select>
-                                                                    <i></i>
+                                                                    <i style="box-shadow: none;"></i>
                                                                 </label>
                                                             </section>
                                                             <section class="col col-4">
@@ -144,6 +144,7 @@ include("inc/nav.php");
                                                                         }
                                                                         ?>
                                                                     </select>
+                                                                    <i style="box-shadow: none;"></i>
                                                                 </label>
                                                             </section>
                                                             <section class="col col-2">
@@ -164,6 +165,7 @@ include("inc/nav.php");
                                                                         }
                                                                         ?>
                                                                     </select>
+                                                                    <i style="box-shadow: none;"></i>
                                                                 </label>
                                                             </section>
                                                             <section class="col col-2">
@@ -186,6 +188,7 @@ include("inc/nav.php");
                                                                         <option value="1">Sim</option>
                                                                         <option value="0">Não</option>
                                                                     </select>
+                                                                    <i style="box-shadow: none;"></i>
                                                                 </label>
                                                             </section>
                                                             <section class="col col-2">
@@ -435,6 +438,7 @@ include("inc/nav.php");
                                                                             }
                                                                             ?>
                                                                         </select>
+                                                                        <i style="box-shadow: none;"></i>
                                                                     </label>
                                                                 </secion>
                                                                 <section class="col col-2">
