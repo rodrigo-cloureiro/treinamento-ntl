@@ -1054,9 +1054,10 @@ include("inc/scripts.php");
     function validaTelefone() {
         let existe = false;
         let achou = false;
-        let tel = $('#telefone').val();
+        let tel =  $('#telefone').val().replaceAll(/\(|\)|(_)|\s|-/g, '');
         let sequencial = +$('#sequencialTel').val();
         let telefonePrincipalMarcado = $("#telPrincipal").is(":checked") ? 1 : 0;
+        debugger
 
         for (i = jsonTelefoneArray.length - 1; i >= 0; i--) {
             if (telefonePrincipalMarcado === 1) {
@@ -1066,7 +1067,7 @@ include("inc/scripts.php");
                 }
             }
 
-            if (jsonTelefoneArray[i].telefone === tel && jsonTelefoneArray[i].sequencialTel !== sequencial) {
+            if (jsonTelefoneArray[i].telefone.replaceAll(/\(|\)|(_)|\s|-/g, '') === tel && jsonTelefoneArray[i].sequencialTel !== sequencial) {
                 existe = true;
                 break;
             }
@@ -1077,8 +1078,9 @@ include("inc/scripts.php");
             return false;
         }
 
-        if (tel.length < 14 || tel.length > 15) {
+        if (tel.length < 10 || tel.length > 11) {
             smartAlert("Erro", "Formato de telefone inválido!", "error");
+            $('#telefone').val('').focus();
             return false;
         }
 
