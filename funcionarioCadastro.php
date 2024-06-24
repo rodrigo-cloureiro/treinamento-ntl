@@ -1427,6 +1427,10 @@ include("inc/scripts.php");
             return false;
         }
 
+        if (!validadorCPF(cpfDependente)) {
+            return false;
+        }
+
         if (nome == "") {
             smartAlert("Erro", "É necessário preencher o nome.", "error");
             $("#nomeDependente").focus();
@@ -1576,5 +1580,40 @@ include("inc/scripts.php");
         $("#tipoDependente").val('');
         $("#dependenteId").val('');
         $("#sequencialDep").val('');
+    }
+
+    function validadorCPF(cpf) {
+        if (cpf == '') {
+            return false;
+        }
+
+        cpf = cpf.replaceAll('.', '');
+        cpf = cpf.replaceAll('-', '');
+
+        if (cpf.length != 11) {
+            return false;
+        } else if (cpf == '00000000000' ||
+            cpf == '11111111111' ||
+            cpf == '22222222222' ||
+            cpf == '33333333333' ||
+            cpf == '44444444444' ||
+            cpf == '55555555555' ||
+            cpf == '66666666666' ||
+            cpf == '77777777777' ||
+            cpf == '88888888888' ||
+            cpf == '99999999999') {
+            return false;
+        } else {
+            for (t = 9; t < 11; t++) {
+                for (d = 0, c = 0; c < t; c++) {
+                    d += cpf[c] * ((t + 1) - c);
+                }
+                d = ((10 * d) % 11) % 10;
+                if (cpf[c] != d) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 </script>
