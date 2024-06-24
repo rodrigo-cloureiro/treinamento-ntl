@@ -623,7 +623,7 @@ include("inc/scripts.php");
             $("#idade").val(0);
             if (!dataValida($("#dataNascimento").val())) {
                 smartAlert("Atenção", "A data de nascimento não é válida!", "error");
-                $("#dataNascimento").focus();
+                $("#dataNascimento").val('').focus();
             }
 
             if ($("#dataNascimento").val() !== 'dd/mm/aaaa') {
@@ -654,7 +654,7 @@ include("inc/scripts.php");
                         } else {
                             smartAlert("Atenção", "CPF Inválido", "error");
                         }
-                        $("#cpf").focus();
+                        $("#cpf").val('').focus();
                         return '';
                     }
                 });
@@ -664,7 +664,7 @@ include("inc/scripts.php");
         $("#rg").on("focusout", function(campo) {
             if (!validaRG(campo.currentTarget.value)) {
                 smartAlert("Atenção", "RG inválido.", "error");
-                $("#rg").focus();
+                $("#rg").val('').focus();
             }
         });
 
@@ -844,19 +844,19 @@ include("inc/scripts.php");
 
         if (!validadorCPF(cpf)) {
             smartAlert("Atenção", "CPF inválido!", "error");
-            $("#cpf").focus();
+            $("#cpf").val('').focus();
             return;
         }
 
         if (rg == "" || rg === $("#rg").attr('placeholder')) {
             smartAlert("Atenção", "O RG precisa ser preenchido!", "error");
-            $("#rg").focus();
+            $("#rg").val('').focus();
             return;
         }
 
         if (!validaRG(rg)) {
             smartAlert("Atenção", "RG inválido!", "error");
-            $("#rg").focus();
+            $("#rg").val('').focus();
             return;
         }
 
@@ -874,13 +874,13 @@ include("inc/scripts.php");
 
         if (dataNascimento == "") {
             smartAlert("Atenção", "A data de nascimento precisa ser preenchida!", "error");
-            $("#dataNascimento").focus();
+            $("#dataNascimento").val('').focus();
             return;
         }
 
         if (!dataValida(dataNascimento)) {
             smartAlert("Atenção", "A data de nascimento não é válida!", "error");
-            $("#dataNascimento").focus();
+            $("#dataNascimento").val('').focus();
             return;
         }
 
