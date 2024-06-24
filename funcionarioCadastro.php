@@ -191,7 +191,7 @@ include("inc/nav.php");
                                                             <section class="col col-2">
                                                                 <label class="label">PIS-PASEP</label>
                                                                 <label class="input">
-                                                                    <input type="text" id="pispasep" class="required" name="pispasep" value="">
+                                                                    <input type="text" id="pispasep" class="required" name="pispasep" value="" data-mask="999.99999.99-9" data-mask-placeholder="XXX.XXXXX.XX-X">
                                                                 </label>
                                                             </section>
                                                         </div>
