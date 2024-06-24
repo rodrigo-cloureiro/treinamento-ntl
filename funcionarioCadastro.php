@@ -96,7 +96,7 @@ include("inc/nav.php");
                                                                     <input id="codigo" name="codigo" type="text" class="readonly" readonly>
                                                                 </label>
                                                             </section>
-                                                            <section class="col col-1">
+                                                            <section class="col col-1 hidden">
                                                                 <label class="label">Ativo</label>
                                                                 <label class="select">
                                                                     <select id="ativo" name="ativo">
@@ -811,7 +811,7 @@ include("inc/scripts.php");
 
     function gravar() {
         const codigo = +($("#codigo").val());
-        const ativo = $("#ativo").val();
+        const ativo = $("#ativo").val() == 0 ? "1" : $("#ativo").val();
         const nome = $("#nome").val();
         const cpf = $("#cpf").val();
         const dataNascimento = $("#dataNascimento").val();
