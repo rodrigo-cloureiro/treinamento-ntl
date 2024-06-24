@@ -1057,7 +1057,6 @@ include("inc/scripts.php");
         let tel =  $('#telefone').val().replaceAll(/\(|\)|(_)|\s|-/g, '');
         let sequencial = +$('#sequencialTel').val();
         let telefonePrincipalMarcado = $("#telPrincipal").is(":checked") ? 1 : 0;
-        debugger
 
         for (i = jsonTelefoneArray.length - 1; i >= 0; i--) {
             if (telefonePrincipalMarcado === 1) {
@@ -1456,6 +1455,13 @@ include("inc/scripts.php");
         let sequencial = +$("#sequencialDep").val();
         const cpfFuncionario = $("#cpf").val();
 
+        for (i = jsonDependenteArray.length - 1; i >= 0; i--) {
+            if (jsonDependenteArray[i].cpfDependente === cpfDependente) {
+                existe = true;
+                break;
+            }
+        }
+
         if (nome == "") {
             smartAlert("Erro", "É necessário preencher o nome.", "error");
             $("#nomeDependente").focus();
@@ -1496,6 +1502,12 @@ include("inc/scripts.php");
         if (tipoDependente == "") {
             smartAlert("Erro", "É necessário selecionar o tipo de dependente.", "error");
             $("#tipoDependente").focus();
+            return false;
+        }
+
+        if (existe === true) {
+            smartAlert("Erro", "CPF já cadastrado em um dependente.", "error");
+            $("#cpfDependente").focus();
             return false;
         }
 
