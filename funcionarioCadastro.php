@@ -631,6 +631,16 @@ include("inc/scripts.php");
             }
         });
 
+        $("#nome").on("keypress", function(e) {
+            if (e.keyCode >= 48 && e.keyCode <= 57) {
+                e.preventDefault();
+            }
+        });
+
+        $("#nome").on("focusout", function() {
+            $("#nome").val($.trim($("#nome").val()));
+        });
+
         $("#cpf").on("focusout", function(campo) {
             const mask = $("#cpf").mask();
             const codigo = $("#codigo").val();
@@ -670,8 +680,8 @@ include("inc/scripts.php");
         $("#whatsapp").prop("checked", false);
         $("#emailPrincipal").prop("checked", false);
 
-        $("#cpf").off('blur focus keydown');
-        $("#rg").off('blur focus keydown');
+        // $("#cpf").off('blur focus keydown');
+        // $("#rg").off('blur focus keydown');
 
         $("#btnRemoverTelefone").on("click", function() {
             excluirContato();
@@ -735,6 +745,16 @@ include("inc/scripts.php");
             if (!dataValida($("#dataNascimentoDependente").val())) {
                 smartAlert("Atenção", "A data de nascimento não é válida!", "error");
                 $("#dataNascimentoDependente").focus();
+            }
+        });
+
+        $("#nomeDependente").on("focusout", function() {
+            $("#nomeDependente").val($.trim($("#nomeDependente").val()));
+        });
+
+        $("#nomeDependente").on("keypress", function(e) {
+            if (e.keyCode >= 48 && e.keyCode <= 57) {
+                e.preventDefault();
             }
         });
 
@@ -810,14 +830,32 @@ include("inc/scripts.php");
             return;
         }
 
+        if (!/[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/.test(nome)) {
+            smartAlert("Atenção", "O nome não é válido!", "error");
+            $("#nome").focus();
+            return;
+        }
+
         if (cpf == "") {
             smartAlert("Atenção", "O CPF precisa ser preenchido!", "error");
             $("#cpf").focus();
             return;
         }
 
+        if (!validadorCPF(cpf)) {
+            smartAlert("Atenção", "CPF inválido!", "error");
+            $("#cpf").focus();
+            return;
+        }
+
         if (rg == "" || rg === $("#rg").attr('placeholder')) {
             smartAlert("Atenção", "O RG precisa ser preenchido!", "error");
+            $("#rg").focus();
+            return;
+        }
+
+        if (!validaRG(rg)) {
+            smartAlert("Atenção", "RG inválido!", "error");
             $("#rg").focus();
             return;
         }
@@ -840,6 +878,12 @@ include("inc/scripts.php");
             return;
         }
 
+        if (!dataValida(dataNascimento)) {
+            smartAlert("Atenção", "A data de nascimento não é válida!", "error");
+            $("#dataNascimento").focus();
+            return;
+        }
+
         if (primeiroEmprego === "") {
             smartAlert("Atenção", "É necessário informar se é primeiro emprego ou não", "error");
             $("#primeiroEmprego").focus();
@@ -854,6 +898,11 @@ include("inc/scripts.php");
 
         if (jsonTelefoneArray.length === 0 && jsonEmailArray.length === 0) {
             smartAlert("Atenção", "É necessário adicionar pelo menos 1 contato.", "error");
+            return;
+        }
+
+        if (jsonTelefoneArray.every(item => item.telPrincipal === 0) && jsonEmailArray.every(item => item.emailPrincipal === 0)) {
+            smartAlert("Atenção", "É necessário pelo menos um contato principal", "error");
             return;
         }
 
@@ -965,11 +1014,13 @@ include("inc/scripts.php");
     }
 
     function validaRG(rg) {
-        const invalidos = ['00.000.000-0', '11.111.111-1', '22.222.222-2', '33.333.333-3', '44.444.444-4',
-            '55.555.555-5', '66.666.666-6', '77.777.777-7', '88.888.888-8', '99.999.999-9'
+        const invalidos = ['000000000', '111111111', '222222222', '333333333', '444444444',
+            '555555555', '666666666', '777777777', '888888888', '999999999'
         ];
 
-        if (invalidos.includes(rg)) {
+        if (invalidos.includes(rg.replaceAll('.', '').replaceAll('-', ''))) {
+            return false;
+        } else if (!/^[0-9]+$/.test(rg.replaceAll('.', '').replaceAll('-', ''))) {
             return false;
         }
         return true;
@@ -1422,19 +1473,21 @@ include("inc/scripts.php");
         let sequencial = +$("#sequencialDep").val();
         const cpfFuncionario = $("#cpf").val();
 
+        if (nome == "") {
+            smartAlert("Erro", "É necessário preencher o nome.", "error");
+            $("#nomeDependente").focus();
+            return false;
+        }
+
         if (cpfDependente == cpfFuncionario) {
             smartAlert("Erro", "Não é possível cadastrar o CPF do funcionário como dependente.", "error");
             return false;
         }
 
-        if (!validadorCPF(cpfDependente)) {
-            return false;
-        }
-
-        if (nome == "") {
-            smartAlert("Erro", "É necessário preencher o nome.", "error");
-            $("#nomeDependente").focus();
-            return false;
+        if (!/[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/.test(nome)) {
+            smartAlert("Atenção", "O nome não é válido!", "error");
+            $("#nome").focus();
+            return;
         }
 
         if (cpfDependente == "" || cpfDependente == $("#cpfDependente").attr('placeholder')) {
@@ -1443,9 +1496,17 @@ include("inc/scripts.php");
             return false;
         }
 
+        if (!validadorCPF(cpfDependente)) {
+            return false;
+        }
+
         if (dataNasimento == "" || dataNasimento == $("#dataNascimentoDependente").attr('placeholder')) {
             smartAlert("Erro", "É necessário informar a data de nascimento.", "error");
             $("#dataNascimentoDependente").focus();
+            return false;
+        }
+
+        if (!dataValida(dataNasimento)) {
             return false;
         }
 
