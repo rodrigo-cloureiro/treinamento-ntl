@@ -676,9 +676,9 @@ include("inc/scripts.php");
             autoclear: 0
         });
 
-        $("#telPrincipal").prop("checked", false);
+        // $("#telPrincipal").prop("checked", false);
         $("#whatsapp").prop("checked", false);
-        $("#emailPrincipal").prop("checked", false);
+        // $("#emailPrincipal").prop("checked", false);
 
         // $("#cpf").off('blur focus keydown');
         // $("#rg").off('blur focus keydown');
@@ -979,29 +979,6 @@ include("inc/scripts.php");
             return false;
         }
 
-        // if (dataAtual < dataNascimento) {
-        //     return false;
-        // }
-
-        // nascimentoSplit[2] -> ano
-        // nascimentoSplit[1]-1 -> mês
-        // nascimentoSplit[0] -> dia
-        // if (nascimentoSplit[1] < 0 || nascimentoSplit[1] > 12 || nascimentoSplit[0] < 1 || nascimentoSplit[1] > 31) {
-        //     return false;
-        // }
-
-        // if (dias30.includes(nascimentoSplit[1]) && nascimentoSplit[0] > 30) {
-        //     return false;
-        // }
-
-        // if (dias31.includes(nascimentoSplit[1]) && nascimentoSplit[0] > 31) {
-        //     return false;
-        // }
-
-        // if (!ehBissexto(nascimentoSplit[2]) && (nascimentoSplit[1] == 2 && nascimentoSplit[0] > 28)) {
-        //     return false;
-        // }
-
         return true;
     }
 
@@ -1203,7 +1180,7 @@ include("inc/scripts.php");
         $("#telefone").val("");
         $("#telefoneId").val("");
         $("#sequencialTel").val("");
-        $("#telPrincipal").prop("checked", false);
+        $("#telPrincipal").prop("checked", true);
         $("#whatsapp").prop("checked", false);
     }
 
@@ -1394,7 +1371,7 @@ include("inc/scripts.php");
         $("#email").val("");
         $("#emailId").val("");
         $("#sequencialEmail").val("");
-        $("#emailPrincipal").prop("checked", false);
+        $("#emailPrincipal").prop("checked", true);
     }
 
     async function preencheEndereco(cep) {
