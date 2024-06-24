@@ -341,25 +341,25 @@ include("inc/nav.php");
                                                             <section class="col col-3">
                                                                 <label class="label">Logradouro</label>
                                                                 <label class="input">
-                                                                    <input id="logradouro" name="logradouro" type="text" value="" class="required" placeholder="Logradouro" readonly>
+                                                                    <input id="logradouro" name="logradouro" type="text" value="" class="required" placeholder="Logradouro">
                                                                 </label>
                                                             </section>
                                                             <section class="col col-1">
                                                                 <label class="label">UF</label>
                                                                 <label class="input">
-                                                                    <input type="text" value="" id="uf" name="uf" class="required" placeholder="UF" readonly>
+                                                                    <input type="text" value="" id="uf" name="uf" class="required" placeholder="UF">
                                                                 </label>
                                                             </section>
                                                             <section class="col col-2">
                                                                 <label class="label">Bairro</label>
                                                                 <label class="input">
-                                                                    <input type="text" value="" id="bairro" name="bairro" class="required" placeholder="Bairro" readonly>
+                                                                    <input type="text" value="" id="bairro" name="bairro" class="required" placeholder="Bairro">
                                                                 </label>
                                                             </section>
                                                             <section class="col col-2">
                                                                 <label class="label">Cidade</label>
                                                                 <label class="input">
-                                                                    <input type="text" value="" id="cidade" name="cidade" class="required" placeholder="Cidade" readonly>
+                                                                    <input type="text" value="" id="cidade" name="cidade" class="required" placeholder="Cidade">
                                                                 </label>
                                                             </section>
                                                             <section class="col col-1">
