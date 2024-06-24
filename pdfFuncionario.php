@@ -21,7 +21,7 @@ $sql = "SELECT f.nome, f.cpf, f.rg, f.dataNascimento, s.descricao AS sexo,
 $reposit = new reposit();
 $resultFuncionario = $reposit->RunQuery($sql);
 
-$sql = "SELECT t.telefone
+$sql = "SELECT t.telefone, t.principal, t.whatsapp
         FROM funcionarios f
             JOIN telefones t ON f.codigo = t.funcionarioId
         WHERE f.codigo = $id ";
@@ -29,7 +29,7 @@ $sql = "SELECT t.telefone
 $reposit = new reposit();
 $telefonesFuncionario = $reposit->RunQuery($sql);
 
-$sql = "SELECT e.email
+$sql = "SELECT e.email, e.principal
         FROM funcionarios f
             JOIN emails e ON f.codigo = e.codigo_func
         WHERE f.codigo = $id ";
@@ -140,7 +140,11 @@ if (count($telefonesFuncionario) > 0 || count($emailsFuncionario) > 0) {
 
     if (count($telefonesFuncionario) > 0) {
         foreach ($telefonesFuncionario  as $index => $row) {
-            $pdf->Text(1.1, $y, 'Telefone ' . $index + 1 . ': ' . $row['telefone']);
+            $telefoneTexto = $row['principal'] == 1 ? 'Telefone Principal: ' . $row['telefone'] : 'Telefone ' . $index + 1 . ': ' . $row['telefone'];
+            if ($row['whatsapp'] == 1) {
+                $telefoneTexto .= '  |  ' . 'WhatsApp: Sim';
+            }
+            $pdf->Text(1.1, $y, iconv('UTF-8', 'windows-1252', $telefoneTexto));
             $y += 0.5;
         }
         $y += 0.5;
@@ -148,7 +152,11 @@ if (count($telefonesFuncionario) > 0 || count($emailsFuncionario) > 0) {
 
     if (count($emailsFuncionario) > 0) {
         foreach ($emailsFuncionario  as $index => $row) {
-            $pdf->Text(1.1, $y, 'Email ' . $index + 1 . ': ' . $row['email']);
+            if ($row['principal'] == 1) {
+                $pdf->Text(1.1, $y, 'Email Principal: ' . $row['email']);
+            } else {
+                $pdf->Text(1.1, $y, 'Email ' . $index + 1 . ': ' . $row['email']);
+            }
             $y += 0.5;
         }
         $y += 0.5;
